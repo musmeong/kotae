@@ -1,0 +1,13 @@
+{
+  "title": "Kotae Demo N3",
+  "author": "Original sample questions",
+  "level": "N3",
+  "types": {
+    "dochira": {
+      "tag": "正しいほう",
+      "id": "Pilih yang benar",
+      "jp": "文中の（　　）から正しいほうをえらびなさい。",
+      "how": "Pilih bentuk yang benar dari dua pilihan dalam kurung."
+    }
+  }
+}

@@ -1,0 +1,147 @@
+# Kotae demo book — grammar. Original questions.
+% section g 文法 | Tata bahasa
+% part g1 問題1 文法形式
+% set g1-1 練習
+
+@g1-1 bunpou p0
+Q: {雨|あめ}が{降|ふ}っている（　　）、{試合|しあい}は{中止|ちゅうし}になった。
+O: のに | ので | ても | ながら
+A: 2
+T: Karena sedang hujan, pertandingannya dibatalkan.
+W: **〜ので** = karena (sebab yang wajar menghasilkan akibat).
+1: のに = padahal; tidak ada pertentangan di sini.
+2: ので. Benar.
+3: ても = walaupun; hujan justru penyebab batal.
+4: ながら = sambil.
+
+@g1-2 bunpou p0
+Q: {日本|にほん}に{来|き}て（　　）、{毎日|まいにち}{日本語|にほんご}を{話|はな}すようになった。
+O: まで | ばかり | から | ほど
+A: 3
+T: Sejak datang ke Jepang, aku jadi berbicara bahasa Jepang setiap hari.
+W: **〜てから** = sejak / setelah ~.
+1: まで — 来てまで = sampai repot-repot datang; maknanya lain.
+2: ばかり — 来たばかり = baru saja datang; bentuk てばかり = terus-menerus ~.
+3: から. Benar.
+4: ほど — tidak bergabung dengan bentuk て.
+
+@g1-3 bunpou p0
+Q: このペンは{書|か}き（　　）、とても{便利|べんり}だ。
+O: にくくて | すぎて | かけて | やすくて
+A: 4
+T: Pena ini enak dipakai menulis, jadi sangat praktis.
+W: **Vます + やすい** = mudah di-~. Cocok dengan 便利.
+1: にくくて = sulit di-~ — bertentangan dengan 便利.
+2: すぎて = terlalu banyak ~.
+3: かけて = setengah jalan ~ (belum selesai).
+4: やすくて. Benar.
+
+@g1-4 bunpou p0
+Q: {先生|せんせい}に（　　）、{作文|さくぶん}を{何度|なんど}も{書|か}き{直|なお}した。
+O: {言|い}われて | {言|い}わせて | {言|い}って | {言|い}わされて
+A: 1
+T: Karena disuruh (diberi tahu) guru, aku menulis ulang karanganku berkali-kali.
+W: **言われる** = pasif dari 言う: guru yang berkata, aku yang menerima.
+1: 言われて. Benar.
+2: 言わせて = membuat guru berkata; arahnya terbalik.
+3: 言って = aku yang berkata kepada guru; tidak menjelaskan kenapa menulis ulang.
+4: 言わされて = dipaksa berkata; yang dilakukan menulis, bukan berkata.
+
+% part g2 問題2 文の組み立て
+% set g2-1 練習
+
+@g2-1 star p0
+Q: {私|わたし}は{_}{_}{★}{_}{好|す}きです。
+O: {映画|えいが}を | {一人|ひとり}で | のが | {見|み}る
+A: 4
+R: 2143
+T: Aku suka menonton film sendirian.
+W: **〜のが好き** = suka melakukan ~. Kalimatnya: 私は一人で映画を見るのが好きです. Urutan: 一人で › 映画を › 見る › のが.
+
+@g2-2 star p0
+Q: {宿題|しゅくだい}が{_}{_}{★}{_}よ。
+O: {行|い}って | {終|お}わったら | もいい | {遊|あそ}びに
+A: 1
+R: 2413
+T: Kalau PR-nya sudah selesai, boleh pergi main.
+W: **〜たら** = kalau sudah ~; **〜てもいい** = boleh ~. Kalimatnya: 宿題が終わったら遊びに行ってもいいよ. Urutan: 終わったら › 遊びに › 行って › もいい.
+
+@g2-3 star p0
+Q: この{本|ほん}は{_}{_}{★}{_}やさしい。
+O: ほど | {子|こ}ども | {読|よ}める | でも
+A: 3
+R: 2431
+T: Buku ini mudah, sampai anak-anak pun bisa membacanya.
+W: **Nでも** = bahkan N; **〜ほど** = sampai ~. Kalimatnya: この本は子どもでも読めるほどやさしい. Urutan: 子ども › でも › 読める › ほど.
+
+% part g3 正しいほうをえらぶ
+% set g3-1 練習
+
+@g3-1 dochira p0
+Q: {日本|にほん}の{生活|せいかつ}に（　　）までに、{半年|はんとし}かかった。
+O: {慣|な}れる | {慣|な}れた
+A: 1
+T: Butuh setengah tahun sampai aku terbiasa dengan kehidupan di Jepang.
+W: **Vる + までに** = sampai (batas waktu) ~. Di depan まで(に) dipakai bentuk kamus.
+1: 慣れる. Benar.
+2: 慣れた — bentuk lampau tidak dipakai di depan までに.
+
+@g3-2 dochira p0
+Q: {彼女|かのじょ}はうれし（　　）に{笑|わら}った。
+O: そう | よう
+A: 1
+T: Dia tertawa dengan wajah senang.
+W: **い形容詞語幹 + そうに** = tampak ~ (dari luar). うれしい → うれしそうに.
+1: そう. Benar.
+2: よう — ように tidak bergabung dengan pangkal kata sifat (うれしように salah).
+
+@g3-3 dochira p0
+Q: {窓|まど}が（　　）いるので、{少|すこ}し{寒|さむ}い。
+O: {開|あ}けて | {開|あ}いて
+A: 2
+T: Jendelanya terbuka, jadi agak dingin.
+W: Keadaan benda memakai **自動詞 + ている**: 窓が開いている. 開ける adalah transitif (窓を開ける).
+1: 開けて — transitif, butuh を: 窓を開けている (seseorang sedang membuka).
+2: 開いて. Benar.
+
+% part g4 文章の文法
+% set g4-1 私の趣味
+
+% passage g4p 私の趣味
+I: つぎの{文章|ぶんしょう}を{読|よ}んで、1から3の{中|なか}に{入|はい}る{最|もっと}もよいものを、1・2・3・4から一つえらびなさい。
+P: {私|わたし}の{趣味|しゅみ}は{料理|りょうり}です。{最初|さいしょ}は{簡単|かんたん}な{料理|りょうり}〔1〕{作|つく}れませんでしたが、{毎週末|まいしゅうまつ}{練習|れんしゅう}するうちに、{少|すこ}しずつ{上手|じょうず}になりました。
+P: 〔2〕、{先月|せんげつ}は{友|とも}だちを{家|いえ}に{呼|よ}んで、カレーを{作|つく}りました。みんなが「おいしい」と{言|い}って〔3〕、とてもうれしかったです。
+% end
+
+@g4-1 cloze p0 passage=g4p n=1
+Q: 〔1〕
+O: だけ | しか | まで | さえ
+A: 2
+T: "Awalnya aku hanya bisa memasak masakan sederhana, …"
+W: **Nしか〜ない** = hanya N (bentuk negatif 作れませんでした sudah ada).
+1: だけ — だけ dipakai dengan bentuk positif (簡単な料理だけ作れました).
+2: しか. Benar.
+3: まで = sampai; maknanya tidak cocok.
+4: さえ = bahkan; "bahkan masakan sederhana pun tidak bisa" mengubah maksud penulis.
+
+@g4-2 cloze p0 passage=g4p n=2
+Q: 〔2〕
+O: しかし | それとも | そして | つまり
+A: 3
+T: "Lalu, bulan lalu aku mengundang teman ke rumah dan memasak kari."
+W: Kejadian berikutnya yang menyambung cerita → **そして** (lalu, kemudian).
+1: しかし = tetapi; tidak ada pertentangan.
+2: それとも = atau (dalam pertanyaan).
+3: そして. Benar.
+4: つまり = dengan kata lain; kalimat berikutnya bukan penjelasan ulang.
+
+@g4-3 cloze p0 passage=g4p n=3
+Q: 〔3〕
+O: あげて | もらって | やって | くれて
+A: 4
+T: "Teman-teman bilang 'enak', jadi aku senang sekali."
+W: Orang lain melakukan sesuatu yang menguntungkan aku (subjek: みんなが) → **〜てくれる**.
+1: あげて — aku yang melakukan untuk orang lain; arahnya terbalik.
+2: もらって — subjeknya harus aku (私は〜てもらう), padahal subjeknya みんなが.
+3: やって — seperti あげる, arahnya dari aku ke orang lain.
+4: くれて. Benar.

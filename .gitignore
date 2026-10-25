@@ -1,0 +1,21 @@
+# Imported books stay on your machine: their content belongs to the publisher.
+/data/*
+!/data/books.js
+!/data/demo-n3.js
+/tools/src/*
+!/tools/src/demo-n3/
+/tools/expl/*
+!/tools/expl/demo-n3/
+/tools/*.extracted.json
+!/tools/demo-n3.extracted.json
+/tools/*.keys.json
+!/tools/demo-n3.keys.json
+
+# Secrets
+/local/*
+!/local/gemini-keys.example.js
+
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db

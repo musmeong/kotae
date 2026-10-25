@@ -1,0 +1,1158 @@
+<!doctype html>
+<html lang="id" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kotae — Latihan Soal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="grammar.css?v=1">
+<style>
+:root{
+  --bg:#070a14;--bg2:#0c1124;--nebula:#140f2e;
+  --panel:rgba(15,19,38,.78);--panel2:rgba(22,28,54,.72);--solid:#0f1326;
+  --edge:rgba(140,160,255,.14);--line:rgba(150,170,255,.16);
+  --ink:#eaf0ff;--dim:#9aa6c8;--faint:#5d6788;
+  --blue:#45b8ff;--pink:#ff4d97;--violet:#b06bff;--amber:#ffb547;--teal:#2fd3c9;
+  --ok:#3ee6a8;--bad:#ff5c7a;--okbg:rgba(62,230,168,.12);--badbg:rgba(255,92,122,.12);
+  --acc:var(--blue);
+  --shadow:0 18px 50px -20px rgba(0,0,0,.7);
+  --ui:"Space Grotesk","Zen Maru Gothic",system-ui,sans-serif;
+  --jp:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Noto Sans JP","Yu Gothic",sans-serif;
+}
+:root[data-theme="light"]{
+  --bg:#f3f5fc;--bg2:#e8ecf9;--nebula:#efe9ff;
+  --panel:rgba(255,255,255,.88);--panel2:rgba(246,248,255,.95);--solid:#fff;
+  --edge:rgba(60,80,160,.16);--line:rgba(60,80,160,.14);
+  --ink:#141a33;--dim:#4d5878;--faint:#8a93ad;
+  --blue:#1d86d6;--pink:#d8306f;--violet:#7444d6;--amber:#c27a00;--teal:#0f8f88;
+  --ok:#0f9467;--bad:#d4364f;--okbg:rgba(15,148,103,.1);--badbg:rgba(212,54,79,.09);
+  --shadow:0 16px 40px -24px rgba(30,40,90,.45);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  min-height:100vh;color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.55;
+  background:
+    radial-gradient(1100px 600px at 85% -10%,color-mix(in srgb,var(--violet) 22%,transparent),transparent 60%),
+    radial-gradient(900px 500px at -10% 30%,color-mix(in srgb,var(--blue) 14%,transparent),transparent 60%),
+    linear-gradient(180deg,var(--bg),var(--bg2));
+  background-attachment:fixed;
+}
+:root[data-theme="dark"] body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.5;
+  background-image:radial-gradient(1px 1px at 12% 18%,#fff8,transparent),radial-gradient(1px 1px at 72% 12%,#fff6,transparent),
+    radial-gradient(1.5px 1.5px at 40% 70%,#fff5,transparent),radial-gradient(1px 1px at 88% 64%,#fff7,transparent),
+    radial-gradient(1px 1px at 22% 86%,#fff5,transparent),radial-gradient(1px 1px at 58% 38%,#fff4,transparent);
+}
+a{color:inherit}
+button{font:inherit;color:inherit}
+.jp,.stem,.opt .t,.ptext,.ex .tr-jp{font-family:var(--jp)}
+rt{font-size:.5em;color:var(--dim);font-weight:500;letter-spacing:0}
+body.nofuri rt{visibility:hidden}
+u{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:.32em;text-decoration-color:var(--acc)}
+
+/* header */
+.top{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  background:color-mix(in srgb,var(--bg) 70%,transparent);border-bottom:1px solid var(--line)}
+.top .in{max-width:1180px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;letter-spacing:.2px}
+.brand svg{width:34px;height:34px;flex:none}
+.brand small{display:block;font-weight:500;color:var(--dim);font-size:11px;letter-spacing:.6px;text-transform:uppercase}
+.crumb{flex:1;min-width:0;color:var(--dim);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.crumb a{text-decoration:none}.crumb a:hover{color:var(--ink)}
+.tog{display:flex;gap:6px}
+.tbtn{height:34px;min-width:34px;padding:0 10px;border-radius:10px;border:1px solid var(--edge);background:var(--panel);cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;font-size:13px;color:var(--dim)}
+.tbtn:hover{color:var(--ink);border-color:color-mix(in srgb,var(--acc) 50%,var(--edge))}
+.tbtn.on{color:var(--ink);border-color:color-mix(in srgb,var(--acc) 60%,var(--edge));background:color-mix(in srgb,var(--acc) 14%,var(--panel))}
+.tbtn svg{width:16px;height:16px}
+main{max-width:1180px;margin:0 auto;padding:22px 16px 90px}
+
+/* generic */
+.panel{background:var(--panel);border:1px solid var(--edge);border-radius:20px;box-shadow:var(--shadow)}
+.muted{color:var(--dim)}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:12px;border:1px solid var(--edge);color:var(--dim);background:var(--panel2)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 18px;border-radius:13px;border:1px solid var(--edge);
+  background:var(--panel2);cursor:pointer;font-weight:600;text-decoration:none;transition:transform .15s,border-color .15s,background .15s}
+.btn:hover{transform:translateY(-1px);border-color:color-mix(in srgb,var(--acc) 55%,var(--edge))}
+.btn.pri{background:linear-gradient(135deg,color-mix(in srgb,var(--acc) 85%,#fff 0%),color-mix(in srgb,var(--violet) 80%,var(--acc)));border-color:transparent;color:#05070f}
+:root[data-theme="light"] .btn.pri{color:#fff}
+.btn[disabled]{opacity:.4;pointer-events:none}
+.btn svg{width:18px;height:18px}
+h1,h2,h3{margin:0;line-height:1.25}
+
+/* home */
+.hero{padding:26px 4px 18px}
+.hero h1{font-size:clamp(28px,4.4vw,44px);font-weight:700;letter-spacing:-.5px}
+.hero h1 span{background:linear-gradient(90deg,var(--blue),var(--violet),var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{max-width:640px;color:var(--dim);margin:10px 0 0}
+.books{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-top:20px}
+.bcard{position:relative;display:block;padding:20px;text-decoration:none;overflow:hidden;transition:transform .2s,border-color .2s}
+.bcard:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--acc) 50%,var(--edge))}
+.bcard .cover{display:flex;gap:16px;align-items:center}
+.bcard .book-cover{width:72px;height:104px;object-fit:contain;flex:none;border-radius:3px;background:#fff;box-shadow:0 8px 18px -8px rgba(0,0,0,.4)}
+.bcard .spine{width:64px;height:86px;border-radius:8px 14px 14px 8px;flex:none;position:relative;
+  background:linear-gradient(160deg,#2ccf9a,#118a6a);box-shadow:inset 6px 0 0 rgba(0,0,0,.18),0 10px 24px -10px rgba(0,0,0,.6);
+  display:grid;place-items:center;color:#fff;font-family:var(--jp);font-weight:900;font-size:22px}
+.bcard .spine small{position:absolute;bottom:6px;font-size:9px;font-family:var(--ui);letter-spacing:.5px;opacity:.85}
+.bcard h3{font-family:var(--jp);font-size:18px}
+.bcard .meta{color:var(--dim);font-size:13px;margin-top:4px}
+.bcard .bar{margin-top:16px}
+.bcard.add{display:grid;place-items:center;min-height:150px;border-style:dashed;color:var(--faint);text-align:center;font-size:14px}
+.bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden;display:flex}
+.bar i{display:block;height:100%}
+.bar .g{background:var(--ok)}.bar .r{background:var(--bad)}
+.stats{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--dim);margin-top:8px}
+.stats b{color:var(--ink);font-weight:600}
+
+/* book */
+.bhead{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end;justify-content:space-between;padding:6px 2px 18px}
+.bhead h1{font-family:var(--jp);font-size:clamp(22px,3vw,30px)}
+.bhead .acts{display:flex;gap:10px;flex-wrap:wrap}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 12px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;height:40px;padding:0 16px;border-radius:12px;border:1px solid var(--edge);background:var(--panel);cursor:pointer;text-decoration:none;
+  display:inline-flex;align-items:center;gap:8px;font-family:var(--jp);font-weight:700;font-size:14px;color:var(--dim)}
+.tab .n{font-family:var(--ui);font-size:11px;font-weight:600;padding:1px 7px;border-radius:99px;background:var(--line)}
+.tab.on{color:var(--ink);border-color:color-mix(in srgb,var(--acc) 60%,var(--edge));background:color-mix(in srgb,var(--acc) 15%,var(--panel))}
+.part{margin-top:18px}
+.part h2{font-family:var(--jp);font-size:17px;display:flex;align-items:center;gap:10px;margin:0 2px 10px}
+.part h2 .pill{font-family:var(--ui)}
+.sets{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.set{display:block;padding:14px 14px 12px;border-radius:16px;text-decoration:none;background:var(--panel);border:1px solid var(--edge);transition:transform .15s,border-color .15s}
+.set:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--acc) 55%,var(--edge))}
+.set .l{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.set .l b{font-family:var(--jp);font-size:15px}
+.set .l span{font-size:12px;color:var(--faint)}
+.set .sc{font-size:12px;color:var(--dim);margin-top:2px}
+.set .sc b{color:var(--ok)}
+.qstrip{display:flex;flex-wrap:wrap;gap:3px;margin-top:10px}
+.qstrip i{width:9px;height:9px;border-radius:3px;background:var(--line)}
+.qstrip i.g{background:var(--ok)}.qstrip i.r{background:var(--bad)}
+.sec-actions{display:flex;gap:10px;flex-wrap:wrap;margin:6px 2px 4px}
+
+/* quiz */
+.qtop{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.qtop .back{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;border:1px solid var(--edge);background:var(--panel);text-decoration:none;flex:none}
+.qtop .back svg{width:18px;height:18px}
+.qtop .tt{min-width:0;flex:1}
+.qtop .tt small{display:block;color:var(--dim);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qtop .tt b{font-family:var(--jp);font-size:17px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.score{flex:none;font-size:13px;color:var(--dim);text-align:right}
+.score b{display:block;font-size:20px;color:var(--ink);line-height:1.1}
+.dots{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 16px}
+.dot{width:32px;height:32px;border-radius:10px;border:1px solid var(--edge);background:var(--panel);cursor:pointer;font-size:12px;color:var(--dim);padding:0}
+.dot.g{background:var(--okbg);border-color:color-mix(in srgb,var(--ok) 55%,transparent);color:var(--ok)}
+.dot.r{background:var(--badbg);border-color:color-mix(in srgb,var(--bad) 55%,transparent);color:var(--bad)}
+.dot.cur{outline:2px solid var(--acc);outline-offset:2px;color:var(--ink)}
+.qgrid{display:grid;gap:16px;align-items:start}
+.qgrid.wp{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)}
+.passage{position:sticky;top:76px;max-height:calc(100vh - 96px);display:flex;flex-direction:column;overflow:hidden}
+.passage .ph{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line);font-size:13px;color:var(--dim)}
+.passage .ph b{color:var(--ink);font-family:var(--jp)}
+.passage .ph button{border:0;background:none;color:var(--dim);cursor:pointer;display:none}
+.ptext{padding:16px 20px 22px;overflow:auto;font-size:17px;line-height:2.15}
+.ptext p{margin:0 0 .3em;text-indent:1em}
+.ptext p.c{text-align:center;text-indent:0;font-weight:700}
+.ptext p.r{text-align:right;text-indent:0}
+.ptext p.img{text-indent:0;margin-top:8px}
+.ptext img{width:100%;height:auto;border-radius:10px;background:#fff;display:block}
+.ptext a.zoom{display:block;cursor:zoom-in}
+.ptext .intro{color:var(--dim);font-size:14px;text-indent:0;margin-bottom:.6em}
+.qcard{padding:22px 22px 20px}
+.qhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.qnum{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-weight:700;background:color-mix(in srgb,var(--acc) 18%,var(--panel2));border:1px solid color-mix(in srgb,var(--acc) 45%,transparent)}
+.qtag{font-family:var(--jp);font-weight:700}
+.qpage{margin-left:auto;font-size:12px;color:var(--faint)}
+.instr{font-size:13px;color:var(--dim);margin:0 0 16px;padding:10px 12px;border-radius:12px;background:var(--panel2);border:1px solid var(--line)}
+.instr .jp{display:block;color:var(--ink);font-size:13.5px;margin-bottom:2px}
+.ulb{display:inline-block;width:2.4em;border-bottom:1.5px solid currentColor;vertical-align:.1em;margin:0 .15em}
+.stem{font-size:clamp(18px,2.3vw,22px);line-height:2.2;margin:4px 0 18px;word-break:break-word}
+.stem.word{font-size:clamp(26px,4vw,34px);font-weight:700;line-height:1.6}
+.slot{display:inline-block;min-width:3.4em;height:1.3em;border-bottom:2px solid var(--ink);margin:0 .22em;vertical-align:-.25em;text-align:center;line-height:1.3em}
+.slot.star{color:var(--pink);font-weight:900}
+.slot.fill{min-width:0;height:auto;line-height:inherit;padding:0 .35em;border-bottom-color:var(--ok);border-radius:4px 4px 0 0;background:var(--okbg);vertical-align:baseline}
+.slot.fill.star{background:color-mix(in srgb,var(--pink) 18%,transparent);border-bottom-color:var(--pink);color:var(--ink)}
+.slot.num{min-width:0;height:auto;line-height:1.5;border:1.5px solid var(--dim);border-radius:7px;padding:0 .5em;font-family:var(--ui);font-weight:700;font-size:.82em;vertical-align:.08em;margin:0 .15em}
+.slot.num.cur{border-color:var(--pink);color:var(--pink);box-shadow:0 0 0 4px color-mix(in srgb,var(--pink) 20%,transparent)}
+.slot.num i{font-style:normal;font-family:var(--jp);font-weight:700;margin-left:.4em;color:var(--ok)}
+.blank{display:inline-block;min-width:4.6em;height:1.35em;border:1.5px solid var(--dim);border-radius:8px;vertical-align:-.3em;margin:0 .2em}
+.blank.fill{min-width:0;height:auto;line-height:inherit;padding:0 .4em;border-color:var(--ok);background:var(--okbg);vertical-align:baseline}
+.opts{display:grid;gap:10px}
+.opts.grid2{grid-template-columns:1fr 1fr}
+.opt{display:flex;align-items:flex-start;gap:12px;width:100%;text-align:left;padding:13px 15px;border-radius:15px;border:1px solid var(--edge);
+  background:var(--panel2);cursor:pointer;transition:transform .12s,border-color .12s,background .12s;font-size:17px;line-height:2}
+.opt:hover{transform:translateY(-1px);border-color:color-mix(in srgb,var(--acc) 60%,var(--edge))}
+.opt .k{flex:none;width:28px;height:28px;margin-top:5px;border-radius:9px;display:grid;place-items:center;font-size:13px;font-weight:700;font-family:var(--ui);
+  background:var(--line);color:var(--dim)}
+.opt .t{flex:1;min-width:0}
+.opt .ic{flex:none;width:22px;height:22px;margin-top:8px;display:none}
+.done .opt{cursor:default}.done .opt:hover{transform:none}
+.opt.right{border-color:color-mix(in srgb,var(--ok) 70%,transparent);background:var(--okbg)}
+.opt.right .k{background:var(--ok);color:#04130d}
+.opt.right .ic.y{display:block;color:var(--ok)}
+.opt.wrong{border-color:color-mix(in srgb,var(--bad) 70%,transparent);background:var(--badbg)}
+.opt.wrong .k{background:var(--bad);color:#1a0509}
+.opt.wrong .ic.n{display:block;color:var(--bad)}
+.done .opt.dim{opacity:.55}
+.verdict{display:flex;align-items:center;gap:12px;margin:18px 0 0;padding:14px 16px;border-radius:15px;font-weight:600}
+.verdict svg{width:26px;height:26px;flex:none}
+.verdict.ok{background:var(--okbg);color:var(--ok)}
+.verdict.no{background:var(--badbg);color:var(--bad)}
+.verdict span{color:var(--ink);font-weight:500}
+.verdict .jp{font-weight:700}
+.ex{margin-top:14px;display:grid;gap:12px;animation:rise .35s ease}
+@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.ex h4{margin:0 0 4px;font-size:12px;letter-spacing:.8px;text-transform:uppercase;color:var(--faint);font-weight:600}
+.ex .box{padding:12px 14px;border-radius:14px;background:var(--panel2);border:1px solid var(--line);line-height:1.7}
+.ex .box b{color:color-mix(in srgb,var(--acc) 75%,var(--ink))}
+.ex .full{font-family:var(--jp);font-size:17px;line-height:2.1}
+.olist{display:grid;gap:8px}
+.orow{display:grid;grid-template-columns:28px 1fr;gap:10px;padding:10px 12px;border-radius:13px;border:1px solid var(--line);background:var(--panel2);line-height:1.65;font-size:14.5px}
+.orow .k{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-size:12px;font-weight:700;background:var(--line);color:var(--dim)}
+.orow.right{border-color:color-mix(in srgb,var(--ok) 45%,transparent)}
+.orow.right .k{background:var(--ok);color:#04130d}
+.orow.mine:not(.right){border-color:color-mix(in srgb,var(--bad) 45%,transparent)}
+.orow.mine:not(.right) .k{background:var(--bad);color:#1a0509}
+.orow .ot{font-family:var(--jp);font-weight:700;font-size:15px;display:block;line-height:1.9}
+.orow .tag{font-size:11px;font-weight:600;padding:1px 7px;border-radius:99px;margin-left:6px;vertical-align:2px;font-family:var(--ui)}
+.orow .tag.y{background:var(--okbg);color:var(--ok)}.orow .tag.m{background:var(--badbg);color:var(--bad)}
+.order{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.order .c{padding:3px 10px;border-radius:9px;background:var(--panel2);border:1px solid var(--line);font-family:var(--jp);font-weight:700}
+.order .c.s{border-color:var(--pink);color:var(--pink)}
+.order .ar{color:var(--faint)}
+.aud{margin:0 0 16px;padding:10px 12px;border-radius:14px;background:var(--panel2);border:1px solid var(--line);display:flex;align-items:center;gap:10px}
+.aud .ic{flex:none;width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:color-mix(in srgb,var(--acc) 18%,transparent);color:var(--acc)}
+.aud .ic svg{width:18px;height:18px}
+.aud audio{flex:1;min-width:0;width:100%;height:40px}
+.qimg{margin:0 0 18px}
+.qimg img{display:block;max-width:100%;max-height:420px;height:auto;border-radius:12px;background:#fff;margin:0 auto}
+.ex details.scr summary{cursor:pointer;margin:0 0 4px;font-size:12px;letter-spacing:.8px;text-transform:uppercase;color:var(--faint);font-weight:600}
+.ex .scr .box{font-family:var(--jp);font-size:15.5px;line-height:2}
+.opt.used{opacity:.35;pointer-events:none}
+.slot.pick{min-width:0;height:auto;line-height:inherit;padding:0 .35em;border-bottom-color:var(--acc);border-radius:4px 4px 0 0;background:color-mix(in srgb,var(--acc) 16%,transparent);vertical-align:baseline;cursor:pointer}
+.narh{font-size:13px;color:var(--dim);margin:-8px 0 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.narh button{border:1px solid var(--edge);background:var(--panel2);border-radius:9px;padding:2px 10px;cursor:pointer;font-size:12.5px}
+.qnav{display:flex;gap:10px;justify-content:space-between;margin-top:18px}
+.qnav .btn{flex:1}
+.kbd{font-size:12px;color:var(--faint);text-align:center;margin-top:10px}
+.kbd kbd{font-family:var(--ui);padding:1px 6px;border-radius:6px;border:1px solid var(--edge);background:var(--panel2)}
+
+/* summary */
+.sum{padding:28px;text-align:center;max-width:720px;margin:0 auto}
+.ring{width:150px;height:150px;margin:6px auto 14px;position:relative}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring b{position:absolute;inset:0;display:grid;place-items:center;font-size:34px}
+.ring b small{display:block;font-size:13px;color:var(--dim);font-weight:500;margin-top:-34px}
+.sum h2{font-size:24px}
+.sum .acts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.slist{display:grid;grid-template-columns:minmax(0,1fr);gap:6px;margin-top:22px;text-align:left}
+.slist a{min-width:0;display:flex;gap:10px;align-items:center;padding:9px 12px;border-radius:12px;border:1px solid var(--line);background:var(--panel2);text-decoration:none;font-family:var(--jp);font-size:14.5px}
+.slist a .m{flex:none;width:24px;height:24px;border-radius:8px;display:grid;place-items:center;font-family:var(--ui);font-size:12px;font-weight:700}
+.slist a .m.g{background:var(--okbg);color:var(--ok)}.slist a .m.r{background:var(--badbg);color:var(--bad)}
+.slist a .x{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.empty{padding:40px 20px;text-align:center;color:var(--dim)}
+
+/* mistake analysis */
+.an-tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:4px 0 6px}
+.an-tile{padding:14px 16px;border-radius:16px}
+.an-tile b{display:block;font-size:26px;line-height:1.15}
+.an-tile span{font-size:12.5px;color:var(--dim)}
+.an-tile.r b{color:var(--bad)}.an-tile.g b{color:var(--ok)}
+.an-sec{margin-top:22px}
+.an-sec>h2{font-size:17px;margin:0 2px 4px}
+.an-sec>p{margin:0 2px 10px;font-size:13px;color:var(--dim)}
+.skills{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.skills .pill{font-size:13px;padding:5px 12px}.skills .pill b{color:var(--ink)}
+.wk{display:grid;gap:8px}
+.wk .row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 12px;align-items:center;padding:12px 14px;border-radius:14px;background:var(--panel);border:1px solid var(--edge)}
+.wk .nm{min-width:0;font-weight:700}
+.wk .nm small{font-weight:500;font-size:12.5px;color:var(--dim);margin-left:6px}
+.wk .ct{font-size:12.5px;color:var(--dim);display:flex;align-items:center;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+.wk .bar{grid-column:1/-1}
+.wk .btn{height:32px;padding:0 12px;font-size:13px;border-radius:10px}
+.mlist{display:grid;gap:6px}
+.mlist a{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--panel2);text-decoration:none}
+.mlist a:hover{border-color:color-mix(in srgb,var(--acc) 50%,var(--line))}
+.mlist .x{min-width:0;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mlist small{grid-column:1/-1;font-size:12.5px;color:var(--dim);overflow-wrap:anywhere}
+.mlist .st{font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:99px;white-space:nowrap}
+.mlist .st.r{background:var(--badbg);color:var(--bad)}.mlist .st.g{background:var(--okbg);color:var(--ok)}
+.mlist details summary{cursor:pointer;color:var(--dim);font-size:13px;padding:8px 2px}
+.ai{padding:18px 20px;margin-top:22px}
+.ai .aih{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.ai h2{font-size:18px}.ai .aih p{margin:4px 0 0;font-size:13.5px;max-width:620px}
+.ai h3{font-size:15px;margin:18px 0 8px}
+.aimeta{font-size:12.5px;margin:14px 0 0}
+.aisum{font-size:15.5px;line-height:1.7;margin:8px 0 0}
+.aipola{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.aipola .card{padding:12px 14px;border-radius:14px;background:var(--panel2);border:1px solid var(--line);line-height:1.6;font-size:14.5px}
+.aipola .card p{margin:6px 0 0}
+.aipola .sar span{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--ok);margin-right:6px}
+.aipola .pill{margin:8px 6px 0 0;text-decoration:none}
+.aifokus,.airen{margin:0;padding-left:22px;display:grid;gap:8px;line-height:1.6;font-size:14.5px}
+.aierr{color:var(--bad);margin:14px 0 0}
+.aiq{padding:12px 14px;border-radius:14px;border:1px dashed color-mix(in srgb,var(--violet) 45%,var(--line));background:color-mix(in srgb,var(--violet) 6%,var(--panel2))}
+.aiq .aiqh{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.aiq .aiqh span{font-size:13px}
+.aiq .btn{height:38px;font-size:14px}
+.aiqout{display:grid;gap:10px;margin-top:10px;line-height:1.7;font-size:14.5px}
+.aiqout:empty{display:none}
+.aiqout h5{margin:0 0 2px;font-size:12px;letter-spacing:.8px;text-transform:uppercase;color:var(--faint);font-weight:600}
+.aiqout p{margin:0}
+.aiqout ul,.aiqout ol{margin:0;padding-left:20px;display:grid;gap:4px}
+.aiqout .aiqinti{font-weight:600}
+.aiqout .aiqex{margin-top:4px}
+.aiqout .aiqex .jp{display:block;font-size:16px}
+.aiqout .aiqex small{display:block;color:var(--dim)}
+.aiqout .aimeta{margin:2px 0 0}
+
+@media (max-width:980px){
+  .qgrid.wp{grid-template-columns:1fr}
+  .passage{position:relative;top:0;max-height:none}
+  .passage .ph button{display:inline-flex}
+  .passage.shut .ptext{display:none}
+  .passage:not(.shut) .ptext{max-height:56vh}
+}
+@media (max-width:640px){
+  main{padding:14px 12px 96px}
+  .qcard{padding:16px 14px}
+  .opts.grid2{grid-template-columns:1fr}
+  .brand small{display:none}
+  .crumb{display:none}
+  .qnav{position:fixed;left:0;right:0;bottom:0;z-index:15;margin:0;padding:10px 12px calc(10px + env(safe-area-inset-bottom));
+    background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+  .kbd{display:none}
+  .dot{width:28px;height:28px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-ok" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".16"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-no" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".16"/><path d="M8.5 8.5l7 7M15.5 8.5l-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-redo" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4.5h4.5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-shuf" viewBox="0 0 24 24"><path d="M3 7h3.5c2 0 3.3 1 4.5 2.7l2 3c1.2 1.7 2.5 2.8 4.5 2.8H21M18 12.5l3 3-3 3M3 17h3.5c1.4 0 2.4-.5 3.3-1.4M13.7 8.4c.9-.9 1.9-1.4 3.3-1.4H21M18 4l3 3-3 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4m0 0h11l-2 4 2 4H5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-ear" viewBox="0 0 24 24"><path d="M4 13v-1a8 8 0 0 1 16 0v1M4 13h2.5a1.5 1.5 0 0 1 1.5 1.5v4A1.5 1.5 0 0 1 6.5 20H5.5A1.5 1.5 0 0 1 4 18.5V13zm16 0h-2.5a1.5 1.5 0 0 0-1.5 1.5v4a1.5 1.5 0 0 0 1.5 1.5h1a1.5 1.5 0 0 0 1.5-1.5V13z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5v-15zM4 20.5A2.5 2.5 0 0 0 6.5 23H20" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+</svg>
+
+<header class="top"><div class="in">
+  <a class="brand" href="#/">
+    <svg viewBox="0 0 40 40" aria-hidden="true">
+      <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#45b8ff"/><stop offset=".55" stop-color="#b06bff"/><stop offset="1" stop-color="#ff4d97"/></linearGradient></defs>
+      <rect x="2" y="2" width="36" height="36" rx="11" fill="url(#lg)"/>
+      <text x="20" y="27.5" text-anchor="middle" font-family="Zen Maru Gothic, sans-serif" font-weight="900" font-size="19" fill="#070a14">答</text>
+      <circle cx="31.5" cy="9" r="4.2" fill="#3ee6a8" stroke="#070a14" stroke-width="1.6"/>
+    </svg>
+    <span>Kotae<small>latihan soal dari buku</small></span>
+  </a>
+  <div class="crumb" id="crumb"></div>
+  <div class="tog">
+    <button class="tbtn on" id="furiBtn" title="Tampilkan / sembunyikan furigana (F)"><span class="jp">ふりがな</span></button>
+    <button class="tbtn" id="themeBtn" title="Ganti tema"><svg><use href="#i-sun"/></svg></button>
+  </div>
+</div></header>
+
+<main id="app"><div class="empty">Memuat…</div></main>
+
+<script src="local/gemini-keys.js" onerror="this.remove()"></script>
+<script src="data/books.js"></script>
+<script>
+(() => {
+'use strict';
+const $ = (s, el = document) => el.querySelector(s);
+const app = $('#app');
+const KEY = 'kotae:v1';
+
+/* ---------- storage ---------- */
+let DB = { prefs: {}, hist: {}, sets: {} };
+try { Object.assign(DB, JSON.parse(localStorage.getItem(KEY)) || {}); } catch (e) {}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(DB)); } catch (e) {} };
+
+/* ---------- prefs ---------- */
+function applyPrefs() {
+  const theme = DB.prefs.theme || 'light';
+  document.documentElement.dataset.theme = theme;
+  $('#themeBtn').innerHTML = `<svg><use href="#i-${theme === 'dark' ? 'sun' : 'moon'}"/></svg>`;
+  const furi = DB.prefs.furi !== false;
+  document.body.classList.toggle('nofuri', !furi);
+  $('#furiBtn').classList.toggle('on', furi);
+}
+$('#themeBtn').onclick = () => { DB.prefs.theme = (DB.prefs.theme || 'light') === 'dark' ? 'light' : 'dark'; save(); applyPrefs(); };
+$('#furiBtn').onclick = () => { DB.prefs.furi = DB.prefs.furi === false; save(); applyPrefs(); };
+applyPrefs();
+
+/* ---------- question types ---------- */
+const UL = '<span class="ulb"></span>';
+const TYPES = {
+  kanji:    { tag: '漢字読み', id: 'Cara baca kanji', jp: `${UL}のことばの読み方として最もよいものを、1・2・3・4から一つえらびなさい。`, how: 'Pilih cara baca yang benar untuk kata bergaris bawah.' },
+  hyouki:   { tag: '表記', id: 'Penulisan kanji', jp: `${UL}のことばを漢字で書くとき、最もよいものを、1・2・3・4から一つえらびなさい。`, how: 'Pilih penulisan kanji yang benar untuk kata bergaris bawah.' },
+  bunmyaku: { tag: '文脈規定', id: 'Kata yang pas', jp: '（　　）に入れるのに最もよいものを、1・2・3・4から一つえらびなさい。', how: 'Pilih kata yang paling pas untuk mengisi kotak kosong.' },
+  iikae:    { tag: '言い換え類義', id: 'Padanan arti', jp: `${UL}に意味が最も近いものを、1・2・3・4から一つえらびなさい。`, how: 'Pilih yang artinya paling dekat dengan bagian bergaris bawah.' },
+  youhou:   { tag: '用法', id: 'Pemakaian kata', jp: 'つぎのことばの使い方として最もよいものを、1・2・3・4から一つえらびなさい。', how: 'Pilih kalimat yang memakai kata ini dengan benar.' },
+  bunpou:   { tag: '文法形式', id: 'Bentuk tata bahasa', jp: 'つぎの文の（　　）に入れるのに最もよいものを、1・2・3・4から一つえらびなさい。', how: 'Pilih bentuk tata bahasa yang tepat untuk kotak kosong.' },
+  star:     { tag: '並べ替え ★', id: 'Susun kalimat', jp: 'つぎの文の ★ に入る最もよいものを、1・2・3・4から一つえらびなさい。', how: 'Susun keempat potongan jadi kalimat yang benar, lalu pilih potongan yang jatuh di ★.' },
+  cloze:    { tag: '文章の文法', id: 'Tata bahasa dalam teks', jp: '文章全体の内容を考えて、□の中に入る最もよいものを、1・2・3・4から一つえらびなさい。', how: 'Baca teksnya, lalu pilih yang paling cocok untuk kotak bernomor yang menyala.' },
+  dokkai:   { tag: '読解', id: 'Pemahaman bacaan', jp: '文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい。', how: 'Baca teksnya, lalu jawab pertanyaannya.' },
+  erabu:    { tag: 'れんしゅう', id: 'Pilih yang benar', jp: '正しいほうに○をつけなさい。', how: 'Pilih yang benar dari dua pilihan.', ab: 1 },
+  yomi:     { tag: '読み', id: 'Cara baca', jp: '正しい読みに○をつけなさい。', how: 'Pilih cara baca yang benar untuk kata ini.' },
+  kaki:     { tag: '書き', id: 'Penulisan kanji', jp: '正しい漢字に○をつけなさい。', how: 'Pilih penulisan kanji yang benar untuk kata ini.' },
+  maru:     { tag: '○×', id: 'Benar atau salah', jp: '次の文章を読んで、後の文が正しいかどうか考えよう。', how: 'Baca teksnya, lalu tentukan apakah pernyataan ini sesuai (○) atau tidak (×).' },
+  setsumei: { tag: '説明', id: 'Kata sesuai penjelasan', jp: '説明に最もあうことばを、1・2・3・4から一つえらびなさい。', how: 'Baca penjelasannya, lalu pilih kata yang paling cocok dengan penjelasan itu.' },
+  gokei:    { tag: '語形成', id: 'Pembentukan kata', jp: '（　　）に入れるのに最もよいものを、1・2・3・4から一つえらびなさい。', how: 'Pilih kanji/imbuhan yang bergabung dengan kata di sebelahnya menjadi kata yang benar.' },
+  narabe:   { tag: '並べ替え', id: 'Susun kalimat', jp: '下の語を並べ替えて正しい文を作りなさい。', how: 'Ketuk keempat potongan sesuai urutan yang benar. Ketuk potongan yang sudah terpasang untuk melepasnya.' },
+  kiku:     { tag: '聴解れんしゅう', id: 'Latihan mendengar', jp: 'CDを聞いて、正しいものを選んでください。', how: 'Putar audionya, lalu pilih jawaban yang benar.' },
+  kadai:    { tag: '課題理解', id: 'Memahami tugas', jp: 'まず質問を聞いてください。それから話を聞いて、1から4の中から、最もよいものを一つえらんでください。', how: 'Dengarkan pertanyaan lalu percakapannya: apa yang harus dilakukan orang itu?' },
+  point:    { tag: 'ポイント理解', id: 'Menangkap poin', jp: 'まず質問を聞いてください。そのあと、せんたくしを読んでください。それから話を聞いて、1から4の中から、最もよいものを一つえらんでください。', how: 'Dengarkan pertanyaannya, baca pilihannya, lalu cari poin yang ditanyakan di percakapan.' },
+  gaiyou:   { tag: '概要理解', id: 'Memahami garis besar', jp: '問題用紙に何もいんさつされていません。話を聞いて、質問とせんたくしを聞いて、1から4の中から、最もよいものを一つえらんでください。', how: 'Pilihannya hanya dibacakan di audio. Tangkap isi besar pembicaraannya.' },
+  hatsuwa:  { tag: '発話表現', id: 'Ungkapan yang tepat', jp: '絵を見ながら質問を聞いてください。やじるし（→）の人は何と言いますか。1から3の中から、最もよいものを一つえらんでください。', how: 'Lihat gambarnya; pilih ucapan yang tepat untuk orang yang ditunjuk panah. Pilihannya dibacakan di audio.' },
+  sokuji:   { tag: '即時応答', id: 'Tanggapan cepat', jp: '問題用紙に何もいんさつされていません。まず文を聞いてください。それから、その返事を聞いて、1から3の中から、最もよいものを一つえらんでください。', how: 'Dengarkan kalimatnya, lalu pilih tanggapan yang paling pas. Pilihannya dibacakan di audio.' },
+};
+const SEC_ACC = { v: 'var(--blue)', g: 'var(--pink)', r: 'var(--violet)', m1: 'var(--amber)', m2: 'var(--amber)',
+  w1: 'var(--blue)', w2: 'var(--pink)', w3: 'var(--violet)', w4: 'var(--amber)', k: 'var(--amber)', l: 'var(--teal)' };
+const SEC_ID = { v: 'Kosakata', g: 'Tata bahasa', r: 'Bacaan', m1: 'Ujian simulasi', m2: 'Ujian simulasi',
+  w1: 'Minggu 1', w2: 'Minggu 2', w3: 'Minggu 3', w4: 'Minggu 4', k: 'Kanji', l: 'Mendengarkan' };
+const typeOf = (B, q) => (B.types && B.types[q.type]) || TYPES[q.type] || TYPES.dokkai;
+// option labels (a/b for 正しいほう items), right-answer test (q.alt = other accepted answers; narabe: ans is the order string)
+const lab = (q, k) => (TYPES[q.type] || {}).ab ? 'abcd'[k] : String(k + 1);
+const isOk = (q, a) => a != null && (a === q.ans || (q.alt || []).includes(a));
+const ansText = q => q.type === 'narabe' ? q.order.split('').map(d => strip(q.opts[+d - 1])).join(' › ') : strip(q.opts[q.ans - 1]);
+
+/* ---------- books ---------- */
+const BOOKS = window.KOTAE_BOOKS || [];
+const loaded = {};
+function loadBook(id) {
+  if (loaded[id]) return Promise.resolve(loaded[id]);
+  const meta = BOOKS.find(b => b.id === id);
+  if (!meta) return Promise.reject(new Error('Buku tidak ditemukan'));
+  const ready = () => (loaded[id] = indexBook(window.KOTAE_DATA[id], meta));
+  if (window.KOTAE_DATA && window.KOTAE_DATA[id]) return Promise.resolve(ready());
+  return new Promise((res, rej) => {
+    const s = document.createElement('script');
+    s.src = meta.file + '?v=' + (meta.v || 1);
+    s.onload = () => res(ready());
+    s.onerror = () => rej(new Error('Gagal memuat ' + meta.file));
+    document.head.appendChild(s);
+  });
+}
+function indexBook(data, meta) {
+  // the app shows the romaji title from books.js; the Japanese original stays as a tooltip
+  const B = { ...data, title: meta.title || data.title, jp: meta.jp || data.title, meta, q: {}, set: {}, all: [] };
+  for (const sec of data.sections) for (const part of sec.parts) for (const st of part.sets) {
+    st.sec = sec; st.part = part;
+    B.set[st.id] = st;
+    for (const q of st.qs) { q.set = st; B.q[q.id] = q; B.all.push(q); }
+  }
+  return B;
+}
+
+/* ---------- helpers ---------- */
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const strip = h => h.replace(/<rt>.*?<\/rt>/g, '').replace(/<[^>]+>/g, '');
+const histOf = q => DB.hist[q.id];
+// first attempt {c, ok, t} of a history entry; null for an older entry answered several times before f existed
+const firstOf = h => h.f !== undefined ? h.f : h.n === 1 ? { c: h.c, ok: h.ok, t: h.t } : null;
+// a mistake on the first try (for older multi-try entries only the latest answer is known)
+const missedFirst = h => { const f = firstOf(h); return f ? !f.ok : !h.ok; };
+function statOf(qs) {
+  let g = 0, r = 0;
+  for (const q of qs) { const h = DB.hist[q.id]; if (h) h.ok ? g++ : r++; }
+  return { g, r, n: qs.length };
+}
+function bar(st) {
+  const pct = x => (st.n ? (100 * x / st.n) : 0).toFixed(2) + '%';
+  return `<div class="bar"><i class="g" style="width:${pct(st.g)}"></i><i class="r" style="width:${pct(st.r)}"></i></div>`;
+}
+const pagesLabel = p => !p || !p.length ? '' : 'hlm. ' + (p.length > 1 ? `${p[0]}–${p[p.length - 1]}` : p[0]);
+function setCrumb(parts) { $('#crumb').innerHTML = parts.join(' <span class="muted">/</span> '); }
+function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+/* ---------- router ---------- */
+let S = null;          // current quiz session
+window.addEventListener('hashchange', route);
+function route() {
+  const h = location.hash.replace(/^#\/?/, '').split('/').map(decodeURIComponent);
+  window.scrollTo(0, 0);
+  if (!h[0]) return home();
+  if (h[0] === 'g') return loadBook(h[1]).then(B => grammarView(B, h[2])).catch(fail);
+  if (h[0] === 'b') return loadBook(h[1]).then(B => bookView(B, h[2])).catch(fail);
+  if (h[0] === 's') return loadBook(h[1]).then(B => startSet(B, h[2])).catch(fail);
+  if (h[0] === 'w') return loadBook(h[1]).then(B => startWrong(B, h[2])).catch(fail);
+  if (h[0] === 'x') return loadBook(h[1]).then(B => startMix(B, h[2])).catch(fail);
+  if (h[0] === 'a') return analysisView(h[1]);
+  if (h[0] === 'm') return loadBook(h[1]).then(B => startMistakes(B, h[2])).catch(fail);
+  home();
+}
+function fail(e) { app.innerHTML = `<div class="empty">${esc(e.message || e)}</div>`; }
+
+/* ---------- home ---------- */
+function home() {
+  S = null;
+  setCrumb([]);
+  document.documentElement.style.setProperty('--acc', 'var(--blue)');
+  const cards = BOOKS.map(b => {
+    const hs = Object.keys(DB.hist).filter(k => DB.hist[k].b === b.id);
+    const g = hs.filter(k => DB.hist[k].ok).length;
+    const n = b.count || 0;
+    return `<a class="bcard panel" href="#/b/${b.id}">
+      <div class="cover">${b.cover ? `<img class="book-cover" src="${esc(b.cover)}" alt="Sampul ${esc(b.title)}" width="72" height="104" loading="lazy">` : `<div class="spine"${b.color ? ` style="background:linear-gradient(160deg,${b.color[0]},${b.color[1]})"` : ''}>${esc(b.level)}<small>${esc(b.short || b.author)}</small></div>`}
+      <div><h3 title="${esc(b.jp || '')}">${esc(b.title)}</h3><div class="meta">${esc(b.author)} · ${esc(b.blurb || '')}</div></div></div>
+      <div class="stats"><span><b>${hs.length}</b>/${n} soal dicoba</span><span><b>${g}</b> benar</span>${hs.length ? `<span><b>${Math.round(100 * g / hs.length)}%</b> akurasi</span>` : ''}</div>
+    </a>`;
+  }).join('');
+  app.innerHTML = `
+    <section class="hero">
+      <h1>Latihan dari bukumu, <span>langsung dikoreksi.</span></h1>
+      <p>Pilih jawaban, lihat benar atau salah saat itu juga, lalu baca kenapa jawaban itu benar dan kenapa pilihan lainnya keliru.</p>
+      <div class="sec-actions" style="margin:16px 0 0"><a class="btn" href="#/a"><svg><use href="#i-flag"/></svg>Analisis kesalahan</a></div>
+    </section>
+    <div class="books">${cards}
+      <div class="bcard panel add">Buku latihan lain bisa ditambahkan nanti —<br>tinggal kirim PDF-nya.</div>
+    </div>`;
+}
+
+/* ---------- book view ---------- */
+function bookView(B, secId) {
+  S = null;
+  const sec = B.sections.find(s => s.id === secId) || B.sections[0];
+  document.documentElement.style.setProperty('--acc', SEC_ACC[sec.id] || 'var(--blue)');
+  setCrumb([`<a href="#/">Kotae</a>`, `<span class="jp">${esc(B.title)}</span>`]);
+  const all = statOf(B.all);
+  const wrong = B.all.filter(q => DB.hist[q.id] && !DB.hist[q.id].ok).length;
+  const tabs = B.sections.map(s => {
+    const qs = s.parts.flatMap(p => p.sets.flatMap(st => st.qs));
+    return `<a class="tab ${s === sec ? 'on' : ''}" href="#/b/${B.id}/${s.id}">${esc(s.title)}<span class="n">${qs.length}</span></a>`;
+  }).join('');
+  const resources = (B.resources || []).map(r => `<a class="btn" href="${esc(r.href)}">${esc(r.label)}</a>`).join('');
+  const secQs = sec.parts.flatMap(p => p.sets.flatMap(st => st.qs));
+  const parts = sec.parts.map(p => {
+    const pq = p.sets.flatMap(st => st.qs);
+    const ps = statOf(pq);
+    const sets = p.sets.map(st => {
+      const s = statOf(st.qs), rec = DB.sets[st.id];
+      const strip_ = st.qs.map(q => { const h = DB.hist[q.id]; return `<i class="${h ? (h.ok ? 'g' : 'r') : ''}"></i>`; }).join('');
+      return `<a class="set" href="#/s/${B.id}/${st.id}">
+        <div class="l"><b>${esc(st.label)}</b><span>${pagesLabel(st.pages)}</span></div>
+        <div class="sc">${st.qs.length} soal${rec ? ` · terakhir <b>${rec.last}/${rec.total}</b>` : ''}</div>
+        <div class="qstrip">${strip_}</div></a>`;
+    }).join('');
+    return `<div class="part"><h2>${esc(p.title)} <span class="pill">${ps.g}/${ps.n} benar</span></h2><div class="sets">${sets}</div></div>`;
+  }).join('');
+  app.innerHTML = `
+    <div class="bhead">
+      <div><div class="pill" style="margin-bottom:8px">${esc(B.author)} · ${esc(B.level)}</div>
+        <h1 title="${esc(B.jp)}">${esc(B.title)}</h1>
+        <div class="stats"><span><b>${all.g + all.r}</b>/${all.n} soal dicoba</span><span><b>${all.g}</b> benar</span><span><b>${all.r}</b> salah</span></div>
+      </div>
+      <div class="acts">
+        <a class="btn" href="#/w/${B.id}" ${wrong ? '' : 'disabled'}><svg><use href="#i-redo"/></svg>Ulas yang salah (${wrong})</a>
+        <a class="btn" href="#/a/${B.id}"><svg><use href="#i-flag"/></svg>Analisis</a>
+      </div>
+    </div>
+    <nav class="tabs">${tabs}${B.meta.grammar ? `<a class="tab" href="#/g/${B.id}">Rangkuman Grammar${B.meta.grammar.count ? `<span class="n">${B.meta.grammar.count}</span>` : ''}</a>` : ''}</nav>
+    <div class="panel" style="padding:16px 18px">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div><b class="jp" style="font-size:18px">${esc(sec.title)}</b> <span class="muted">· ${sec.sub || SEC_ID[sec.id] || ''}</span></div>
+        <div class="sec-actions">
+          ${sec.id === 'g' && B.meta.grammar ? `<a class="btn" href="#/g/${B.id}">Baca rangkuman</a>` : ''}
+          <a class="btn" href="#/x/${B.id}/${sec.id}"><svg><use href="#i-shuf"/></svg>Acak 20 soal</a>
+        </div>
+      </div>
+      <div style="margin-top:10px">${bar(statOf(secQs))}</div>
+    </div>
+    ${resources ? `<div class="acts" style="margin:18px 0">${resources}</div>` : ''}
+    ${parts}`;
+}
+
+/* ---------- grammar notes ---------- */
+const grammarLoaded = {};
+function loadGrammar(B) {
+  if (grammarLoaded[B.id]) return grammarLoaded[B.id];
+  grammarLoaded[B.id] = new Promise((res, rej) => {
+    if (window.KOTAE_GRAMMAR && window.KOTAE_GRAMMAR[B.id]) return res(window.KOTAE_GRAMMAR[B.id]);
+    const script = document.createElement('script');
+    script.src = B.meta.grammar.file + '?v=' + B.meta.grammar.v;
+    script.onload = () => res(window.KOTAE_GRAMMAR[B.id]);
+    script.onerror = () => { delete grammarLoaded[B.id]; rej(new Error('Gagal memuat rangkuman grammar')); };
+    document.head.appendChild(script);
+  });
+  return grammarLoaded[B.id];
+}
+async function grammarView(B, chapterId) {
+  if (!B.meta.grammar) return bookView(B, 'g');
+  const data = await loadGrammar(B);
+  // A later navigation may finish while this script is loading.
+  const current = location.hash.replace(/^#\/?/, '').split('/');
+  if (current[0] !== 'g' || current[1] !== B.id || (current[2] || '') !== (chapterId || '')) return;
+  S = null;
+  const chapter = data.chapters.find(c => c.id === +chapterId) || data.chapters[0];
+  document.documentElement.style.setProperty('--acc', 'var(--pink)');
+  setCrumb([`<a href="#/">Kotae</a>`, `<a href="#/b/${B.id}/g">文法</a>`, 'Rangkuman']);
+  const nPat = data.chapters.reduce((n, c) => n + c.patterns.length, 0), nEx = data.chapters.reduce((n, c) => n + c.patterns.reduce((m, p) => m + p.examples.length, 0), 0);
+  app.innerHTML = `<div class="grammar-head"><div><div class="pill">${esc(B.title)} · ${nPat} pola · ${nEx} contoh</div>
+    <h1 style="margin-top:10px">Rangkuman Grammar N3</h1><p>Arti, pembentukan, tiga contoh dari buku, dan catatan untuk membedakan pola yang mirip.</p></div>
+    <a class="btn" href="${esc(B.meta.grammar.pdf)}" download>Unduh PDF lengkap</a></div>
+    <div class="acts" style="margin-bottom:18px"><a class="btn" href="#/b/${B.id}/g">Kembali ke latihan 文法</a></div>
+    <div class="grammar-tools panel"><label for="grammar-search">Cari di seluruh ${nPat} pola<input id="grammar-search" type="search" placeholder="Pola Jepang, romaji, atau arti Indonesia…" autocomplete="off"></label>
+    <label><input id="grammar-romaji" type="checkbox" checked> Tampilkan romaji</label></div>
+    <div class="grammar-layout"><nav class="grammar-nav panel" aria-label="Bab grammar">${data.chapters.map(c => `<a href="#/g/${B.id}/${c.id}" class="${c.id === chapter.id ? 'on' : ''}">${String(c.id).padStart(2,'0')} <span class="jp">${esc(c.title)}</span><span>${esc(c.title_id)} · ${c.patterns.length} pola</span></a>`).join('')}</nav>
+    <div id="grammar-content"></div></div>`;
+  const content = $('#grammar-content');
+  const normalize = text => String(text).normalize('NFKC').toLowerCase();
+  const allPatterns = data.chapters.flatMap(c => c.patterns);
+  function card(c) {
+    return `<article class="grammar-card panel" id="grammar-${c.id}"><h3 class="jp">${String(c.id).padStart(2,'0')}. ${esc(c.title)}</h3>
+      <div class="grammar-meta">Bab ${c.chapter} · Buku hlm. ${c.book_page} · PDF sumber hlm. ${c.pdf_page} · ${esc(c.register)}</div>
+      <p><strong>意味 / Arti pola:</strong> ${esc(c.meaning)}</p><p><strong>接続 / Pembentukan:</strong> <span class="jp">${esc(c.formation)}</span></p>
+      <div class="grammar-table-wrap"><table class="grammar-table"><thead><tr><th>#</th><th>Kalimat Jepang</th><th class="example-romaji">Romaji</th><th>Terjemahan Indonesia</th></tr></thead><tbody>
+      ${c.examples.map((e,i) => `<tr><td class="example-number">${i+1}</td><td class="example-jp jp" lang="ja">${e.ruby}</td><td class="example-romaji">${esc(e.romaji)}</td><td class="example-id">${esc(e.id)}</td></tr>`).join('')}</tbody></table></div>
+      <p class="grammar-note"><strong>Catatan:</strong> ${esc(c.note)}</p></article>`;
+  }
+  function render() {
+    const query = normalize($('#grammar-search').value.trim());
+    const patterns = query ? allPatterns.filter(c => normalize([c.id,c.title,c.meaning,c.formation,c.note,...c.examples.flatMap(e => [e.jp,e.romaji,e.id])].join(' ')).includes(query)) : chapter.patterns;
+    const part = B.sections.find(s => s.id === 'g').parts.find(p => p.id === 'g' + String(chapter.id).padStart(2,'0'));
+    content.innerHTML = (query ? `<p role="status">${patterns.length} pola ditemukan di seluruh bab.</p>` : `<div class="grammar-intro panel"><h2 class="jp">${chapter.id}. ${esc(chapter.title)}</h2><p>${esc(chapter.title_id)} · ${patterns.length} pola</p><a class="btn" href="#/s/${B.id}/${part.sets[0].id}">Latihan bab ini</a></div>`) +
+      patterns.map(card).join('') + (!patterns.length ? '<div class="empty">Pola belum ditemukan. Coba kata kunci lain.</div>' : '') +
+      (!query ? `<section class="grammar-compare panel"><h3>Ringkasan perbandingan nuansa</h3><div class="grammar-table-wrap"><table class="grammar-table"><thead><tr><th>Pola</th><th>Fokus pemakaian</th><th>Gaya / formalitas</th></tr></thead><tbody>${patterns.map(c => `<tr><td class="jp">${esc(c.title)}</td><td>${esc(c.focus)}</td><td>${esc(c.register)}</td></tr>`).join('')}</tbody></table></div></section>` : '') +
+      `<p class="grammar-source">${esc(data.source_note)}<br>${esc(data.romaji_note)}<br><strong>Petunjuk:</strong> Pangkal Vます = bentuk ます tanpa ます. Pangkal Vない = bentuk ない tanpa ない. N = kata benda; i-adj = kata sifat い; na-adj = kata sifat な.</p>`;
+  }
+  $('#grammar-search').addEventListener('input', render);
+  $('#grammar-romaji').addEventListener('change', e => content.classList.toggle('grammar-hide-romaji', !e.target.checked));
+  render();
+}
+
+
+/* ---------- sessions ---------- */
+function newSession(B, qs, title, crumb, back, setId) {
+  // show the book's own numbers on the dots only when they are unique within the session
+  const bookNums = !!setId && new Set(qs.map(q => q.n)).size === qs.length;
+  S = { B, qs, i: 0, ans: {}, part: {}, title, crumb, back, setId, bookNums };
+  renderQ();
+}
+function startSet(B, setId) {
+  const st = B.set[setId];
+  if (!st) return fail('Set tidak ditemukan');
+  newSession(B, st.qs, `${st.part.title} · ${st.label}`, st.sec.title, `#/b/${B.id}/${st.sec.id}`, setId);
+}
+function startWrong(B) {
+  const qs = B.all.filter(q => DB.hist[q.id] && !DB.hist[q.id].ok);
+  if (!qs.length) { app.innerHTML = `<div class="empty">Belum ada soal yang salah. Mantap!<br><br><a class="btn" href="#/b/${B.id}">Kembali</a></div>`; return; }
+  newSession(B, qs, `Ulas yang salah (${qs.length})`, B.title, `#/b/${B.id}`, null);
+}
+function startMix(B, secId) {
+  const sec = B.sections.find(s => s.id === secId) || B.sections[0];
+  const qs = shuffle(sec.parts.flatMap(p => p.sets.flatMap(st => st.qs))).slice(0, 20);
+  newSession(B, qs, `Acak 20 soal · ${sec.title}`, B.title, `#/b/${B.id}/${sec.id}`, null);
+}
+function startMistakes(B, filter) {       // first-try mistakes, newest first; t:<type> / p:<part> narrow it, @<id> opens at that question
+  const rows = mistakeRows([B]).filter(r => r.miss).sort((a, b) => b.t - a.t);
+  let qs = rows.map(r => r.q), title = 'Salah di percobaan pertama', at = 0;
+  const f = filter || '';
+  if (f.startsWith('t:')) { qs = qs.filter(q => q.type === f.slice(2)); if (qs[0]) title += ' · ' + typeOf(B, qs[0]).tag; }
+  else if (f.startsWith('p:')) { qs = qs.filter(q => q.set.part.id === f.slice(2)); if (qs[0]) title += ' · ' + qs[0].set.part.title; }
+  else if (f.startsWith('@')) at = Math.max(0, qs.findIndex(q => q.id === f.slice(1)));
+  if (!qs.length) { app.innerHTML = `<div class="empty">Tidak ada kesalahan untuk dilatih.<br><br><a class="btn" href="#/a/${B.id}">Kembali</a></div>`; return; }
+  newSession(B, qs, `${title} (${qs.length})`, B.title, `#/a/${B.id}`, null);
+  if (at) { S.i = at; renderQ(); }
+}
+
+/* ---------- mistake analysis ---------- */
+// skill buckets: built-in types map directly; a book's own types fall back to its section / part title
+const TYPE_SKILL = { kanji: 'Kanji', hyouki: 'Kanji', yomi: 'Kanji', kaki: 'Kanji',
+  bunmyaku: 'Kosakata', iikae: 'Kosakata', youhou: 'Kosakata', setsumei: 'Kosakata', gokei: 'Kosakata',
+  bunpou: 'Tata bahasa', star: 'Tata bahasa', cloze: 'Tata bahasa', narabe: 'Tata bahasa', dokkai: 'Bacaan', maru: 'Bacaan',
+  kiku: 'Mendengar', kadai: 'Mendengar', point: 'Mendengar', gaiyou: 'Mendengar', hatsuwa: 'Mendengar', sokuji: 'Mendengar' };
+function skillOf(B, q) {
+  if (!(B.types && B.types[q.type]) && TYPE_SKILL[q.type]) return TYPE_SKILL[q.type];
+  const s = q.set.sec.title + ' ' + q.set.part.title;
+  return /聴|聞|ちょうかい/.test(s) ? 'Mendengar' : /読解|読む|どっかい/.test(s) ? 'Bacaan' : /漢字|かんじ/.test(s) ? 'Kanji'
+    : /文法|ぶんぽう|助詞|活用/.test(s) ? 'Tata bahasa' : /語彙|文字|ことば|もじ|ごい/.test(s) ? 'Kosakata' : 'Lainnya';
+}
+function mistakeRows(Bs) {               // one row per question answered in this browser
+  const rows = [];
+  for (const B of Bs) for (const q of B.all) {
+    const h = DB.hist[q.id];
+    if (!h || h.b !== B.id) continue;
+    const f = firstOf(h), miss = missedFirst(h);
+    rows.push({ B, q, h, f, miss, fixed: miss && !!h.ok, rep: (h.w || 0) >= 2, skill: skillOf(B, q), T: typeOf(B, q), t: (f && f.t) || h.t });
+  }
+  return rows;
+}
+function groupRows(rows, keyOf) {        // most first-try mistakes first, then the lowest first-try accuracy
+  const m = new Map();
+  for (const r of rows) { const k = keyOf(r), g = m.get(k) || { k, r, n: 0, miss: 0 }; g.n++; if (r.miss) g.miss++; m.set(k, g); }
+  return [...m.values()].sort((a, b) => b.miss - a.miss || a.miss / a.n - b.miss / b.n);
+}
+const snip = (B, q, len = 90) => (q.type === 'cloze' && q.passage ? `${(B.passages[q.passage] || {}).label || 'Teks'} · kotak ${q.n}` : strip(q.stem)).replace(/\s+/g, ' ').trim().slice(0, len);
+const pickText = (q, c) => c == null ? '—' : q.type === 'narabe' ? String(c).split('').map(d => strip(q.opts[+d - 1] || '')).join(' › ') : `${lab(q, c - 1)}. ${strip(q.opts[c - 1] || '')}`;
+const keyText = q => q.type === 'narabe' ? ansText(q) : `${lab(q, q.ans - 1)}. ${ansText(q)}`;
+const histBooks = () => BOOKS.filter(b => Object.values(DB.hist).some(h => h.b === b.id));
+
+let AN = null;                           // the analysis on screen (rows + scope), reused by the AI button
+function analysisView(scope) {
+  S = null;
+  app.innerHTML = '<div class="empty">Menyiapkan analisis…</div>';
+  const ids = scope ? [scope] : histBooks().map(b => b.id);
+  Promise.all(ids.map(loadBook)).then(Bs => renderAnalysis(scope, Bs)).catch(fail);
+}
+function renderAnalysis(scope, Bs) {
+  const B0 = scope ? Bs[0] : null;
+  document.documentElement.style.setProperty('--acc', 'var(--pink)');
+  setCrumb([`<a href="#/">Kotae</a>`, ...(B0 ? [`<a href="#/b/${B0.id}">${esc(B0.title)}</a>`] : []), 'Analisis kesalahan']);
+  const rows = mistakeRows(Bs), miss = rows.filter(r => r.miss);
+  AN = { scope: scope || 'all', rows, miss };
+  const known = rows.filter(r => r.f), firstOk = known.filter(r => r.f.ok).length, fixed = miss.filter(r => r.fixed).length;
+  const tabs = `<nav class="tabs"><a class="tab ${scope ? '' : 'on'}" href="#/a">Semua buku</a>${histBooks().map(b =>
+    `<a class="tab ${b.id === scope ? 'on' : ''}" href="#/a/${b.id}" title="${esc(b.jp || '')}">${esc(b.title)}</a>`).join('')}</nav>`;
+  const head = `<div class="bhead"><div><h1>Analisis kesalahan</h1>
+      <div class="stats"><span>${B0 ? esc(B0.title) : 'Semua buku'} · dihitung dari jawaban <b>pertama</b> tiap soal, jadi kesalahan tetap tercatat walau sudah kamu perbaiki.</span></div></div>
+    ${B0 ? `<div class="acts"><a class="btn" href="#/m/${B0.id}" ${miss.length ? '' : 'disabled'}><svg><use href="#i-redo"/></svg>Latih semua kesalahan (${miss.length})</a></div>` : ''}</div>`;
+  if (!rows.length) {
+    app.innerHTML = head + tabs + `<div class="panel empty">Belum ada jawaban yang tercatat${B0 ? ' untuk buku ini' : ''} di browser ini.<br>Progres tersimpan per browser, jadi buka Kotae di browser tempat kamu biasa latihan.</div>`;
+    return;
+  }
+  const tile = (v, l, c = '') => `<div class="panel an-tile ${c}"><b>${v}</b><span>${l}</span></div>`;
+  const tiles = `<div class="an-tiles">${tile(rows.length, 'soal dicoba')}${tile(known.length ? Math.round(100 * firstOk / known.length) + '%' : '—', 'benar di percobaan pertama', 'g')}
+    ${tile(miss.length, 'salah di percobaan pertama', 'r')}${tile(fixed, 'sudah kamu perbaiki')}${tile(miss.length - fixed, 'masih salah')}${tile(rows.filter(r => r.rep).length, 'salah 2× atau lebih')}</div>`;
+  const pct = g => Math.round(100 * (g.n - g.miss) / g.n);
+  const skills = `<div class="skills">${groupRows(rows, r => r.skill).map(g => `<span class="pill">${esc(g.k)} <b>${pct(g)}%</b> · ${g.miss} salah dari ${g.n}</span>`).join('')}</div>`;
+  const wkRow = (g, name, href) => `<div class="row"><div class="nm">${name}</div>
+      <div class="ct">${g.miss} salah dari ${g.n} · ${pct(g)}% benar ${href ? `<a class="btn" href="${href}">Latih</a>` : ''}</div>
+      ${bar({ g: g.n - g.miss, r: g.miss, n: g.n })}</div>`;
+  const types = groupRows(rows, r => r.T.tag + '|' + r.T.id).filter(g => g.miss).slice(0, 8)
+    .map(g => wkRow(g, `<span class="jp">${esc(g.r.T.tag)}</span><small>${esc(g.r.T.id)}</small>`, B0 ? `#/m/${B0.id}/t:${encodeURIComponent(g.r.q.type)}` : '')).join('');
+  const parts = B0 ? groupRows(rows, r => r.q.set.part.id).filter(g => g.miss).slice(0, 6)
+    .map(g => wkRow(g, `<span class="jp">${esc(g.r.q.set.sec.title)} · ${esc(g.r.q.set.part.title)}</span>`, `#/m/${B0.id}/p:${encodeURIComponent(g.k)}`)).join('') : '';
+  const item = r => `<a href="#/m/${r.B.id}/@${encodeURIComponent(r.q.id)}">
+      <span class="x jp">${esc(snip(r.B, r.q))}</span>
+      <span class="st ${r.fixed ? 'g' : 'r'}">${r.fixed ? 'sudah benar' : 'masih salah'}${r.rep ? ` · ${r.h.w}× salah` : ''}</span>
+      <small>${B0 ? '' : esc(r.B.title) + ' · '}<span class="jp">${esc(r.T.tag)}</span> · ${r.f ? 'jawaban pertama' : 'jawaban terakhir'}: <span class="jp">${esc(pickText(r.q, r.f ? r.f.c : r.h.c))}</span> · kunci: <span class="jp">${esc(keyText(r.q))}</span></small></a>`;
+  const list = miss.slice().sort((a, b) => b.t - a.t);
+  const mlist = list.length ? `<div class="mlist">${list.slice(0, 30).map(item).join('')}${list.length > 30 ? `<details><summary>Tampilkan ${list.length - 30} lainnya</summary><div class="mlist">${list.slice(30).map(item).join('')}</div></details>` : ''}</div>` : '<div class="panel empty">Belum ada kesalahan di percobaan pertama. Mantap!</div>';
+  const aiOn = !!((window.KOTAE_AI || {}).keys || []).length;
+  const cache = DB.ai && DB.ai.cache && DB.ai.cache[AN.scope];
+  app.innerHTML = head + tabs + tiles +
+    `<section class="an-sec"><h2>Per kemampuan</h2>${skills}</section>
+    <section class="panel ai"><div class="aih"><div><h2>Analisis AI</h2>
+        <p class="muted">Gemini membaca kesalahan percobaan pertamamu${B0 ? ' di buku ini' : ' di semua buku'}, mencari polanya, lalu menyusun fokus belajar.</p></div>
+      <button class="btn pri" data-ai ${aiOn && miss.length ? '' : 'disabled'}>${cache ? 'Analisis ulang' : 'Analisis dengan AI'}</button></div>
+      <div id="aiout">${cache ? aiHtml(cache) : aiOn ? '' : '<p class="muted aimeta">Key Gemini belum dipasang (file <code>local/gemini-keys.js</code>).</p>'}</div></section>
+    ${types ? `<section class="an-sec"><h2>Jenis soal yang paling sering salah</h2><p>Diurutkan dari jumlah salah di percobaan pertama.</p><div class="wk">${types}</div></section>` : ''}
+    ${parts ? `<section class="an-sec"><h2>Bagian buku yang paling sering salah</h2><div class="wk">${parts}</div></section>` : ''}
+    <section class="an-sec"><h2>Daftar kesalahan</h2><p>Terbaru di atas. Ketuk untuk mengulang soalnya.</p>${mlist}</section>`;
+}
+
+/* ---------- AI (Gemini) ---------- */
+// keys come from local/gemini-keys.js (window.KOTAE_AI = { model, keys }); a key that hits a limit rests for 90 s
+const AI_SYSTEM = `Kamu tutor JLPT N3 untuk pelajar Indonesia. Kamu menerima daftar soal yang dijawab SALAH pada percobaan pertama, lengkap dengan jawaban pertama, kunci, dan pembahasan singkat. Tugasmu menemukan POLA kesalahan, bukan membahas soal satu per satu.
+Contoh pola: bacaan kanji (dakuten, bunyi panjang, っ kecil, on/kun), kanji yang bentuknya mirip, kolokasi kata kerja, beda nuansa sinonim, bentuk tata bahasa yang tertukar, partikel, keigo, salah menangkap konteks kalimat. Satu pola sebaiknya didukung minimal 2 soal; kalau datanya masih sedikit, katakan terus terang dan tetap beri saran yang berdasar data.
+Pakai bahasa Indonesia yang santai dan jelas (sapa dengan "kamu"). Kata dan kalimat Jepang SELALU ditulis dengan huruf Jepang (mis. ペアを組む, 受け取る) dan kanji Jepang, bukan huruf Tionghoa sederhana. Jangan menulis romaji sama sekali, juga tidak di dalam kurung; kalau perlu cara baca, tulis dengan hiragana. Ambil contoh dari data; jangan mengarang soal atau fakta di luar data.
+Balas HANYA JSON:
+{"ringkasan": "2-3 kalimat gambaran besar",
+ "pola": [{"judul": "...", "penjelasan": "kenapa kamu salah, dengan contoh singkat", "saran": "cara memperbaikinya", "contoh": ["id soal"]}],
+ "fokus": [{"topik": "...", "alasan": "...", "langkah": "latihan konkret; boleh sebut jenis soal atau bagian buku"}],
+ "rencana": ["langkah singkat"]}
+pola 2-6 item, fokus 3-5 item urut dari yang paling penting, rencana 3-5 langkah. "contoh" hanya berisi id soal dari data.`;
+const aiRest = {};
+async function gemini(system, user) {
+  const C = window.KOTAE_AI || {}, keys = C.keys || [];
+  if (!keys.length) throw new Error('Key Gemini belum dipasang (file local/gemini-keys.js).');
+  DB.ai = DB.ai || {};
+  let last = '';
+  for (let i = 0; i < keys.length; i++) {
+    const k = ((DB.ai.next || 0) + i) % keys.length;
+    if ((aiRest[k] || 0) > Date.now()) continue;
+    let res;
+    try {
+      res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${C.model || 'gemini-3.1-flash-lite'}:generateContent`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': keys[k] },
+        body: JSON.stringify({ systemInstruction: { parts: [{ text: system }] }, contents: [{ role: 'user', parts: [{ text: user }] }],
+          generationConfig: { temperature: 0.4, maxOutputTokens: 8192, responseMimeType: 'application/json' } }) });
+    } catch (e) { throw new Error('Tidak bisa menghubungi Gemini. Cek koneksi internet.'); }
+    if (res.status === 429 || res.status === 403 || res.status >= 500) { aiRest[k] = Date.now() + 90000; last = `HTTP ${res.status}`; continue; }
+    if (!res.ok) throw new Error(`Gemini menolak permintaan (HTTP ${res.status}).`);
+    DB.ai.next = (k + 1) % keys.length;   // spread the load over the pool
+    const j = await res.json(), cand = (j.candidates || [])[0] || {};
+    const text = ((cand.content || {}).parts || []).map(p => p.text || '').join('').replace(/^\s*```(?:json)?|```\s*$/g, '');
+    try { return JSON.parse(text); } catch (e) { throw new Error(`Jawaban Gemini tidak lengkap (${cand.finishReason || 'format salah'}). Coba lagi.`); }
+  }
+  throw new Error(`Semua key sedang kena limit (${last}). Coba lagi 1–2 menit lagi.`);
+}
+function aiPrompt(A) {
+  // still-wrong and repeated mistakes first, then the newest; at most 80 go to the model
+  const sel = A.miss.slice().sort((a, b) => (b.h.ok ? 0 : 1) - (a.h.ok ? 0 : 1) || (b.h.w || 0) - (a.h.w || 0) || b.t - a.t).slice(0, 80);
+  const types = groupRows(A.rows, r => r.T.tag + ' / ' + r.T.id).map(g => `${g.k}: ${g.miss} salah dari ${g.n}`);
+  const items = sel.map(r => ({ id: r.q.id, buku: r.B.title, kemampuan: r.skill, jenis: `${r.T.tag} / ${r.T.id}`,
+    bagian: `${r.q.set.sec.title} · ${r.q.set.part.title}`, soal: snip(r.B, r.q, 220),
+    pilihan: r.q.opts.map((o, k) => `${lab(r.q, k)}. ${strip(o).slice(0, 60)}`),
+    jawaban_pertama: r.f ? pickText(r.q, r.f.c) : null, kunci: keyText(r.q),
+    status: r.h.ok ? 'sudah benar saat diulang' : 'masih salah', berapa_kali_salah: r.h.w || 1,
+    pembahasan: strip((r.q.ex || {}).why || '').slice(0, 220) }));
+  return `Ringkasan per jenis soal (percobaan pertama):\n${types.join('\n')}\n\nTotal dicoba ${A.rows.length}, salah di percobaan pertama ${A.miss.length}` +
+    `${A.miss.length > sel.length ? ` (di bawah ini ${sel.length} yang paling penting)` : ''}.\n\nDaftar kesalahan (JSON):\n${JSON.stringify(items)}`;
+}
+async function runAI() {
+  const A = AN, out = $('#aiout'), btn = $('[data-ai]');
+  if (!A || !A.miss.length || !out) return;
+  btn.setAttribute('disabled', '');
+  out.innerHTML = '<p class="muted aimeta">Gemini sedang membaca kesalahanmu…</p>';
+  let html;
+  try {
+    const res = await gemini(AI_SYSTEM, aiPrompt(A));
+    DB.ai.cache = DB.ai.cache || {};
+    DB.ai.cache[A.scope] = { t: Date.now(), n: A.miss.length, out: res };
+    save();
+    html = aiHtml(DB.ai.cache[A.scope]);
+  } catch (e) { html = `<p class="aierr">${esc(e.message || e)}</p>`; }
+  if (AN !== A || !document.body.contains(out)) return;     // the user moved on meanwhile
+  out.innerHTML = html;
+  btn.removeAttribute('disabled'); btn.textContent = 'Analisis ulang';
+}
+function aiHtml(c) {
+  const o = c.out || {}, arr = x => Array.isArray(x) ? x : [];
+  const ex = id => { const r = AN.rows.find(x => x.q.id === id); return r ? `<a class="pill jp" href="#/m/${r.B.id}/@${encodeURIComponent(id)}">${esc(snip(r.B, r.q, 22))}…</a>` : ''; };
+  const newer = AN.miss.length - (c.n || 0);
+  return `<p class="aimeta muted">Dianalisis ${esc(new Date(c.t).toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' }))} dari ${c.n} kesalahan${newer > 0 ? ` · ada ${newer} kesalahan baru sejak itu, tekan Analisis ulang` : ''}.</p>
+    ${o.ringkasan ? `<p class="aisum">${esc(o.ringkasan)}</p>` : ''}
+    ${arr(o.pola).length ? `<h3>Pola kesalahan</h3><div class="aipola">${arr(o.pola).map(p => `<div class="card"><b>${esc(p.judul || '')}</b><p>${esc(p.penjelasan || '')}</p>
+      ${p.saran ? `<p class="sar"><span>Saran</span>${esc(p.saran)}</p>` : ''}<div>${arr(p.contoh).map(ex).join('')}</div></div>`).join('')}</div>` : ''}
+    ${arr(o.fokus).length ? `<h3>Fokus belajar</h3><ol class="aifokus">${arr(o.fokus).map(f => `<li><b>${esc(f.topik || '')}</b> — ${esc(f.alasan || '')}${f.langkah ? `<br><span class="muted">${esc(f.langkah)}</span>` : ''}</li>`).join('')}</ol>` : ''}
+    ${arr(o.rencana).length ? `<h3>Rencana singkat</h3><ul class="airen">${arr(o.rencana).map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}`;
+}
+
+/* ---------- AI on one question: why the pick was wrong, tips for this kind of question, what to do next ---------- */
+const AIQ_SYSTEM = `Kamu tutor JLPT N3 untuk pelajar Indonesia. Kamu menerima satu soal latihan yang baru dijawab: jenis soal, soal, pilihan, kunci, jawaban si pelajar, dan pembahasan singkat yang sudah ada. Tugasmu MEMPERDALAM pembahasan itu, bukan mengulangnya.
+- kenapa_salah: kalau jawabannya salah, jelaskan jebakan yang membuat pilihan itu terasa benar dan di mana tepatnya salahnya (makna, nuansa, kolokasi, bentuk, bacaan, konteks). Kalau jawabannya benar, isi null.
+- kenapa_benar: alasan kunci benar, lebih dalam dari pembahasan yang ada (aturan, nuansa, pola yang bisa dipakai lagi).
+- tips: 2-4 tips untuk mengenali dan menjawab soal SEJENIS (jenis soal yang sama), konkret dan bisa langsung dipakai saat ujian.
+- strategi: 1-3 langkah belajar berikutnya supaya tidak salah lagi di soal seperti ini.
+- contoh: 1-2 kalimat contoh lain yang memakai jawaban yang benar; jp = kalimat Jepang wajar setingkat N3, baca = cara bacanya dalam hiragana, id = artinya.
+Bahasa Indonesia santai dan jelas, sapa dengan "kamu". Kata dan kalimat Jepang SELALU dengan huruf Jepang dan kanji Jepang (bukan huruf Tionghoa sederhana). Jangan menulis romaji sama sekali, juga tidak di dalam kurung; kalau perlu cara baca, tulis dengan hiragana. Jangan bertentangan dengan kunci.
+Balas HANYA JSON: {"inti": "1 kalimat pelajaran utamanya", "kenapa_salah": "..." atau null, "kenapa_benar": "...", "tips": ["..."], "strategi": ["..."], "contoh": [{"jp": "...", "baca": "...", "id": "..."}]}`;
+const aiqKey = (B, q, picked) => `${B.id}/${q.id}/${picked}`;
+function aiqPrompt(B, q, picked) {
+  const T = typeOf(B, q), ex = q.ex || {}, h = DB.hist[q.id] || {}, f = firstOf(h), p = q.passage && B.passages[q.passage];
+  return JSON.stringify({ jenis: `${T.tag} / ${T.id}`, instruksi: strip(q.ins || T.jp || ''), bagian: `${q.set.sec.title} · ${q.set.part.title}`,
+    soal: q.type === 'cloze' ? `kotak ${q.n} di teks` : strip(q.stem), teks: p ? strip((p.intro || '') + ' ' + p.html).slice(0, 2500) : undefined,
+    skrip_audio: q.script ? strip(q.script).slice(0, 2500) : undefined,
+    pilihan: q.opts.map((o, k) => `${lab(q, k)}. ${strip(o)}`), kunci: keyText(q), jawabanmu: pickText(q, picked), jawaban_benar: !!isOk(q, picked),
+    jawaban_pertama: f ? pickText(q, f.c) : undefined, berapa_kali_salah: h.w || 0,
+    pembahasan_yang_ada: { arti: strip(ex.tr || ''), kenapa: strip(ex.why || ''), tiap_pilihan: (ex.opt || []).map(x => strip(x || '')) } });
+}
+function aiqBlock(q, picked) {           // only when a key file is present
+  if (!((window.KOTAE_AI || {}).keys || []).length) return '';
+  const c = DB.aiq && DB.aiq[aiqKey(S.B, q, picked)], ok = isOk(q, picked);
+  return `<div class="aiq" id="aiq"><div class="aiqh"><div><h4>Bahas dengan AI</h4>
+      <span class="muted">${ok ? 'Tips dan strategi untuk soal sejenis.' : 'Kenapa pilihanmu menjebak, tips untuk soal sejenis, dan strategi berikutnya.'}</span></div>
+    <button class="btn" data-aiq>${c ? 'Bahas ulang' : ok ? 'Minta tips' : 'Bahas kesalahanku'}</button></div>
+    <div class="aiqout">${c ? aiqHtml(c) : ''}</div></div>`;
+}
+function aiqHtml(c) {
+  const o = c.out || {}, arr = x => Array.isArray(x) ? x : [], li = x => `<li>${esc(x)}</li>`;
+  return `${o.inti ? `<p class="aiqinti">${esc(o.inti)}</p>` : ''}
+    ${o.kenapa_salah ? `<div><h5>Kenapa jawabanmu salah</h5><p>${esc(o.kenapa_salah)}</p></div>` : ''}
+    ${o.kenapa_benar ? `<div><h5>Kenapa kuncinya benar</h5><p>${esc(o.kenapa_benar)}</p></div>` : ''}
+    ${arr(o.tips).length ? `<div><h5>Tips soal seperti ini</h5><ul>${arr(o.tips).map(li).join('')}</ul></div>` : ''}
+    ${arr(o.strategi).length ? `<div><h5>Strategi berikutnya</h5><ol>${arr(o.strategi).map(li).join('')}</ol></div>` : ''}
+    ${arr(o.contoh).length ? `<div><h5>Contoh lain</h5>${arr(o.contoh).map(x => `<p class="aiqex"><span class="jp">${esc(x.jp || '')}</span>${x.baca ? `<small class="jp">${esc(x.baca)}</small>` : ''}<small>${esc(x.id || '')}</small></p>`).join('')}</div>` : ''}
+    <p class="aimeta muted">Dari AI · ${esc(new Date(c.t).toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' }))}. AI bisa keliru; kalau bertentangan dengan kunci, ikuti kunci.</p>`;
+}
+async function runAIQ() {
+  const q = S.qs[S.i], picked = S.ans[q.id], B = S.B, box = $('#aiq');
+  if (picked == null || !box) return;
+  const btn = $('[data-aiq]', box), out = $('.aiqout', box), key = aiqKey(B, q, picked);
+  btn.setAttribute('disabled', '');
+  out.innerHTML = '<p class="muted">AI sedang membahas soal ini…</p>';
+  let html;
+  try {
+    const res = await gemini(AIQ_SYSTEM, aiqPrompt(B, q, picked));
+    DB.aiq = DB.aiq || {};
+    DB.aiq[key] = { t: Date.now(), out: res };
+    // keep localStorage small: progress is saved in the same entry, a full quota would stop saving answers
+    const keys = Object.keys(DB.aiq);
+    if (keys.length > 300) keys.sort((a, b) => DB.aiq[a].t - DB.aiq[b].t).slice(0, keys.length - 300).forEach(k => delete DB.aiq[k]);
+    save();
+    html = aiqHtml(DB.aiq[key]);
+  } catch (e) { html = `<p class="aierr">${esc(e.message || e)}</p>`; }
+  if (!document.body.contains(out)) return;   // moved to another question; the answer shows when you come back
+  out.innerHTML = html;
+  btn.removeAttribute('disabled'); btn.textContent = 'Bahas ulang';
+}
+
+/* ---------- quiz rendering ---------- */
+function fillStar(q) {
+  if (!q.order) return q.stem;
+  let k = 0;
+  return q.stem.replace(/<span class="slot( star)?">(★)?<\/span>/g, (m, star) => {
+    const o = q.opts[+q.order[k++] - 1] || '';
+    return `<span class="slot fill${star ? ' star' : ''}">${o}</span>`;
+  });
+}
+function fillPart(q) {            // narabe in progress: picked pieces sit in the first slots, tap one to take it back
+  const got = S.part[q.id] || [];
+  let k = 0;
+  return q.stem.replace(/<span class="slot( star)?">(★)?<\/span>/g, m => {
+    const i = k++;
+    return i < got.length ? `<span class="slot pick" data-unslot="${i}">${q.opts[got[i] - 1]}</span>` : m;
+  });
+}
+function fillBlank(q, html) {
+  // an option like 券／券 fills several blanks in order
+  const n = (html.match(/<span class="blank"><\/span>/g) || []).length;
+  const parts = n > 1 ? q.opts[q.ans - 1].split('／') : [q.opts[q.ans - 1]];
+  let k = 0;
+  return html.replace(/<span class="blank"><\/span>/g, m => k < parts.length ? `<span class="blank fill">${parts[k++]}</span>` : m);
+}
+function passageHtml(q) {
+  const p = S.B.passages[q.passage];
+  if (!p) return '';
+  let h = (p.intro ? `<p class="intro">${p.intro}</p>` : '') + p.html;
+  if (q.type === 'cloze' || (q.type === 'sm-bank' && q.passage)) {
+    h = h.replace(/<span class="slot num">(\d+)([ab]?)<\/span>/g, (m, n, pair) => {
+      const other = S.qs.find(x => x.passage === q.passage && x.n === +n);
+      const done = other && S.ans[other.id];
+      const cur = +n === q.n;
+      let answer = done ? strip(other.opts[other.ans - 1]) : '';
+      if (pair && done) answer = (answer.split('／')[pair === 'a' ? 0 : 1] || '').trim().replace(/^[ab]\s*/, '').trim();
+      return `<span class="slot num${cur ? ' cur' : ''}">${n}${pair}${done ? `<i>${answer}</i>` : ''}</span>`;
+    });
+  }
+  return h;
+}
+function renderQ(keepScroll) {
+  const q = S.qs[S.i], B = S.B, T = typeOf(B, q);
+  const secId = q.set.sec.id;
+  document.documentElement.style.setProperty('--acc', SEC_ACC[secId] || 'var(--blue)');
+  setCrumb([`<a href="#/">Kotae</a>`, `<a class="jp" href="#/b/${B.id}">${esc(B.title)}</a>`, `<span class="jp">${esc(S.title)}</span>`]);
+  const picked = S.ans[q.id];
+  const done = picked != null;
+  const nOk = S.qs.filter(x => isOk(x, S.ans[x.id])).length;
+  const nDone = S.qs.filter(x => S.ans[x.id] != null).length;
+  const nar = q.type === 'narabe', got = S.part[q.id] || [];
+  // keep a playing audio element alive across re-renders of the same question
+  const oldA = $('audio.qa');
+  const keepA = oldA && oldA.dataset.q === q.id ? oldA : null;
+
+  // passage panel (keep scroll if same passage)
+  const oldP = $('.passage');
+  const sameP = oldP && oldP.dataset.p === (q.passage || '');
+  const pScroll = sameP ? $('.ptext', oldP).scrollTop : 0;
+  const shut = sameP && oldP.classList.contains('shut');
+
+  let stem = q.stem;
+  if (done && (q.type === 'star' || nar)) stem = fillStar(q);
+  else if (nar) stem = fillPart(q);
+  else if (done && /<span class="blank"><\/span>/.test(stem)) stem = fillBlank(q, stem);
+  if (q.type === 'cloze') stem = `Kotak <span class="slot num cur">${q.n}</span> di teks diisi dengan…`;
+
+  const short = q.opts.every(o => strip(o).length <= 9);
+  const optsHtml = q.opts.map((o, k) => {
+    const n = k + 1;
+    let cls = '';
+    if (nar) cls = done ? 'dim' : (got.includes(n) ? 'used' : '');
+    else if (done) cls = isOk(q, n) ? 'right' : (n === picked ? 'wrong' : 'dim');
+    return `<button class="opt ${cls}" data-pick="${n}" ${done ? 'aria-disabled="true"' : ''}>
+      <span class="k">${lab(q, k)}</span><span class="t">${o}</span>
+      <svg class="ic y"><use href="#i-ok"/></svg><svg class="ic n"><use href="#i-no"/></svg></button>`;
+  }).join('');
+
+  // mock tests are a separate booklet with its own page numbers
+  const pageNo = (q.ref ? `ulangan soal no. ${q.ref} · ` : '') + (q.page ? `${q.set.sec.mock ? 'Buklet ujian' : 'Buku'} hlm. ${q.page}` : '');
+  const isLast = S.i === S.qs.length - 1;
+  const passage = q.passage ? (() => {
+    const p = B.passages[q.passage] || {};
+    return `<aside class="passage panel${shut ? ' shut' : ''}" data-p="${q.passage}">
+      <div class="ph"><span><b>Teks</b> ${esc(p.label || '')}</span><button data-act="toggleP">${shut ? 'Buka' : 'Tutup'}</button></div>
+      <div class="ptext jp">${passageHtml(q)}</div></aside>`;
+  })() : '';
+
+  app.innerHTML = `
+    <div class="qtop">
+      <a class="back" href="${S.back}" title="Kembali"><svg><use href="#i-back"/></svg></a>
+      <div class="tt"><small class="jp">${esc(S.crumb)}</small><b>${esc(S.title)}</b></div>
+      <div class="score"><b>${nOk}/${nDone}</b>benar</div>
+    </div>
+    <div class="dots">${S.qs.map((x, k) => {
+      const a = S.ans[x.id];
+      return `<button class="dot ${a != null ? (isOk(x, a) ? 'g' : 'r') : ''} ${k === S.i ? 'cur' : ''}" data-go="${k}" title="Soal ${x.n}">${S.bookNums ? x.n : k + 1}</button>`;
+    }).join('')}</div>
+    <div class="qgrid ${q.passage ? 'wp' : ''}">
+      ${passage}
+      <section class="qcard panel ${done ? 'done' : ''}">
+        <div class="qhead">
+          <div class="qnum">${q.n}</div>
+          <div><div class="qtag">${T.tag}</div><div class="muted" style="font-size:12px">${T.id}</div></div>
+          <div class="qpage">${esc(pageNo)}</div>
+        </div>
+        <div class="instr"><span class="jp">${q.ins || T.jp}</span>${T.how}</div>
+        ${q.audio ? `<div class="aud"><span class="ic"><svg><use href="#i-ear"/></svg></span><audio class="qa" data-q="${q.id}" controls preload="metadata" src="${q.audio}${q.t ? '#t=' + q.t : ''}"></audio></div>` : ''}
+        <div class="stem ${q.type === 'youhou' ? 'word' : ''}">${stem}</div>
+        ${q.img ? `<figure class="qimg"><img src="${q.img}" alt="Gambar soal"></figure>` : ''}
+        ${nar && !done ? `<div class="narh"><span>${got.length}/4 terpasang</span>${got.length ? '<button data-act="unslot">Hapus terakhir</button>' : ''}</div>` : ''}
+        <div class="opts ${short && q.type !== 'youhou' ? 'grid2' : ''}">${optsHtml}</div>
+        <div id="exwrap" aria-live="polite">${done ? explain(q, picked) : ''}</div>
+        <div class="qnav">
+          <button class="btn" data-act="prev" ${S.i ? '' : 'disabled'}><svg><use href="#i-back"/></svg>Sebelumnya</button>
+          <button class="btn ${done ? 'pri' : ''}" data-act="next">${isLast ? (done ? 'Lihat hasil' : 'Lewati & selesai') : (done ? 'Berikutnya' : 'Lewati')}<svg><use href="#i-next"/></svg></button>
+        </div>
+        <div class="kbd"><kbd>1</kbd>–<kbd>${Math.min(q.opts.length, 9)}</kbd> jawab${q.opts.length > 9 ? ' · klik pilihan 10 ke atas' : ''} · <kbd>Enter</kbd> lanjut · <kbd>←</kbd><kbd>→</kbd> pindah · <kbd>F</kbd> furigana</div>
+      </section>
+    </div>`;
+  if (keepA) $('audio.qa').replaceWith(keepA);
+  const np = $('.passage .ptext');
+  if (np && sameP) np.scrollTop = pScroll;
+  if (q.type === 'cloze' && np && !sameP) {
+    const cur = $('.slot.num.cur', np);
+    if (cur) np.scrollTop = Math.max(0, cur.offsetTop - np.clientHeight / 3);
+  }
+}
+
+function explain(q, picked) {
+  const ok = isOk(q, picked);
+  const nar = q.type === 'narabe';
+  const ex = q.ex || {};
+  const key = nar ? q.order.split('').join('→') : lab(q, q.ans - 1) + (q.alt || []).map(a => ' / ' + lab(q, a - 1)).join('');
+  let h = `<div class="verdict ${ok ? 'ok' : 'no'}"><svg><use href="#i-${ok ? 'ok' : 'no'}"/></svg>
+    <div>${ok ? 'Benar!' : 'Belum tepat.'} <span>Jawabannya <b>${key}</b> — <span class="jp">${ansText(q)}</span></span></div></div>`;
+  h += '<div class="ex">';
+  if ((q.type === 'star' || nar) && q.order) {
+    const chips = seq => seq.split('').map((d, k) => `<span class="c ${k === starPos(q) ? 's' : ''}">${strip(q.opts[+d - 1])}</span>`).join('<span class="ar">›</span>');
+    h += `<div><h4>Urutan yang benar</h4><div class="box"><div class="order">${chips(q.order)}</div></div></div>`;
+    if (nar && !ok) h += `<div><h4>Urutanmu</h4><div class="box"><div class="order">${chips(picked)}</div></div></div>`;
+  }
+  if (q.script) h += `<details class="scr" open><summary>Skrip audio</summary><div class="box">${q.script}</div></details>`;
+  if (ex.tr) h += `<div><h4>Arti</h4><div class="box">${ex.tr}</div></div>`;
+  if (ex.why) h += `<div><h4>Kenapa</h4><div class="box">${ex.why}</div></div>`;
+  const notes = ex.opt || [];
+  if (notes.some(Boolean)) {
+    h += `<div><h4>Tiap pilihan</h4><div class="olist">${q.opts.map((o, k) => {
+      const n = k + 1, right = !nar && isOk(q, n), mine = !nar && n === picked;
+      const tag = nar ? `<span class="tag y">ke-${q.order.indexOf(String(n)) + 1}</span>` : (right ? '<span class="tag y">benar</span>' : '') + (mine && !right ? '<span class="tag m">pilihanmu</span>' : '');
+      return `<div class="orow ${right ? 'right' : ''} ${mine ? 'mine' : ''}"><span class="k">${lab(q, k)}</span>
+        <div><span class="ot">${o}${tag}</span>${notes[k] || ''}</div></div>`;
+    }).join('')}</div></div>`;
+  }
+  if (!ex.why && !ex.tr) {
+    let fb = 'Penjelasan untuk soal ini belum ditulis.';
+    if (q.hint) fb += `<br>Kunci buku untuk pilihan lain: <span class="jp">${esc(q.hint)}</span>`;
+    h += `<div class="box muted">${fb}</div>`;
+  }
+  return h + aiqBlock(q, picked) + '</div>';
+}
+function starPos(q) {
+  const slots = q.stem.match(/<span class="slot( star)?">/g) || [];
+  return slots.findIndex(s => s.includes('star'));
+}
+
+function pick(n) {
+  const q = S.qs[S.i];
+  if (S.ans[q.id] != null || !(n >= 1 && n <= q.opts.length)) return;
+  if (q.type === 'narabe') {                 // collect pieces until all four are placed
+    const got = S.part[q.id] = S.part[q.id] || [];
+    if (got.includes(n)) return;
+    got.push(n);
+    if (got.length < q.opts.length) return renderQ();
+    n = got.join('');
+  }
+  S.ans[q.id] = n;
+  const prev = DB.hist[q.id], ok = isOk(q, n) ? 1 : 0;
+  // f = first attempt, never overwritten (a later correct retry keeps the original mistake on record);
+  // w = wrong attempts so far. Older entries have neither: their f is known only when n was 1.
+  const f = prev ? firstOf(prev) : { c: n, ok, t: Date.now() };
+  const w = (prev ? (prev.w != null ? prev.w : prev.ok ? 0 : 1) : 0) + (ok ? 0 : 1);
+  DB.hist[q.id] = { ok, c: n, t: Date.now(), n: (prev ? prev.n : 0) + 1, b: S.B.id, f, w };
+  if (S.setId && S.qs.every(x => S.ans[x.id] != null)) recordSet();
+  save();
+  renderQ();
+  const ex = $('#exwrap');
+  if (ex && ex.getBoundingClientRect().top > innerHeight * .7) ex.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function unslot(i) {                         // take a placed narabe piece back (-1 = the last one)
+  const q = S.qs[S.i], got = S.part[q.id];
+  if (S.ans[q.id] != null || !got || !got.length) return;
+  got.splice(i < 0 ? got.length - 1 : i, 1);
+  renderQ();
+}
+function recordSet() {
+  const st = S.B.set[S.setId];
+  const g = st.qs.filter(x => isOk(x, S.ans[x.id])).length;
+  const r = DB.sets[S.setId] || {};
+  DB.sets[S.setId] = { last: g, best: Math.max(g, r.best || 0), total: st.qs.length, t: Date.now() };
+}
+function go(i) { S.i = Math.max(0, Math.min(S.qs.length - 1, i)); renderQ(); window.scrollTo({ top: 0 }); }
+function next() { if (S.i < S.qs.length - 1) go(S.i + 1); else summary(); }
+
+function summary() {
+  const g = S.qs.filter(x => isOk(x, S.ans[x.id])).length, n = S.qs.length;
+  const pct = n ? g / n : 0, C = 2 * Math.PI * 64;
+  const wrongQs = S.qs.filter(x => S.ans[x.id] != null && !isOk(x, S.ans[x.id]));
+  const msg = pct >= .9 ? 'Luar biasa!' : pct >= .7 ? 'Bagus, tinggal sedikit lagi.' : pct >= .4 ? 'Lumayan — ulas yang salah, ya.' : 'Pelan-pelan saja, baca penjelasannya.';
+  let nextSet = '';
+  if (S.setId) {
+    const st = S.B.set[S.setId], sets = st.part.sets, k = sets.indexOf(st);
+    if (sets[k + 1]) nextSet = `<a class="btn pri" href="#/s/${S.B.id}/${sets[k + 1].id}">Set berikutnya<svg><use href="#i-next"/></svg></a>`;
+  }
+  setCrumb([`<a href="#/">Kotae</a>`, `<a class="jp" href="#/b/${S.B.id}">${esc(S.B.title)}</a>`, 'Hasil']);
+  app.innerHTML = `<div class="sum panel">
+    <div class="ring"><svg viewBox="0 0 150 150"><circle cx="75" cy="75" r="64" fill="none" stroke="var(--line)" stroke-width="12"/>
+      <circle cx="75" cy="75" r="64" fill="none" stroke="var(--ok)" stroke-width="12" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C * (1 - pct)}"/></svg>
+      <b>${g}/${n}</b></div>
+    <h2>${msg}</h2>
+    <p class="muted jp">${esc(S.title)}</p>
+    <div class="acts">
+      ${wrongQs.length ? '<button class="btn" data-act="redoWrong"><svg><use href="#i-redo"/></svg>Ulangi yang salah (' + wrongQs.length + ')</button>' : ''}
+      <button class="btn" data-act="redoAll"><svg><use href="#i-redo"/></svg>Ulangi semua</button>
+      ${nextSet}
+      <a class="btn" href="${S.back}"><svg><use href="#i-book"/></svg>Kembali</a>
+    </div>
+    <div class="slist">${S.qs.map((x, k) => {
+      const a = S.ans[x.id];
+      return `<a href="#" data-review="${k}"><span class="m ${a == null ? '' : isOk(x, a) ? 'g' : 'r'}">${x.n}</span><span class="x">${strip(x.type === 'cloze' ? x.opts[x.ans - 1] : x.stem).slice(0, 80)}</span></a>`;
+    }).join('')}</div></div>`;
+  S.wrongQs = wrongQs;
+}
+
+/* ---------- events ---------- */
+app.addEventListener('click', e => {
+  const t = e.target.closest('[data-pick],[data-go],[data-act],[data-review],[data-unslot],[data-ai],[data-aiq]');
+  if (t && t.dataset.ai != null) return runAI();
+  if (!t || !S) return;
+  if (t.dataset.aiq != null) return runAIQ();
+  if (t.dataset.pick) return pick(+t.dataset.pick);
+  if (t.dataset.unslot) return unslot(+t.dataset.unslot);
+  if (t.dataset.go) return go(+t.dataset.go);
+  if (t.dataset.review) { e.preventDefault(); S.i = +t.dataset.review; renderQ(); window.scrollTo({ top: 0 }); return; }
+  const a = t.dataset.act;
+  if (a === 'next') return next();
+  if (a === 'prev') return go(S.i - 1);
+  if (a === 'unslot') return unslot(-1);
+  if (a === 'toggleP') { const p = t.closest('.passage'); p.classList.toggle('shut'); t.textContent = p.classList.contains('shut') ? 'Buka' : 'Tutup'; return; }
+  if (a === 'redoAll') return newSession(S.B, S.qs, S.title, S.crumb, S.back, S.setId);
+  if (a === 'redoWrong') return newSession(S.B, S.wrongQs, 'Ulangi yang salah', S.crumb, S.back, null);
+});
+document.addEventListener('keydown', e => {
+  if (e.ctrlKey || e.metaKey || e.altKey || e.target.closest('input,textarea,select,[contenteditable="true"]')) return;
+  if (e.key === 'f' || e.key === 'F') { $('#furiBtn').click(); return; }
+  if (!S || !$('.qcard')) return;
+  if (/^[1-9]$/.test(e.key)) { pick(+e.key); e.preventDefault(); }
+  else if ((e.key === 'a' || e.key === 'b') && (TYPES[S.qs[S.i].type] || {}).ab) { pick(e.key === 'a' ? 1 : 2); e.preventDefault(); }
+  else if (e.key === 'Backspace' && S.part[S.qs[S.i].id]) { unslot(-1); e.preventDefault(); }
+  else if (e.key === 'Enter' || e.key === 'ArrowRight') { if (e.key === 'ArrowRight' || S.ans[S.qs[S.i].id] != null) { next(); e.preventDefault(); } }
+  else if (e.key === 'ArrowLeft') { go(S.i - 1); e.preventDefault(); }
+});
+
+route();
+})();
+</script>
+</body>
+</html>

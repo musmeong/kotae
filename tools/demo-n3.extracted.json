@@ -1,0 +1,615 @@
+{
+ "id": "demo-n3",
+ "title": "Kotae Demo N3",
+ "author": "Original sample questions",
+ "level": "N3",
+ "types": {
+  "dochira": {
+   "tag": "正しいほう",
+   "id": "Pilih yang benar",
+   "jp": "文中の（　　）から正しいほうをえらびなさい。",
+   "how": "Pilih bentuk yang benar dari dua pilihan dalam kurung."
+  }
+ },
+ "passages": {
+  "g4p": {
+   "label": "私の趣味",
+   "html": "<p><ruby>私<rt>わたし</rt></ruby>の<ruby>趣味<rt>しゅみ</rt></ruby>は<ruby>料理<rt>りょうり</rt></ruby>です。<ruby>最初<rt>さいしょ</rt></ruby>は<ruby>簡単<rt>かんたん</rt></ruby>な<ruby>料理<rt>りょうり</rt></ruby><span class=\"slot num\">1</span><ruby>作<rt>つく</rt></ruby>れませんでしたが、<ruby>毎週末<rt>まいしゅうまつ</rt></ruby><ruby>練習<rt>れんしゅう</rt></ruby>するうちに、<ruby>少<rt>すこ</rt></ruby>しずつ<ruby>上手<rt>じょうず</rt></ruby>になりました。</p><p><span class=\"slot num\">2</span>、<ruby>先月<rt>せんげつ</rt></ruby>は<ruby>友<rt>とも</rt></ruby>だちを<ruby>家<rt>いえ</rt></ruby>に<ruby>呼<rt>よ</rt></ruby>んで、カレーを<ruby>作<rt>つく</rt></ruby>りました。みんなが「おいしい」と<ruby>言<rt>い</rt></ruby>って<span class=\"slot num\">3</span>、とてもうれしかったです。</p>",
+   "intro": "つぎの<ruby>文章<rt>ぶんしょう</rt></ruby>を<ruby>読<rt>よ</rt></ruby>んで、1から3の<ruby>中<rt>なか</rt></ruby>に<ruby>入<rt>はい</rt></ruby>る<ruby>最<rt>もっと</rt></ruby>もよいものを、1・2・3・4から一つえらびなさい。"
+  },
+  "r1p": {
+   "label": "図書館からのお知らせ",
+   "html": "<p class=\"c\"><ruby>図書館<rt>としょかん</rt></ruby>からのお<ruby>知<rt>し</rt></ruby>らせ</p><p>3<ruby>月<rt>がつ</rt></ruby>20<ruby>日<rt>か</rt></ruby>（<ruby>月<rt>げつ</rt></ruby>）から3<ruby>月<rt>がつ</rt></ruby>26<ruby>日<rt>にち</rt></ruby>（<ruby>日<rt>にち</rt></ruby>）まで、<ruby>本<rt>ほん</rt></ruby>の<ruby>整理<rt>せいり</rt></ruby>のため<ruby>図書館<rt>としょかん</rt></ruby>は<ruby>休<rt>やす</rt></ruby>みです。</p><p>この<ruby>間<rt>あいだ</rt></ruby>に<ruby>本<rt>ほん</rt></ruby>を<ruby>返<rt>かえ</rt></ruby>したい<ruby>人<rt>ひと</rt></ruby>は、<ruby>入口<rt>いりぐち</rt></ruby>の<ruby>右<rt>みぎ</rt></ruby>にある<ruby>返却<rt>へんきゃく</rt></ruby>ポストに<ruby>入<rt>い</rt></ruby>れてください。ただし、CDとDVDは<ruby>返却<rt>へんきゃく</rt></ruby>ポストに<ruby>入<rt>い</rt></ruby>れないで、3<ruby>月<rt>がつ</rt></ruby>27<ruby>日<rt>にち</rt></ruby><ruby>以降<rt>いこう</rt></ruby>にカウンターに<ruby>返<rt>かえ</rt></ruby>してください。</p>",
+   "intro": "つぎの<ruby>文章<rt>ぶんしょう</rt></ruby>を<ruby>読<rt>よ</rt></ruby>んで、<ruby>質問<rt>しつもん</rt></ruby>に<ruby>答<rt>こた</rt></ruby>えなさい。"
+  }
+ },
+ "sections": [
+  {
+   "id": "v",
+   "title": "文字・語彙",
+   "parts": [
+    {
+     "id": "v1",
+     "title": "問題1 漢字読み",
+     "sets": [
+      {
+       "id": "v1-1",
+       "label": "練習",
+       "pages": [],
+       "qs": [
+        {
+         "id": "v1-1",
+         "n": 1,
+         "kind": "mc",
+         "type": "kanji",
+         "stem": "<ruby>駅<rt>えき</rt></ruby>の<u>改札</u>で<ruby>友<rt>とも</rt></ruby>だちを<ruby>待<rt>ま</rt></ruby>っている。",
+         "opts": [
+          "かいざつ",
+          "かいさつ",
+          "がいさつ",
+          "かいさく"
+         ],
+         "ans": 2
+        },
+        {
+         "id": "v1-2",
+         "n": 2,
+         "kind": "mc",
+         "type": "kanji",
+         "stem": "この<ruby>道<rt>みち</rt></ruby>は<u>狭い</u>ので、<ruby>車<rt>くるま</rt></ruby>に<ruby>気<rt>き</rt></ruby>をつけてください。",
+         "opts": [
+          "ひろい",
+          "ほそい",
+          "せまい",
+          "あさい"
+         ],
+         "ans": 3
+        },
+        {
+         "id": "v1-3",
+         "n": 3,
+         "kind": "mc",
+         "type": "kanji",
+         "stem": "<ruby>来週<rt>らいしゅう</rt></ruby>の<u>会議</u>の<ruby>資料<rt>しりょう</rt></ruby>を<ruby>作<rt>つく</rt></ruby>った。",
+         "opts": [
+          "かいき",
+          "かいご",
+          "がいぎ",
+          "かいぎ"
+         ],
+         "ans": 4
+        },
+        {
+         "id": "v1-4",
+         "n": 4,
+         "kind": "mc",
+         "type": "kanji",
+         "stem": "<ruby>毎朝<rt>まいあさ</rt></ruby>、<ruby>公園<rt>こうえん</rt></ruby>を<u>散歩</u>している。",
+         "opts": [
+          "さんぽ",
+          "さんほ",
+          "さんぼ",
+          "ざんぽ"
+         ],
+         "ans": 1
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "v2",
+     "title": "問題2 表記",
+     "sets": [
+      {
+       "id": "v2-1",
+       "label": "練習",
+       "pages": [],
+       "qs": [
+        {
+         "id": "v2-1",
+         "n": 1,
+         "kind": "mc",
+         "type": "hyouki",
+         "stem": "<ruby>新<rt>あたら</rt></ruby>しい<ruby>靴<rt>くつ</rt></ruby>を<u>はいて</u><ruby>出<rt>で</rt></ruby>かけた。",
+         "opts": [
+          "掃いて",
+          "履いて",
+          "吐いて",
+          "拝いて"
+         ],
+         "ans": 2
+        },
+        {
+         "id": "v2-2",
+         "n": 2,
+         "kind": "mc",
+         "type": "hyouki",
+         "stem": "<ruby>図書館<rt>としょかん</rt></ruby>で<ruby>本<rt>ほん</rt></ruby>を<u>かりた</u>。",
+         "opts": [
+          "貸りた",
+          "狩りた",
+          "刈りた",
+          "借りた"
+         ],
+         "ans": 4
+        },
+        {
+         "id": "v2-3",
+         "n": 3,
+         "kind": "mc",
+         "type": "hyouki",
+         "stem": "<u>しゅくだい</u>を<ruby>家<rt>いえ</rt></ruby>に<ruby>忘<rt>わす</rt></ruby>れてしまった。",
+         "opts": [
+          "宿第",
+          "宿題",
+          "縮題",
+          "祝題"
+         ],
+         "ans": 2
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "v3",
+     "title": "問題3 文脈規定",
+     "sets": [
+      {
+       "id": "v3-1",
+       "label": "練習",
+       "pages": [],
+       "qs": [
+        {
+         "id": "v3-1",
+         "n": 1,
+         "kind": "mc",
+         "type": "bunmyaku",
+         "stem": "<ruby>何度<rt>なんど</rt></ruby><ruby>説明<rt>せつめい</rt></ruby>しても、<ruby>彼<rt>かれ</rt></ruby>は<ruby>自分<rt>じぶん</rt></ruby>の<ruby>間違<rt>まちが</rt></ruby>いを（　　）としない。",
+         "opts": [
+          "<ruby>許<rt>ゆる</rt></ruby>そう",
+          "<ruby>守<rt>まも</rt></ruby>ろう",
+          "<ruby>認<rt>みと</rt></ruby>めよう",
+          "<ruby>決<rt>き</rt></ruby>めよう"
+         ],
+         "ans": 3
+        },
+        {
+         "id": "v3-2",
+         "n": 2,
+         "kind": "mc",
+         "type": "bunmyaku",
+         "stem": "<ruby>約束<rt>やくそく</rt></ruby>の<ruby>時間<rt>じかん</rt></ruby>に（　　）<ruby>間<rt>ま</rt></ruby>に<ruby>合<rt>あ</rt></ruby>った。",
+         "opts": [
+          "ぐっすり",
+          "ぎりぎり",
+          "うっかり",
+          "のんびり"
+         ],
+         "ans": 2
+        },
+        {
+         "id": "v3-3",
+         "n": 3,
+         "kind": "mc",
+         "type": "bunmyaku",
+         "stem": "<ruby>大事<rt>だいじ</rt></ruby>な<ruby>書類<rt>しょるい</rt></ruby>なので、なくさないように（　　）しまっておいてください。",
+         "opts": [
+          "ぼんやり",
+          "うっかり",
+          "のんびり",
+          "きちんと"
+         ],
+         "ans": 4
+        },
+        {
+         "id": "v3-4",
+         "n": 4,
+         "kind": "mc",
+         "type": "bunmyaku",
+         "stem": "<ruby>駅前<rt>えきまえ</rt></ruby>に<ruby>新<rt>あたら</rt></ruby>しいスーパーができて、とても（　　）になった。",
+         "opts": [
+          "<ruby>便利<rt>べんり</rt></ruby>",
+          "<ruby>丁寧<rt>ていねい</rt></ruby>",
+          "<ruby>正直<rt>しょうじき</rt></ruby>",
+          "<ruby>平和<rt>へいわ</rt></ruby>"
+         ],
+         "ans": 1
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "v4",
+     "title": "問題4 言い換え類義",
+     "sets": [
+      {
+       "id": "v4-1",
+       "label": "練習",
+       "pages": [],
+       "qs": [
+        {
+         "id": "v4-1",
+         "n": 1,
+         "kind": "mc",
+         "type": "iikae",
+         "stem": "<ruby>母<rt>はは</rt></ruby>は<u>たまに</u>ケーキを<ruby>焼<rt>や</rt></ruby>いてくれる。",
+         "opts": [
+          "いつも",
+          "<ruby>毎日<rt>まいにち</rt></ruby>",
+          "ときどき",
+          "<ruby>一度<rt>いちど</rt></ruby>も"
+         ],
+         "ans": 3
+        },
+        {
+         "id": "v4-2",
+         "n": 2,
+         "kind": "mc",
+         "type": "iikae",
+         "stem": "このかばんは<u>じょうぶ</u>だ。",
+         "opts": [
+          "かるい",
+          "こわれにくい",
+          "<ruby>値段<rt>ねだん</rt></ruby>が<ruby>高<rt>たか</rt></ruby>い",
+          "<ruby>大<rt>おお</rt></ruby>きい"
+         ],
+         "ans": 2
+        },
+        {
+         "id": "v4-3",
+         "n": 3,
+         "kind": "mc",
+         "type": "iikae",
+         "stem": "<ruby>彼<rt>かれ</rt></ruby>は<u>あわてて</u><ruby>家<rt>いえ</rt></ruby>を<ruby>出<rt>で</rt></ruby>た。",
+         "opts": [
+          "ゆっくり",
+          "<ruby>静<rt>しず</rt></ruby>かに",
+          "<ruby>一人<rt>ひとり</rt></ruby>で",
+          "いそいで"
+         ],
+         "ans": 4
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "v5",
+     "title": "問題5 用法",
+     "sets": [
+      {
+       "id": "v5-1",
+       "label": "練習",
+       "pages": [],
+       "qs": [
+        {
+         "id": "v5-1",
+         "n": 1,
+         "kind": "mc",
+         "type": "youhou",
+         "stem": "<ruby>夢中<rt>むちゅう</rt></ruby>",
+         "opts": [
+          "<u>夢中</u>の<ruby>時間<rt>じかん</rt></ruby>に<ruby>電話<rt>でんわ</rt></ruby>がかかってきた。",
+          "このケーキは<u>夢中</u>でおいしい。",
+          "<ruby>弟<rt>おとうと</rt></ruby>はゲームに<u>夢中</u>で、<ruby>呼<rt>よ</rt></ruby>んでも<ruby>返事<rt>へんじ</rt></ruby>をしない。",
+          "<u>夢中</u>な<ruby>人<rt>ひと</rt></ruby>と<ruby>結婚<rt>けっこん</rt></ruby>したい。"
+         ],
+         "ans": 3
+        },
+        {
+         "id": "v5-2",
+         "n": 2,
+         "kind": "mc",
+         "type": "youhou",
+         "stem": "<ruby>片<rt>かた</rt></ruby>づける",
+         "opts": [
+          "<ruby>先生<rt>せんせい</rt></ruby>の<ruby>質問<rt>しつもん</rt></ruby>に<u><ruby>片<rt>かた</rt></ruby>づけた</u>。",
+          "<ruby>部屋<rt>へや</rt></ruby>を<u><ruby>片<rt>かた</rt></ruby>づけ</u>てから、<ruby>出<rt>で</rt></ruby>かけよう。",
+          "<ruby>病気<rt>びょうき</rt></ruby>が<u><ruby>片<rt>かた</rt></ruby>づけて</u>、<ruby>元気<rt>げんき</rt></ruby>になった。",
+          "<ruby>天気<rt>てんき</rt></ruby>が<u><ruby>片<rt>かた</rt></ruby>づけて</u>、<ruby>雨<rt>あめ</rt></ruby>がやんだ。"
+         ],
+         "ans": 2
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "sub": "Kosakata"
+  },
+  {
+   "id": "g",
+   "title": "文法",
+   "parts": [
+    {
+     "id": "g1",
+     "title": "問題1 文法形式",
+     "sets": [
+      {
+       "id": "g1-1",
+       "label": "練習",
+       "pages": [],
+       "qs": [
+        {
+         "id": "g1-1",
+         "n": 1,
+         "kind": "mc",
+         "type": "bunpou",
+         "stem": "<ruby>雨<rt>あめ</rt></ruby>が<ruby>降<rt>ふ</rt></ruby>っている（　　）、<ruby>試合<rt>しあい</rt></ruby>は<ruby>中止<rt>ちゅうし</rt></ruby>になった。",
+         "opts": [
+          "のに",
+          "ので",
+          "ても",
+          "ながら"
+         ],
+         "ans": 2
+        },
+        {
+         "id": "g1-2",
+         "n": 2,
+         "kind": "mc",
+         "type": "bunpou",
+         "stem": "<ruby>日本<rt>にほん</rt></ruby>に<ruby>来<rt>き</rt></ruby>て（　　）、<ruby>毎日<rt>まいにち</rt></ruby><ruby>日本語<rt>にほんご</rt></ruby>を<ruby>話<rt>はな</rt></ruby>すようになった。",
+         "opts": [
+          "まで",
+          "ばかり",
+          "から",
+          "ほど"
+         ],
+         "ans": 3
+        },
+        {
+         "id": "g1-3",
+         "n": 3,
+         "kind": "mc",
+         "type": "bunpou",
+         "stem": "このペンは<ruby>書<rt>か</rt></ruby>き（　　）、とても<ruby>便利<rt>べんり</rt></ruby>だ。",
+         "opts": [
+          "にくくて",
+          "すぎて",
+          "かけて",
+          "やすくて"
+         ],
+         "ans": 4
+        },
+        {
+         "id": "g1-4",
+         "n": 4,
+         "kind": "mc",
+         "type": "bunpou",
+         "stem": "<ruby>先生<rt>せんせい</rt></ruby>に（　　）、<ruby>作文<rt>さくぶん</rt></ruby>を<ruby>何度<rt>なんど</rt></ruby>も<ruby>書<rt>か</rt></ruby>き<ruby>直<rt>なお</rt></ruby>した。",
+         "opts": [
+          "<ruby>言<rt>い</rt></ruby>われて",
+          "<ruby>言<rt>い</rt></ruby>わせて",
+          "<ruby>言<rt>い</rt></ruby>って",
+          "<ruby>言<rt>い</rt></ruby>わされて"
+         ],
+         "ans": 1
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "g2",
+     "title": "問題2 文の組み立て",
+     "sets": [
+      {
+       "id": "g2-1",
+       "label": "練習",
+       "pages": [],
+       "qs": [
+        {
+         "id": "g2-1",
+         "n": 1,
+         "kind": "star",
+         "type": "star",
+         "stem": "<ruby>私<rt>わたし</rt></ruby>は<span class=\"slot\"></span><span class=\"slot\"></span><span class=\"slot star\">★</span><span class=\"slot\"></span><ruby>好<rt>す</rt></ruby>きです。",
+         "opts": [
+          "<ruby>映画<rt>えいが</rt></ruby>を",
+          "<ruby>一人<rt>ひとり</rt></ruby>で",
+          "のが",
+          "<ruby>見<rt>み</rt></ruby>る"
+         ],
+         "ans": 4,
+         "order": "2143"
+        },
+        {
+         "id": "g2-2",
+         "n": 2,
+         "kind": "star",
+         "type": "star",
+         "stem": "<ruby>宿題<rt>しゅくだい</rt></ruby>が<span class=\"slot\"></span><span class=\"slot\"></span><span class=\"slot star\">★</span><span class=\"slot\"></span>よ。",
+         "opts": [
+          "<ruby>行<rt>い</rt></ruby>って",
+          "<ruby>終<rt>お</rt></ruby>わったら",
+          "もいい",
+          "<ruby>遊<rt>あそ</rt></ruby>びに"
+         ],
+         "ans": 1,
+         "order": "2413"
+        },
+        {
+         "id": "g2-3",
+         "n": 3,
+         "kind": "star",
+         "type": "star",
+         "stem": "この<ruby>本<rt>ほん</rt></ruby>は<span class=\"slot\"></span><span class=\"slot\"></span><span class=\"slot star\">★</span><span class=\"slot\"></span>やさしい。",
+         "opts": [
+          "ほど",
+          "<ruby>子<rt>こ</rt></ruby>ども",
+          "<ruby>読<rt>よ</rt></ruby>める",
+          "でも"
+         ],
+         "ans": 3,
+         "order": "2431"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "g3",
+     "title": "正しいほうをえらぶ",
+     "sets": [
+      {
+       "id": "g3-1",
+       "label": "練習",
+       "pages": [],
+       "qs": [
+        {
+         "id": "g3-1",
+         "n": 1,
+         "kind": "mc",
+         "type": "dochira",
+         "stem": "<ruby>日本<rt>にほん</rt></ruby>の<ruby>生活<rt>せいかつ</rt></ruby>に（　　）までに、<ruby>半年<rt>はんとし</rt></ruby>かかった。",
+         "opts": [
+          "<ruby>慣<rt>な</rt></ruby>れる",
+          "<ruby>慣<rt>な</rt></ruby>れた"
+         ],
+         "ans": 1
+        },
+        {
+         "id": "g3-2",
+         "n": 2,
+         "kind": "mc",
+         "type": "dochira",
+         "stem": "<ruby>彼女<rt>かのじょ</rt></ruby>はうれし（　　）に<ruby>笑<rt>わら</rt></ruby>った。",
+         "opts": [
+          "そう",
+          "よう"
+         ],
+         "ans": 1
+        },
+        {
+         "id": "g3-3",
+         "n": 3,
+         "kind": "mc",
+         "type": "dochira",
+         "stem": "<ruby>窓<rt>まど</rt></ruby>が（　　）いるので、<ruby>少<rt>すこ</rt></ruby>し<ruby>寒<rt>さむ</rt></ruby>い。",
+         "opts": [
+          "<ruby>開<rt>あ</rt></ruby>けて",
+          "<ruby>開<rt>あ</rt></ruby>いて"
+         ],
+         "ans": 2
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "g4",
+     "title": "文章の文法",
+     "sets": [
+      {
+       "id": "g4-1",
+       "label": "私の趣味",
+       "pages": [],
+       "qs": [
+        {
+         "id": "g4-1",
+         "n": 1,
+         "kind": "mc",
+         "type": "cloze",
+         "passage": "g4p",
+         "stem": "<span class=\"slot num\">1</span>",
+         "opts": [
+          "だけ",
+          "しか",
+          "まで",
+          "さえ"
+         ],
+         "ans": 2
+        },
+        {
+         "id": "g4-2",
+         "n": 2,
+         "kind": "mc",
+         "type": "cloze",
+         "passage": "g4p",
+         "stem": "<span class=\"slot num\">2</span>",
+         "opts": [
+          "しかし",
+          "それとも",
+          "そして",
+          "つまり"
+         ],
+         "ans": 3
+        },
+        {
+         "id": "g4-3",
+         "n": 3,
+         "kind": "mc",
+         "type": "cloze",
+         "passage": "g4p",
+         "stem": "<span class=\"slot num\">3</span>",
+         "opts": [
+          "あげて",
+          "もらって",
+          "やって",
+          "くれて"
+         ],
+         "ans": 4
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "sub": "Tata bahasa"
+  },
+  {
+   "id": "r",
+   "title": "読解",
+   "parts": [
+    {
+     "id": "r1",
+     "title": "情報検索",
+     "sets": [
+      {
+       "id": "r1-1",
+       "label": "図書館からのお知らせ",
+       "pages": [],
+       "qs": [
+        {
+         "id": "r1-1",
+         "n": 1,
+         "kind": "mc",
+         "type": "dokkai",
+         "passage": "r1p",
+         "stem": "3<ruby>月<rt>がつ</rt></ruby>22<ruby>日<rt>にち</rt></ruby>にCDを<ruby>返<rt>かえ</rt></ruby>したい<ruby>人<rt>ひと</rt></ruby>は、どうすればいいか。",
+         "opts": [
+          "<ruby>返却<rt>へんきゃく</rt></ruby>ポストに<ruby>入<rt>い</rt></ruby>れる",
+          "その<ruby>日<rt>ひ</rt></ruby>にカウンターに<ruby>持<rt>も</rt></ruby>っていく",
+          "3<ruby>月<rt>がつ</rt></ruby>27<ruby>日<rt>にち</rt></ruby><ruby>以降<rt>いこう</rt></ruby>にカウンターに<ruby>返<rt>かえ</rt></ruby>す",
+          "3<ruby>月<rt>がつ</rt></ruby>26<ruby>日<rt>にち</rt></ruby>までにカウンターに<ruby>返<rt>かえ</rt></ruby>す"
+         ],
+         "ans": 3
+        },
+        {
+         "id": "r1-2",
+         "n": 2,
+         "kind": "mc",
+         "type": "dokkai",
+         "passage": "r1p",
+         "stem": "3<ruby>月<rt>がつ</rt></ruby>20<ruby>日<rt>か</rt></ruby>から26<ruby>日<rt>にち</rt></ruby>までの<ruby>間<rt>あいだ</rt></ruby>にできることはどれか。",
+         "opts": [
+          "<ruby>本<rt>ほん</rt></ruby>を<ruby>借<rt>か</rt></ruby>りる",
+          "<ruby>本<rt>ほん</rt></ruby>を<ruby>返却<rt>へんきゃく</rt></ruby>ポストに<ruby>入<rt>い</rt></ruby>れる",
+          "DVDを<ruby>返却<rt>へんきゃく</rt></ruby>ポストに<ruby>入<rt>い</rt></ruby>れる",
+          "カウンターで<ruby>質問<rt>しつもん</rt></ruby>する"
+         ],
+         "ans": 2
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "sub": "Bacaan"
+  }
+ ]
+}

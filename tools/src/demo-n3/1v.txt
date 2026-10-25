@@ -1,0 +1,192 @@
+# Kotae demo book — vocabulary. All questions are original (written for this repo), not taken from any book.
+% section v 文字・語彙 | Kosakata
+% part v1 問題1 漢字読み
+% set v1-1 練習
+
+@v1-1 kanji p0
+Q: {駅|えき}の[改札]で{友|とも}だちを{待|ま}っている。
+O: かいざつ | かいさつ | がいさつ | かいさく
+A: 2
+T: Aku sedang menunggu teman di gerbang tiket stasiun.
+W: **改札（かいさつ）** = gerbang pemeriksaan tiket. 改 dibaca かい, 札 dibaca さつ (tidak bersuara).
+1: かいざつ — さつ tidak bersuara.
+2: かいさつ. Benar.
+3: がいさつ — かい tidak bersuara.
+4: かいさく — 札 dibaca さつ, bukan さく.
+
+@v1-2 kanji p0
+Q: この{道|みち}は[狭い]ので、{車|くるま}に{気|き}をつけてください。
+O: ひろい | ほそい | せまい | あさい
+A: 3
+T: Jalan ini sempit, jadi hati-hati dengan mobil.
+W: **狭い（せまい）** = sempit. Lawannya 広い（ひろい）.
+1: ひろい = 広い (luas) — kebalikannya.
+2: ほそい = 細い (ramping, kecil memanjang).
+3: せまい. Benar.
+4: あさい = 浅い (dangkal).
+
+@v1-3 kanji p0
+Q: {来週|らいしゅう}の[会議]の{資料|しりょう}を{作|つく}った。
+O: かいき | かいご | がいぎ | かいぎ
+A: 4
+T: Aku membuat bahan untuk rapat minggu depan.
+W: **会議（かいぎ）** = rapat. 議 dibaca ぎ (bersuara).
+1: かいき — 議 bersuara: ぎ.
+2: かいご = 介護 (perawatan lansia).
+3: がいぎ — 会 tidak bersuara: かい.
+4: かいぎ. Benar.
+
+@v1-4 kanji p0
+Q: {毎朝|まいあさ}、{公園|こうえん}を[散歩]している。
+O: さんぽ | さんほ | さんぼ | ざんぽ
+A: 1
+T: Setiap pagi aku berjalan-jalan di taman.
+W: **散歩（さんぽ）** = jalan-jalan santai. 歩 (ほ) berubah jadi ぽ setelah ん.
+1: さんぽ. Benar.
+2: さんほ — setelah ん, ほ berubah jadi ぽ.
+3: さんぼ — bunyinya ぽ (handakuten), bukan ぼ.
+4: ざんぽ — 散 tidak bersuara: さん.
+
+% part v2 問題2 表記
+% set v2-1 練習
+
+@v2-1 hyouki p0
+Q: {新|あたら}しい{靴|くつ}を[はいて]{出|で}かけた。
+O: 掃いて | 履いて | 吐いて | 拝いて
+A: 2
+T: Aku pergi dengan memakai sepatu baru.
+W: **履く（はく）** = memakai sepatu, celana, atau rok (bagian bawah tubuh).
+1: 掃いて — 掃く = menyapu.
+2: 履いて. Benar.
+3: 吐いて — 吐く = memuntahkan / menghembuskan napas.
+4: 拝いて — 拝 dibaca おがむ (menyembah), bukan はく.
+
+@v2-2 hyouki p0
+Q: {図書館|としょかん}で{本|ほん}を[かりた]。
+O: 貸りた | 狩りた | 刈りた | 借りた
+A: 4
+T: Aku meminjam buku di perpustakaan.
+W: **借りる（かりる）** = meminjam. Yang meminjamkan memakai 貸す（かす）.
+1: 貸りた — 貸 dipakai di 貸す (meminjamkan); 貸りる bukan kata.
+2: 狩りた — 狩る = berburu.
+3: 刈りた — 刈る = memotong (rumput, rambut).
+4: 借りた. Benar.
+
+@v2-3 hyouki p0
+Q: [しゅくだい]を{家|いえ}に{忘|わす}れてしまった。
+O: 宿第 | 宿題 | 縮題 | 祝題
+A: 2
+T: Aku ketinggalan PR di rumah.
+W: **宿題（しゅくだい）** = PR. 題 = soal/judul (問題, 題名).
+1: 宿第 — 第 = urutan (第一), bukan だい untuk "soal".
+2: 宿題. Benar.
+3: 縮題 — 縮 = menyusut (しゅく), bukan 宿.
+4: 祝題 — 祝 = merayakan (しゅく), bukan 宿.
+
+% part v3 問題3 文脈規定
+% set v3-1 練習
+
+@v3-1 bunmyaku p0
+Q: {何度|なんど}{説明|せつめい}しても、{彼|かれ}は{自分|じぶん}の{間違|まちが}いを（　　）としない。
+O: {許|ゆる}そう | {守|まも}ろう | {認|みと}めよう | {決|き}めよう
+A: 3
+T: Berapa kali pun dijelaskan, dia tidak mau mengakui kesalahannya sendiri.
+W: **認める（みとめる）** = mengakui. 〜ようとしない = tidak mau ~.
+1: 許そう — 許す = memaafkan; tidak cocok untuk kesalahan sendiri yang sedang dijelaskan.
+2: 守ろう — 守る = menjaga, menaati.
+3: 認めよう. Benar.
+4: 決めよう — 決める = memutuskan.
+
+@v3-2 bunmyaku p0
+Q: {約束|やくそく}の{時間|じかん}に（　　）{間|ま}に{合|あ}った。
+O: ぐっすり | ぎりぎり | うっかり | のんびり
+A: 2
+T: Aku tepat waktu, nyaris saja (pas-pasan).
+W: **ぎりぎり** = pas di batas, nyaris tidak sempat.
+1: ぐっすり = (tidur) nyenyak.
+2: ぎりぎり. Benar.
+3: うっかり = karena lengah; dipakai untuk kesalahan, bukan untuk "sempat".
+4: のんびり = santai; bertentangan dengan "nyaris".
+
+@v3-3 bunmyaku p0
+Q: {大事|だいじ}な{書類|しょるい}なので、なくさないように（　　）しまっておいてください。
+O: ぼんやり | うっかり | のんびり | きちんと
+A: 4
+T: Ini berkas penting, jadi simpanlah dengan rapi supaya tidak hilang.
+W: **きちんと** = dengan rapi dan benar.
+1: ぼんやり = melamun, tidak fokus.
+2: うっかり = lengah — kebalikannya.
+3: のんびり = santai.
+4: きちんと. Benar.
+
+@v3-4 bunmyaku p0
+Q: {駅前|えきまえ}に{新|あたら}しいスーパーができて、とても（　　）になった。
+O: {便利|べんり} | {丁寧|ていねい} | {正直|しょうじき} | {平和|へいわ}
+A: 1
+T: Sejak ada supermarket baru di depan stasiun, jadi sangat praktis.
+W: **便利** = praktis, memudahkan.
+1: 便利. Benar.
+2: 丁寧 = sopan, teliti; dipakai untuk orang atau cara.
+3: 正直 = jujur.
+4: 平和 = damai; tidak ada hubungannya dengan supermarket.
+
+% part v4 問題4 言い換え類義
+% set v4-1 練習
+
+@v4-1 iikae p0
+Q: {母|はは}は[たまに]ケーキを{焼|や}いてくれる。
+O: いつも | {毎日|まいにち} | ときどき | {一度|いちど}も
+A: 3
+T: Ibu sesekali membuatkan kue untukku.
+W: **たまに** = sesekali ≈ **ときどき**.
+1: いつも = selalu.
+2: 毎日 = setiap hari.
+3: ときどき. Benar.
+4: 一度も = sekali pun (dengan bentuk negatif).
+
+@v4-2 iikae p0
+Q: このかばんは[じょうぶ]だ。
+O: かるい | こわれにくい | {値段|ねだん}が{高|たか}い | {大|おお}きい
+A: 2
+T: Tas ini kuat (awet).
+W: **丈夫（じょうぶ）** = kuat, tidak mudah rusak ≈ **こわれにくい**.
+1: かるい = ringan.
+2: こわれにくい. Benar.
+3: 値段が高い = mahal.
+4: 大きい = besar.
+
+@v4-3 iikae p0
+Q: {彼|かれ}は[あわてて]{家|いえ}を{出|で}た。
+O: ゆっくり | {静|しず}かに | {一人|ひとり}で | いそいで
+A: 4
+T: Dia buru-buru keluar rumah.
+W: **あわてる** = panik, tergesa-gesa ≈ **いそいで**.
+1: ゆっくり = pelan-pelan — kebalikannya.
+2: 静かに = dengan tenang.
+3: 一人で = sendirian.
+4: いそいで. Benar.
+
+% part v5 問題5 用法
+% set v5-1 練習
+
+@v5-1 youhou p0
+Q: {夢中|むちゅう}
+O: [夢中]の{時間|じかん}に{電話|でんわ}がかかってきた。 | このケーキは[夢中]でおいしい。 | {弟|おとうと}はゲームに[夢中]で、{呼|よ}んでも{返事|へんじ}をしない。 | [夢中]な{人|ひと}と{結婚|けっこん}したい。
+A: 3
+T: 夢中 = asyik, tenggelam dalam sesuatu (〜に夢中だ).
+W: Opsi 3: "Adikku asyik main game, dipanggil pun tidak menjawab."
+1: Harusnya **夜中（よなか）** (tengah malam).
+2: Harusnya **とても** (sangat).
+3: Benar.
+4: Harusnya **好きな人** (orang yang disukai).
+
+@v5-2 youhou p0
+Q: {片|かた}づける
+O: {先生|せんせい}の{質問|しつもん}に[{片|かた}づけた]。 | {部屋|へや}を[{片|かた}づけ]てから、{出|で}かけよう。 | {病気|びょうき}が[{片|かた}づけて]、{元気|げんき}になった。 | {天気|てんき}が[{片|かた}づけて]、{雨|あめ}がやんだ。
+A: 2
+T: 片づける = merapikan, membereskan.
+W: Opsi 2: "Setelah merapikan kamar, ayo berangkat."
+1: Harusnya **答えた** (menjawab).
+2: Benar.
+3: Harusnya **治って** (sembuh).
+4: Harusnya **晴れて** (cerah).

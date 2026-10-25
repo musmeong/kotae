@@ -1,0 +1,30 @@
+/* Grammar notes share Kotae's existing theme and typography. */
+.grammar-head{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin:10px 0 20px}
+.grammar-head h1{font-size:clamp(25px,3.8vw,36px)}
+.grammar-head p{margin:8px 0;color:var(--dim);max-width:760px}
+.grammar-tools{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:16px 18px;margin-bottom:20px}
+.grammar-tools label:first-child{flex:1;min-width:220px}
+.grammar-tools input[type="search"]{display:block;width:100%;margin-top:6px;padding:12px 14px;border-radius:10px;border:1px solid var(--edge);background:var(--bg);color:var(--ink);font:inherit}
+.grammar-tools input:focus{outline:2px solid var(--acc);outline-offset:2px}
+.grammar-layout{display:grid;grid-template-columns:225px minmax(0,1fr);gap:22px;align-items:start}
+.grammar-nav{position:sticky;top:78px;padding:10px;display:grid;gap:4px;max-height:calc(100vh - 100px);overflow:auto}
+.grammar-nav a{display:block;padding:10px;border-radius:10px;text-decoration:none;color:var(--dim);font-size:14px}
+.grammar-nav a span{display:block;font-size:11px;margin-top:2px}
+.grammar-nav a.on,.grammar-nav a:hover{color:var(--ink);background:color-mix(in srgb,var(--acc) 13%,var(--panel2))}
+.grammar-intro{margin:0 0 16px;padding:18px}.grammar-intro h2{font-size:22px}.grammar-intro p{color:var(--dim);margin:6px 0 14px}
+.grammar-card{padding:24px;margin-bottom:18px;scroll-margin-top:90px}
+.grammar-card h3{font-size:25px;margin-bottom:8px}.grammar-meta{font-size:12px;color:var(--dim);margin-bottom:17px}
+.grammar-card p{margin:11px 0;line-height:1.8}.grammar-card strong{color:var(--ink)}
+.grammar-table-wrap{overflow:auto;margin-top:18px}
+.grammar-table{width:100%;border-collapse:collapse;text-align:left;font-size:14px}
+.grammar-table th{font-weight:600;color:var(--dim);font-size:12px;background:var(--panel2)}
+.grammar-table td,.grammar-table th{padding:14px 10px;vertical-align:top;border-bottom:1px solid var(--line)}
+.grammar-table .example-jp{font-size:17px;line-height:2.1;min-width:175px}
+.grammar-table .example-romaji{color:var(--dim);line-height:1.8;min-width:145px}
+.grammar-table .example-id{line-height:1.8;min-width:170px}
+.grammar-note{border-left:3px solid var(--acc);padding:8px 13px;background:color-mix(in srgb,var(--acc) 6%,transparent);border-radius:0 8px 8px 0;font-size:14px}
+.grammar-compare{padding:22px;margin-top:25px}.grammar-compare h3{font-size:20px}
+.grammar-source{font-size:12px;color:var(--dim);margin:24px 0;line-height:1.8}
+.grammar-hide-romaji .example-romaji{display:none}
+@media(max-width:950px){.grammar-layout{grid-template-columns:1fr}.grammar-nav{position:static;display:flex;overflow:auto;max-height:none}.grammar-nav a{min-width:140px}.grammar-card{padding:18px}.grammar-head{flex-direction:column}}
+@media(max-width:650px){.grammar-table thead{display:none}.grammar-table,.grammar-table tbody,.grammar-table tr,.grammar-table td{display:block;width:100%}.grammar-table tr{padding:10px 0;border-bottom:1px solid var(--line)}.grammar-table td{border:0;padding:4px 0;min-width:0!important}.grammar-table .example-number{color:var(--acc);font-size:12px}.grammar-table .example-number::before{content:'Contoh '}.grammar-table .example-jp{font-size:18px}.grammar-table .example-id::before{content:'Arti: ';font-weight:600}.grammar-compare .grammar-table tr{display:grid;gap:3px}.grammar-card h3{font-size:23px}}

@@ -1,0 +1,33 @@
+# Kotae demo book — reading. Original text.
+% section r 読解 | Bacaan
+% part r1 情報検索
+% set r1-1 図書館からのお知らせ
+
+% passage r1p 図書館からのお知らせ
+I: つぎの{文章|ぶんしょう}を{読|よ}んで、{質問|しつもん}に{答|こた}えなさい。
+C: {図書館|としょかん}からのお{知|し}らせ
+P: 3{月|がつ}20{日|か}（{月|げつ}）から3{月|がつ}26{日|にち}（{日|にち}）まで、{本|ほん}の{整理|せいり}のため{図書館|としょかん}は{休|やす}みです。
+P: この{間|あいだ}に{本|ほん}を{返|かえ}したい{人|ひと}は、{入口|いりぐち}の{右|みぎ}にある{返却|へんきゃく}ポストに{入|い}れてください。ただし、CDとDVDは{返却|へんきゃく}ポストに{入|い}れないで、3{月|がつ}27{日|にち}{以降|いこう}にカウンターに{返|かえ}してください。
+% end
+
+@r1-1 dokkai p0 passage=r1p
+Q: 3{月|がつ}22{日|にち}にCDを{返|かえ}したい{人|ひと}は、どうすればいいか。
+O: {返却|へんきゃく}ポストに{入|い}れる | その{日|ひ}にカウンターに{持|も}っていく | 3{月|がつ}27{日|にち}{以降|いこう}にカウンターに{返|かえ}す | 3{月|がつ}26{日|にち}までにカウンターに{返|かえ}す
+A: 3
+T: Orang yang ingin mengembalikan CD pada tanggal 22 Maret harus bagaimana?
+W: 「CDとDVDは返却ポストに入れないで、3月27日以降にカウンターに返してください」 — CD tidak boleh dimasukkan ke kotak, dan konter baru buka lagi mulai 27 Maret.
+1: Justru dilarang untuk CD dan DVD.
+2: Perpustakaan tutup tanggal 20–26 Maret, jadi konter juga tutup.
+3: Benar.
+4: Sampai tanggal 26 perpustakaan tutup.
+
+@r1-2 dokkai p0 passage=r1p
+Q: 3{月|がつ}20{日|か}から26{日|にち}までの{間|あいだ}にできることはどれか。
+O: {本|ほん}を{借|か}りる | {本|ほん}を{返却|へんきゃく}ポストに{入|い}れる | DVDを{返却|へんきゃく}ポストに{入|い}れる | カウンターで{質問|しつもん}する
+A: 2
+T: Apa yang bisa dilakukan antara tanggal 20 dan 26 Maret?
+W: Selama tutup, buku boleh dikembalikan lewat kotak pengembalian: 「この間に本を返したい人は、…返却ポストに入れてください」.
+1: Perpustakaan tutup, jadi tidak bisa meminjam.
+2: Benar.
+3: DVD dilarang dimasukkan ke kotak pengembalian.
+4: Konter tutup selama perpustakaan libur.
