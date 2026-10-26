@@ -17,6 +17,7 @@
   --blue:#45b8ff;--pink:#ff4d97;--violet:#b06bff;--amber:#ffb547;--teal:#2fd3c9;
   --ok:#3ee6a8;--bad:#ff5c7a;--okbg:rgba(62,230,168,.12);--badbg:rgba(255,92,122,.12);
   --acc:var(--blue);
+  --viz:#2f9be6;
   --shadow:0 18px 50px -20px rgba(0,0,0,.7);
   --ui:"Space Grotesk","Zen Maru Gothic",system-ui,sans-serif;
   --jp:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Noto Sans JP","Yu Gothic",sans-serif;
@@ -28,6 +29,7 @@
   --ink:#141a33;--dim:#4d5878;--faint:#8a93ad;
   --blue:#1d86d6;--pink:#d8306f;--violet:#7444d6;--amber:#c27a00;--teal:#0f8f88;
   --ok:#0f9467;--bad:#d4364f;--okbg:rgba(15,148,103,.1);--badbg:rgba(212,54,79,.09);
+  --viz:#1d86d6;
   --shadow:0 16px 40px -24px rgba(30,40,90,.45);
 }
 *{box-sizing:border-box}
@@ -294,6 +296,87 @@ h1,h2,h3{margin:0;line-height:1.25}
 .aipola .pill{margin:8px 6px 0 0;text-decoration:none}
 .aifokus,.airen{margin:0;padding-left:22px;display:grid;gap:8px;line-height:1.6;font-size:14.5px}
 .aierr{color:var(--bad);margin:14px 0 0}
+/* profile: range filter, KPI deltas, JLPT estimate, charts */
+.rangef{display:flex;gap:8px;flex-wrap:wrap;margin:-2px 2px 14px}
+.rangef .tab{height:34px;font-family:var(--ui);font-weight:600;font-size:13px}
+.an-tile em{display:block;font-style:normal;font-size:12px;color:var(--faint);margin-top:4px}
+.an-tile em.up{color:var(--ok)}.an-tile em.down{color:var(--bad)}
+.pred{padding:18px 20px;margin-top:16px}
+.predh{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+.predh h2{font-size:18px}.predh p{margin:4px 0 0;font-size:13px;max-width:620px}
+.status{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:99px;font-size:13px;font-weight:600;border:1px solid var(--edge);background:var(--panel2)}
+.status svg{width:18px;height:18px}
+.status.ok{color:var(--ok);background:var(--okbg);border-color:color-mix(in srgb,var(--ok) 40%,transparent)}
+.status.no{color:var(--bad);background:var(--badbg);border-color:color-mix(in srgb,var(--bad) 40%,transparent)}
+.status.warn{color:var(--amber);background:color-mix(in srgb,var(--amber) 12%,transparent);border-color:color-mix(in srgb,var(--amber) 40%,transparent)}
+.pred .hero{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin:14px 0 8px}
+.pred .hero b{font-size:52px;line-height:1;font-weight:700}
+.pred .hero span{font-size:15px;color:var(--dim)}
+.meter{position:relative;height:10px;border-radius:99px;background:color-mix(in srgb,var(--viz) 14%,var(--panel2));margin:6px 0 4px}
+.meter .fill{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:var(--viz)}
+.meter .fill.bad{background:var(--bad)}
+.meter .ci{position:absolute;top:-3px;bottom:-3px;border-radius:99px;border:1.5px solid color-mix(in srgb,var(--ink) 35%,transparent)}
+.meter .mk{position:absolute;top:-6px;bottom:-6px;width:2px;margin-left:-1px;background:var(--ink);border-radius:2px}
+.psecs{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:14px}
+.psec{padding:12px 14px;border-radius:14px;background:var(--panel2);border:1px solid var(--line)}
+.psec .ph{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.psec .ph b{font-size:16px}.psec .ph span{font-size:12.5px}
+.psec .pv{margin-left:auto;color:var(--dim)}.psec .pv b{font-size:18px;color:var(--ink)}
+.psec p,.pred .note{margin:4px 0 0;font-size:12.5px}
+.charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:16px;margin-top:16px}
+.chart{padding:16px 18px;min-width:0}
+.charts+.chart{margin-top:16px}
+.chart h2{font-size:16px}.chart>p{margin:4px 0 10px;font-size:13px}
+svg.viz{display:block;width:100%;height:auto;overflow:visible}
+svg.viz .grid{stroke:var(--line);stroke-width:1}
+svg.viz text{font-family:var(--ui);font-size:11px;fill:var(--faint)}
+svg.viz text.lbl{font-size:13px;fill:var(--dim);font-weight:600}
+svg.viz text.end{font-size:12px;fill:var(--ink);font-weight:700}
+svg.viz .ln{fill:none;stroke:var(--viz);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+svg.viz .wash{fill:var(--viz);opacity:.1}
+svg.viz .dot{fill:var(--viz);stroke:var(--solid);stroke-width:2}
+svg.viz .dot.early{fill:color-mix(in srgb,var(--viz) 35%,var(--solid))}
+svg.viz .db{stroke:color-mix(in srgb,var(--viz) 45%,var(--line));stroke-width:2;stroke-linecap:round}
+svg.viz .hit{fill:transparent;cursor:pointer;outline:none}
+svg.viz .ov{fill:transparent}
+svg.viz .xh{stroke:var(--faint);stroke-width:1;opacity:0;pointer-events:none}
+svg.viz .col{fill:var(--viz);opacity:.85;cursor:pointer;outline:none}
+svg.viz .col:hover,svg.viz .col:focus{opacity:1}
+svg.viz .sr{cursor:pointer;outline:none}
+svg.viz .sr:hover .ov,svg.viz .sr:focus .ov{fill:color-mix(in srgb,var(--viz) 6%,transparent)}
+svg.viz .hit:focus,svg.viz .sr:focus,svg.viz .hc:focus{outline:none}
+svg.viz.vol{margin-top:6px}
+.heatwrap{overflow-x:auto}
+svg.heat{display:block;width:auto;max-width:none}
+.hc{cursor:pointer;outline:none}
+.hc.h0{fill:var(--line)}.hc.h1{fill:color-mix(in srgb,var(--viz) 28%,var(--panel2))}.hc.h2{fill:color-mix(in srgb,var(--viz) 50%,var(--panel2))}
+.hc.h3{fill:color-mix(in srgb,var(--viz) 75%,var(--panel2))}.hc.h4{fill:var(--viz)}
+.hc:hover,.hc:focus{stroke:var(--ink);stroke-width:1.5}
+.legend{display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-size:12.5px;color:var(--dim);margin:0 0 6px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend .lk{display:inline-block;width:10px;height:10px;border-radius:99px;background:var(--viz)}
+.legend .lk.early{background:color-mix(in srgb,var(--viz) 35%,var(--solid));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--viz) 40%,transparent)}
+.legend.scale{gap:4px;margin-top:8px}
+.legend.scale i{display:inline-block;width:13px;height:13px;border-radius:3px}
+.legend.scale i.h0{background:var(--line)}.legend.scale i.h1{background:color-mix(in srgb,var(--viz) 28%,var(--panel2))}
+.legend.scale i.h2{background:color-mix(in srgb,var(--viz) 50%,var(--panel2))}.legend.scale i.h3{background:color-mix(in srgb,var(--viz) 75%,var(--panel2))}
+.legend.scale i.h4{background:var(--viz)}
+.legend.scale span{margin:0 4px}
+.tview{margin-top:10px;font-size:13px}
+.tview summary{cursor:pointer;color:var(--dim)}
+.tview table{width:100%;border-collapse:collapse;margin-top:8px;font-variant-numeric:tabular-nums}
+.tview caption{text-align:left;color:var(--faint);font-size:12px;padding-bottom:4px}
+.tview th,.tview td{text-align:left;padding:5px 8px;border-bottom:1px solid var(--line)}
+.ctip{position:fixed;z-index:50;display:none;pointer-events:none;padding:8px 10px;border-radius:10px;background:var(--solid);border:1px solid var(--edge);box-shadow:var(--shadow);font-size:12.5px;line-height:1.45;max-width:260px}
+.ctip b{display:block;font-size:14px}.ctip span{display:block;color:var(--dim)}
+.aisw{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:10px;margin-top:14px}
+.aisw .card{padding:12px 14px;border-radius:14px;background:var(--panel2);border:1px solid var(--line);font-size:14.5px;line-height:1.6}
+.aisw .card.good{border-left:3px solid var(--ok)}.aisw .card.weak{border-left:3px solid var(--bad)}
+.aisw h3{margin:0 0 6px}.aisw ul{margin:0;padding-left:18px;display:grid;gap:6px}
+.aip{margin:0;font-size:14.5px;line-height:1.7}
+.aiweek{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr));gap:8px}
+.aiweek div{padding:10px 12px;border-radius:12px;background:var(--panel2);border:1px solid var(--line);font-size:14px;line-height:1.55}
+.aiweek b{display:block;font-size:12px;letter-spacing:.6px;text-transform:uppercase;color:var(--faint)}
 .aiq{padding:12px 14px;border-radius:14px;border:1px dashed color-mix(in srgb,var(--violet) 45%,var(--line));background:color-mix(in srgb,var(--violet) 6%,var(--panel2))}
 .aiq .aiqh{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
 .aiq .aiqh span{font-size:13px}
@@ -328,6 +411,7 @@ h1,h2,h3{margin:0;line-height:1.25}
   .dot{width:28px;height:28px}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.opt.multi-selected{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc);background:var(--panel2)}
 </style>
 </head>
 <body>
@@ -424,8 +508,39 @@ const SEC_ID = { v: 'Kosakata', g: 'Tata bahasa', r: 'Bacaan', m1: 'Ujian simula
 const typeOf = (B, q) => (B.types && B.types[q.type]) || TYPES[q.type] || TYPES.dokkai;
 // option labels (a/b for 正しいほう items), right-answer test (q.alt = other accepted answers; narabe: ans is the order string)
 const lab = (q, k) => (TYPES[q.type] || {}).ab ? 'abcd'[k] : String(k + 1);
-const isOk = (q, a) => a != null && (a === q.ans || (q.alt || []).includes(a));
-const ansText = q => q.type === 'narabe' ? q.order.split('').map(d => strip(q.opts[+d - 1])).join(' › ') : strip(q.opts[q.ans - 1]);
+// Typed answers (q.kind 'input') and multi-select answers (q.kind 'multi').
+const normInput = s => String(s).normalize('NFKC').replace(/[ァ-ヶ]/g, c => String.fromCharCode(c.charCodeAt(0) - 96)).replace(/[\s、。,.!?！？]/g, '').toLowerCase();
+const inputValues = a => { try { const v = JSON.parse(a); return Array.isArray(v) && v.every(x => typeof x === 'string') ? v : []; } catch (e) { return []; } };
+const inputComboMatches = (q, v) => !q.acceptedCombos || q.acceptedCombos.some(combo => combo.length === v.length && combo.every((x, i) => normInput(x) === normInput(v[i])));
+const inputMatches = (q, a) => { const v = inputValues(a); return v.length === q.accepted.length && q.accepted.every((alts, i) => alts.some(x => normInput(x) === normInput(v[i]))) && inputComboMatches(q, v); };
+const multiValues = a => { try { const v = JSON.parse(a); return Array.isArray(v) && v.every(Number.isInteger) && new Set(v).size === v.length ? v : []; } catch (e) { return []; } };
+const isOk = (q, a) => a != null && (q.kind === 'input' ? inputMatches(q, a) : q.kind === 'multi' ? typeof a === 'number' ? q.correct.includes(a) : multiValues(a).length === q.correct.length && q.correct.every(n => multiValues(a).includes(n)) : a === q.ans || (q.alt || []).includes(a));
+function multiHtml(q, done, picked) {
+  const selected = done ? multiValues(picked) : S.part[q.id] || [];
+  return q.opts.map((o, k) => { const n = k + 1, checked = selected.includes(n);
+    const cls = done ? q.correct.includes(n) ? 'right' : checked ? 'wrong' : 'dim' : checked ? 'multi-selected' : '';
+    return `<button type="button" class="opt ${cls}" data-multi="${n}" aria-pressed="${checked}" ${done ? 'disabled' : ''}><span class="k">${checked ? '✓' : lab(q, k)}</span><span class="t">${o}</span></button>`;
+  }).join('') + (done ? '' : '<div style="grid-column:1/-1"><button class="btn pri" data-act="multiCheck">Periksa jawaban</button></div>');
+}
+function toggleMulti(n) {
+  const q = S.qs[S.i]; if (S.ans[q.id] != null || n < 1 || n > q.opts.length) return;
+  const a = S.part[q.id] || (S.part[q.id] = []), i = a.indexOf(n);
+  if (i < 0) a.push(n); else a.splice(i, 1); renderQ();
+}
+function inputHtml(q, done, picked) {
+  const values = done ? inputValues(picked) : S.part[q.id] || [];
+  return '<div class="typed" style="grid-column:1/-1">' + q.accepted.map((alts, i) => {
+    const value = values[i] || '', ok = alts.some(x => normInput(x) === normInput(value)) && inputComboMatches(q, values);
+    return `<label style="display:block;margin:12px 0">Isian ${i + 1}<input data-entry="${i}" lang="ja" autocomplete="off" autocapitalize="none" spellcheck="false" aria-label="Isian ${i + 1}" aria-invalid="${done && !ok}" value="${esc(value)}" ${done ? 'readonly' : ''} style="display:block;box-sizing:border-box;width:100%;padding:12px 14px;margin-top:5px;border:2px solid ${done ? ok ? 'var(--ok)' : 'var(--bad)' : 'var(--edge)'};border-radius:12px;background:var(--panel2);color:var(--ink);font:inherit"></label>`;
+  }).join('') + (done ? '' : '<button class="btn pri" data-act="inputCheck">Periksa jawaban</button>') + '</div>';
+}
+function submitInput() {
+  const values = [...app.querySelectorAll('[data-entry]')].map(x => x.value);
+  const empty = [...app.querySelectorAll('[data-entry]')].find(x => !x.value.trim());
+  if (empty) { empty.focus(); return; }
+  pick(JSON.stringify(values));
+}
+const ansText = q => q.kind === 'input' ? q.accepted.map(a => a[0]).join(' ／ ') : q.kind === 'multi' ? q.correct.map(n => strip(q.opts[n - 1])).join(' ／ ') : q.type === 'narabe' ? q.order.split('').map(d => strip(q.opts[+d - 1])).join(' › ') : strip(q.opts[q.ans - 1]);
 
 /* ---------- books ---------- */
 const BOOKS = window.KOTAE_BOOKS || [];
@@ -513,7 +628,7 @@ function home() {
     <section class="hero">
       <h1>Latihan dari bukumu, <span>langsung dikoreksi.</span></h1>
       <p>Pilih jawaban, lihat benar atau salah saat itu juga, lalu baca kenapa jawaban itu benar dan kenapa pilihan lainnya keliru.</p>
-      <div class="sec-actions" style="margin:16px 0 0"><a class="btn" href="#/a"><svg><use href="#i-flag"/></svg>Analisis kesalahan</a></div>
+      <div class="sec-actions" style="margin:16px 0 0"><a class="btn" href="#/a"><svg><use href="#i-flag"/></svg>Analisis profil</a></div>
     </section>
     <div class="books">${cards}
       <div class="bcard panel add">Buku latihan lain bisa ditambahkan nanti —<br>tinggal kirim PDF-nya.</div>
@@ -532,7 +647,7 @@ function bookView(B, secId) {
     const qs = s.parts.flatMap(p => p.sets.flatMap(st => st.qs));
     return `<a class="tab ${s === sec ? 'on' : ''}" href="#/b/${B.id}/${s.id}">${esc(s.title)}<span class="n">${qs.length}</span></a>`;
   }).join('');
-  const resources = (B.resources || []).map(r => `<a class="btn" href="${esc(r.href)}">${esc(r.label)}</a>`).join('');
+  const resources = (sec.resources || B.resources || []).map(r => `<a class="btn" href="${esc(r.href)}">${esc(r.label)}</a>`).join('');
   const secQs = sec.parts.flatMap(p => p.sets.flatMap(st => st.qs));
   const parts = sec.parts.map(p => {
     const pq = p.sets.flatMap(st => st.qs);
@@ -694,11 +809,148 @@ function groupRows(rows, keyOf) {        // most first-try mistakes first, then 
   return [...m.values()].sort((a, b) => b.miss - a.miss || a.miss / a.n - b.miss / b.n);
 }
 const snip = (B, q, len = 90) => (q.type === 'cloze' && q.passage ? `${(B.passages[q.passage] || {}).label || 'Teks'} · kotak ${q.n}` : strip(q.stem)).replace(/\s+/g, ' ').trim().slice(0, len);
-const pickText = (q, c) => c == null ? '—' : q.type === 'narabe' ? String(c).split('').map(d => strip(q.opts[+d - 1] || '')).join(' › ') : `${lab(q, c - 1)}. ${strip(q.opts[c - 1] || '')}`;
-const keyText = q => q.type === 'narabe' ? ansText(q) : `${lab(q, q.ans - 1)}. ${ansText(q)}`;
+const pickText = (q, c) => c == null ? '—' : q.kind === 'input' ? inputValues(c).join(' ／ ') : q.kind === 'multi' ? multiValues(c).map(n => strip(q.opts[n - 1])).join(' ／ ') : q.type === 'narabe' ? String(c).split('').map(d => strip(q.opts[+d - 1] || '')).join(' › ') : `${lab(q, c - 1)}. ${strip(q.opts[c - 1] || '')}`;
+const keyText = q => ['input', 'multi'].includes(q.kind) ? ansText(q) : q.type === 'narabe' ? ansText(q) : `${lab(q, q.ans - 1)}. ${ansText(q)}`;
 const histBooks = () => BOOKS.filter(b => Object.values(DB.hist).some(h => h.b === b.id));
 
-let AN = null;                           // the analysis on screen (rows + scope), reused by the AI button
+/* ---------- profile: time range, trend, activity, JLPT estimate ---------- */
+const DAY = 864e5;
+const RANGES = [['all', 'Semua waktu'], ['90', '90 hari'], ['30', '30 hari'], ['7', '7 hari']];
+const dayKey = t => { const d = new Date(t); d.setHours(0, 0, 0, 0); return d.getTime(); };
+const weekKey = t => { const d = dayKey(t); return d - ((new Date(d).getDay() + 6) % 7) * DAY; };   // weeks start on Monday
+const fmtD = (t, o) => new Date(t).toLocaleDateString('id-ID', o || { day: 'numeric', month: 'short' });
+const firstAcc = rs => { const k = rs.filter(r => r.f); return k.length ? k.filter(r => r.f.ok).length / k.length : null; };
+const pc = p => p == null ? '—' : Math.round(100 * p) + '%';
+// JLPT scoring sections per level. Pass marks and section minimums are the official ones; the weights approximate how many
+// questions of each skill a real test has (they move a little between years), so the estimate is a guide, not a score.
+const JLPT_READ = { name: '読解', sub: 'Bacaan', max: 60, min: 19, w: { Bacaan: 1 } };
+const JLPT_LISTEN = { name: '聴解', sub: 'Mendengar', max: 60, min: 19, w: { Mendengar: 1 } };
+const JLPT = {
+  N1: { pass: 100, secs: [{ name: '言語知識', sub: 'Kanji, kosakata, tata bahasa', max: 60, min: 19, w: { Kanji: 6, Kosakata: 19, 'Tata bahasa': 20 } }, JLPT_READ, JLPT_LISTEN] },
+  N2: { pass: 90, secs: [{ name: '言語知識', sub: 'Kanji, kosakata, tata bahasa', max: 60, min: 19, w: { Kanji: 10, Kosakata: 20, 'Tata bahasa': 22 } }, JLPT_READ, JLPT_LISTEN] },
+  N3: { pass: 95, secs: [{ name: '言語知識', sub: 'Kanji, kosakata, tata bahasa', max: 60, min: 19, w: { Kanji: 14, Kosakata: 21, 'Tata bahasa': 23 } }, JLPT_READ, JLPT_LISTEN] },
+  N4: { pass: 90, secs: [{ name: '言語知識・読解', sub: 'Kanji, kosakata, tata bahasa, bacaan', max: 120, min: 38, w: { Kanji: 12, Kosakata: 16, 'Tata bahasa': 21, Bacaan: 8 } }, JLPT_LISTEN] },
+  N5: { pass: 80, secs: [{ name: '言語知識・読解', sub: 'Kanji, kosakata, tata bahasa, bacaan', max: 120, min: 38, w: { Kanji: 12, Kosakata: 9, 'Tata bahasa': 17, Bacaan: 5 } }, JLPT_LISTEN] },
+};
+function estimateJLPT(rows, level) {
+  const L = JLPT[level];
+  if (!L) return null;
+  const by = {};
+  for (const r of rows) if (r.f) { const s = by[r.skill] || (by[r.skill] = { n: 0, ok: 0 }); s.n++; if (r.f.ok) s.ok++; }
+  const secs = L.secs.map(sec => {
+    let wsum = 0, acc = 0, v = 0, n = 0;
+    const missing = [];
+    for (const [sk, w] of Object.entries(sec.w)) {
+      const s = by[sk];
+      if (!s) { missing.push(sk); continue; }
+      const p = s.ok / s.n, ps = (s.ok + 1) / (s.n + 2);   // ps keeps the error bar honest at 0% / 100% with few answers
+      wsum += w; acc += w * p; v += w * w * ps * (1 - ps) / s.n; n += s.n;
+    }
+    if (!wsum) return { ...sec, score: null, missing, n: 0 };
+    const p = acc / wsum, se = Math.sqrt(v) / wsum, sc = x => Math.max(0, Math.min(sec.max, Math.round(sec.max * x)));
+    return { ...sec, score: sc(p), lo: sc(p - 1.96 * se), hi: sc(p + 1.96 * se), sePts: sec.max * se, missing, n };
+  });
+  // the sections are estimated independently, so their errors add in quadrature (summing the bounds would overstate the range)
+  const full = secs.every(s => s.score != null), max = secs.reduce((a, s) => a + s.max, 0);
+  const total = full ? secs.reduce((a, s) => a + s.score, 0) : null, seT = full ? Math.sqrt(secs.reduce((a, s) => a + s.sePts ** 2, 0)) : 0;
+  const lo = full ? Math.max(0, Math.round(total - 1.96 * seT)) : null, hi = full ? Math.min(max, Math.round(total + 1.96 * seT)) : null;
+  const verdict = !full ? 'partial'
+    : lo >= L.pass && secs.every(s => s.lo >= s.min) ? 'pass'
+    : hi >= L.pass && secs.every(s => s.hi >= s.min) ? 'border' : 'below';
+  return { level, pass: L.pass, max, secs, total, lo, hi, verdict, few: secs.some(s => s.score != null && s.n < 20) };
+}
+function trendBuckets(rows, daily) {     // first-try accuracy per day or per week
+  const m = new Map();
+  for (const r of rows) if (r.f) {
+    const k = daily ? dayKey(r.f.t) : weekKey(r.f.t), b = m.get(k) || { t: k, n: 0, ok: 0 };
+    b.n++; if (r.f.ok) b.ok++; m.set(k, b);
+  }
+  return [...m.values()].sort((a, b) => a.t - b.t).map(b => ({ ...b, p: b.ok / b.n, label: daily ? fmtD(b.t, { weekday: 'short', day: 'numeric', month: 'short' }) : `${fmtD(b.t)} – ${fmtD(b.t + 6 * DAY)}` }));
+}
+function trendSvg(bk, W) {               // accuracy line + a separate volume column chart on the same x positions (never two y-axes)
+  const H = 190, l = 40, r = 44, t = 12, b = 12, iw = W - l - r, ih = H - t - b;
+  const x = i => l + (bk.length === 1 ? iw / 2 : iw * i / (bk.length - 1)), y = p => t + ih * (1 - p);
+  const grid = [0, .25, .5, .75, 1].map(g => `<line class="grid" x1="${l}" x2="${W - r}" y1="${y(g)}" y2="${y(g)}"/><text class="ax" x="${l - 8}" y="${y(g) + 4}" text-anchor="end">${g * 100}%</text>`).join('');
+  const pts = bk.map((d, i) => [x(i), y(d.p)]);
+  const line = pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ');
+  const area = `${line} L${pts[pts.length - 1][0].toFixed(1)} ${y(0)} L${pts[0][0].toFixed(1)} ${y(0)} Z`;
+  const last = bk[bk.length - 1];
+  const acc = `<svg class="viz" viewBox="0 0 ${W} ${H}" role="img" aria-label="Akurasi percobaan pertama per periode">${grid}
+    <path class="wash" d="${area}"/><path class="ln" d="${line}"/>
+    ${pts.map((p, i) => `<circle class="dot" cx="${p[0]}" cy="${p[1]}" r="4"/><circle class="hit" data-ti="${i}" cx="${p[0]}" cy="${p[1]}" r="12" tabindex="0" aria-label="${esc(bk[i].label)}: ${pc(bk[i].p)}"/>`).join('')}
+    <text class="end" x="${pts[pts.length - 1][0] + 8}" y="${pts[pts.length - 1][1] + 4}">${pc(last.p)}</text>
+    <line class="xh" x1="0" x2="0" y1="${t}" y2="${t + ih}"/><rect class="ov" x="${l}" y="${t}" width="${iw}" height="${ih}"/></svg>`;
+  const VH = 64, maxN = Math.max(...bk.map(d => d.n)), bw = Math.max(4, Math.min(24, (iw / Math.max(1, bk.length)) * .6));
+  const col = (d, i) => { const h = Math.max(2, (VH - 18) * d.n / maxN), x0 = x(i) - bw / 2, y0 = VH - 14 - h, rr = Math.min(4, bw / 2, h);
+    return `<path class="col" data-ti="${i}" tabindex="0" aria-label="${esc(d.label)}: ${d.n} soal" d="M${x0} ${VH - 14} V${y0 + rr} Q${x0} ${y0} ${x0 + rr} ${y0} H${x0 + bw - rr} Q${x0 + bw} ${y0} ${x0 + bw} ${y0 + rr} V${VH - 14} Z"/>`; };
+  const ticks = [...new Set([0, Math.floor((bk.length - 1) / 2), bk.length - 1])].map(i => `<text class="ax" x="${x(i)}" y="${VH - 1}" text-anchor="middle">${esc(fmtD(bk[i].t))}</text>`).join('');
+  const vol = `<svg class="viz vol" viewBox="0 0 ${W} ${VH}" role="img" aria-label="Jumlah soal per periode"><line class="grid" x1="${l}" x2="${W - r}" y1="${VH - 14}" y2="${VH - 14}"/>
+    <text class="ax" x="${l - 8}" y="${VH - 14 - (VH - 18) + 8}" text-anchor="end">${maxN}</text>${bk.map(col).join('')}${ticks}</svg>`;
+  return { acc, vol };
+}
+function skillShift(rows) {             // per skill: the first half vs the last half of the answers in range (equal counts)
+  const k = rows.filter(r => r.f).sort((a, b) => a.f.t - b.f.t);
+  if (k.length < 8) return [];
+  const half = Math.floor(k.length / 2), early = k.slice(0, half), late = k.slice(k.length - half);
+  const by = (rs, sk) => rs.filter(r => r.skill === sk);
+  return [...new Set(k.map(r => r.skill))].map(sk => ({ sk, a: by(early, sk), b: by(late, sk) }))
+    .filter(s => s.a.length >= 3 && s.b.length >= 3)
+    .map(s => ({ sk: s.sk, pa: firstAcc(s.a), pb: firstAcc(s.b), na: s.a.length, nb: s.b.length, ta: [early[0].f.t, early[early.length - 1].f.t], tb: [late[0].f.t, late[late.length - 1].f.t] }))
+    .sort((a, b) => (b.pb - b.pa) - (a.pb - a.pa));
+}
+function shiftSvg(sh, W) {
+  const rowH = 34, l = 118, r = 64, H = sh.length * rowH + 26, iw = W - l - r, x = p => l + iw * p;
+  const grid = [0, .5, 1].map(g => `<line class="grid" x1="${x(g)}" x2="${x(g)}" y1="4" y2="${H - 22}"/><text class="ax" x="${x(g)}" y="${H - 6}" text-anchor="middle">${g * 100}%</text>`).join('');
+  return `<svg class="viz" viewBox="0 0 ${W} ${H}" role="img" aria-label="Akurasi awal dibanding akhir per kemampuan">${grid}${sh.map((s, i) => {
+    const cy = 4 + i * rowH + rowH / 2, d = Math.round(100 * (s.pb - s.pa));
+    return `<g class="sr" data-si="${i}" tabindex="0" aria-label="${esc(s.sk)}: ${pc(s.pa)} ke ${pc(s.pb)}"><rect class="ov" x="0" y="${cy - rowH / 2}" width="${W}" height="${rowH}"/>
+      <text class="lbl" x="${l - 12}" y="${cy + 4}" text-anchor="end">${esc(s.sk)}</text>
+      <line class="db" x1="${x(Math.min(s.pa, s.pb))}" x2="${x(Math.max(s.pa, s.pb))}" y1="${cy}" y2="${cy}"/>
+      <circle class="dot early" cx="${x(s.pa)}" cy="${cy}" r="5"/><circle class="dot" cx="${x(s.pb)}" cy="${cy}" r="5"/>
+      <text class="lbl" x="${W - r + 12}" y="${cy + 4}">${d > 0 ? '▲' : d < 0 ? '▼' : '='} ${Math.abs(d)}</text></g>`;
+  }).join('')}</svg>`;
+}
+function heatData(rows, days) {          // one cell per day: answers + first-try accuracy
+  const by = new Map();
+  for (const r of rows) if (r.f) { const k = dayKey(r.f.t), c = by.get(k) || { n: 0, ok: 0 }; c.n++; if (r.f.ok) c.ok++; by.set(k, c); }
+  const today = dayKey(Date.now()), first = by.size ? Math.min(...by.keys()) : today;
+  const span = Math.min(days || 182, Math.max(28, Math.round((today - first) / DAY) + 1));
+  const start = weekKey(today - (span - 1) * DAY), cells = [];
+  for (let d = start; d <= today; d += DAY) { const c = by.get(dayKey(d)); cells.push({ t: d, n: c ? c.n : 0, ok: c ? c.ok : 0 }); }
+  // streaks count calendar days with at least one first try
+  let cur = 0, best = 0, run = 0;
+  for (let d = dayKey(first); d <= today; d += DAY) { run = by.has(dayKey(d)) ? run + 1 : 0; best = Math.max(best, run); }
+  for (let d = today; by.has(dayKey(d)); d -= DAY) cur++;
+  if (!cur && by.has(dayKey(today - DAY))) for (let d = today - DAY; by.has(dayKey(d)); d -= DAY) cur++;   // today not started yet
+  return { cells, active: by.size, cur, best };
+}
+function heatSvg(h) {
+  const cs = 13, g = 3, top = 16, left = 26, weeks = Math.ceil(h.cells.length / 7), W = left + weeks * (cs + g), H = top + 7 * (cs + g);
+  const lvl = n => !n ? 0 : n < 5 ? 1 : n < 15 ? 2 : n < 30 ? 3 : 4;
+  const months = h.cells.filter((c, i) => i % 7 === 0 && new Date(c.t).getDate() <= 7)
+    .map(c => `<text class="ax" x="${left + Math.floor(h.cells.indexOf(c) / 7) * (cs + g)}" y="10">${esc(fmtD(c.t, { month: 'short' }))}</text>`).join('');
+  const dows = [['Sen', 0], ['Rab', 2], ['Jum', 4]].map(([s, i]) => `<text class="ax" x="0" y="${top + i * (cs + g) + 10}">${s}</text>`).join('');
+  return `<svg class="viz heat" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="Kalender aktivitas">${months}${dows}${h.cells.map((c, i) =>
+    `<rect class="hc h${lvl(c.n)}" data-hi="${i}" tabindex="${c.n ? 0 : -1}" aria-label="${esc(fmtD(c.t, { weekday: 'short', day: 'numeric', month: 'short' }))}: ${c.n} soal" x="${left + Math.floor(i / 7) * (cs + g)}" y="${top + (i % 7) * (cs + g)}" width="${cs}" height="${cs}" rx="3"/>`).join('')}</svg>`;
+}
+function predictHtml(E, rows) {
+  if (!E) return '';
+  const tag = { pass: ['ok', 'i-ok', 'Kemungkinan besar lulus'], border: ['warn', 'i-flag', 'Di sekitar batas lulus'], below: ['no', 'i-no', 'Belum mencapai batas lulus'], partial: ['', 'i-flag', 'Data belum lengkap'] }[E.verdict];
+  const meter = (v, lo, hi, max, min, cls) => `<div class="meter"><i class="fill ${cls}" style="width:${100 * v / max}%"></i>${lo != null ? `<i class="ci" style="left:${100 * lo / max}%;width:${100 * (hi - lo) / max}%"></i>` : ''}<i class="mk" style="left:${100 * min / max}%"></i></div>`;
+  const sec = s => s.score == null
+    ? `<div class="psec"><div class="ph"><b class="jp">${esc(s.name)}</b><span class="muted">${esc(s.sub)}</span></div><p class="muted">Belum ada data ${esc(s.missing.join(', ').toLowerCase())}. Kerjakan soal jenis ini dulu supaya bagian ini bisa diperkirakan.</p></div>`
+    : `<div class="psec"><div class="ph"><b class="jp">${esc(s.name)}</b><span class="muted">${esc(s.sub)}</span><span class="pv"><b>${s.score}</b> / ${s.max}</span></div>
+      ${meter(s.score, s.lo, s.hi, s.max, s.min, s.score < s.min ? 'bad' : '')}
+      <p class="muted">Rentang ${s.lo}–${s.hi} · minimal ${s.min} · dari ${s.n} soal${s.missing.length ? ` · belum ada data ${esc(s.missing.join(', ').toLowerCase())}` : ''}</p></div>`;
+  return `<section class="panel pred"><div class="predh"><div><h2>Prediksi skor JLPT ${esc(E.level)}</h2>
+      <p class="muted">Dari jawaban pertama dalam rentang yang dipilih. JLPT memakai skor berskala, jadi ini perkiraan, bukan skor resmi.</p></div>
+      <span class="status ${tag[0]}"><svg><use href="#${tag[1]}"/></svg>${tag[2]}</span></div>
+    ${E.total != null ? `<div class="hero"><b>${E.total}</b><span>/ ${E.max}</span><span class="muted">rentang ${E.lo}–${E.hi} · batas lulus ${E.pass}</span></div>${meter(E.total, E.lo, E.hi, E.max, E.pass, E.total < E.pass ? 'bad' : '')}` : ''}
+    <div class="psecs">${E.secs.map(sec).join('')}</div>
+    ${E.few ? '<p class="muted note">Beberapa bagian baru punya kurang dari 20 soal, jadi rentangnya masih lebar.</p>' : ''}</section>`;
+}
+
+let AN = null;                           // the profile on screen (rows, scope, range, chart data), reused by the AI button
 function analysisView(scope) {
   S = null;
   app.innerHTML = '<div class="empty">Menyiapkan analisis…</div>';
@@ -706,26 +958,56 @@ function analysisView(scope) {
   Promise.all(ids.map(loadBook)).then(Bs => renderAnalysis(scope, Bs)).catch(fail);
 }
 function renderAnalysis(scope, Bs) {
-  const B0 = scope ? Bs[0] : null;
+  const B0 = scope ? Bs[0] : null, range = DB.prefs.anRange || 'all';
   document.documentElement.style.setProperty('--acc', 'var(--pink)');
-  setCrumb([`<a href="#/">Kotae</a>`, ...(B0 ? [`<a href="#/b/${B0.id}">${esc(B0.title)}</a>`] : []), 'Analisis kesalahan']);
-  const rows = mistakeRows(Bs), miss = rows.filter(r => r.miss);
-  AN = { scope: scope || 'all', rows, miss };
+  setCrumb([`<a href="#/">Kotae</a>`, ...(B0 ? [`<a href="#/b/${B0.id}">${esc(B0.title)}</a>`] : []), 'Analisis profil']);
+  // range filter: questions whose FIRST try falls inside it (older entries without a first-try time only count in "Semua waktu")
+  const allRows = mistakeRows(Bs), days = range === 'all' ? 0 : +range, now = Date.now(), from = now - days * DAY;
+  const rows = days ? allRows.filter(r => r.f && r.f.t >= from) : allRows;
+  const prev = days ? allRows.filter(r => r.f && r.f.t >= from - days * DAY && r.f.t < from) : [];
+  const miss = rows.filter(r => r.miss), allMiss = allRows.filter(r => r.miss).length;
+  const levels = groupRows(rows, r => r.B.level || 'N3').sort((a, b) => b.n - a.n), level = B0 ? (B0.level || 'N3') : levels.length ? levels[0].k : 'N3';
+  AN = { scope: scope || 'all', range, days, rows, miss, B0, level };
   const known = rows.filter(r => r.f), firstOk = known.filter(r => r.f.ok).length, fixed = miss.filter(r => r.fixed).length;
   const tabs = `<nav class="tabs"><a class="tab ${scope ? '' : 'on'}" href="#/a">Semua buku</a>${histBooks().map(b =>
     `<a class="tab ${b.id === scope ? 'on' : ''}" href="#/a/${b.id}" title="${esc(b.jp || '')}">${esc(b.title)}</a>`).join('')}</nav>`;
-  const head = `<div class="bhead"><div><h1>Analisis kesalahan</h1>
+  const head = `<div class="bhead"><div><h1>Analisis profil</h1>
       <div class="stats"><span>${B0 ? esc(B0.title) : 'Semua buku'} · dihitung dari jawaban <b>pertama</b> tiap soal, jadi kesalahan tetap tercatat walau sudah kamu perbaiki.</span></div></div>
-    ${B0 ? `<div class="acts"><a class="btn" href="#/m/${B0.id}" ${miss.length ? '' : 'disabled'}><svg><use href="#i-redo"/></svg>Latih semua kesalahan (${miss.length})</a></div>` : ''}</div>`;
+    ${B0 ? `<div class="acts"><a class="btn" href="#/m/${B0.id}" ${allMiss ? '' : 'disabled'}><svg><use href="#i-redo"/></svg>Latih semua kesalahan (${allMiss})</a></div>` : ''}</div>`;
+  const filter = `<div class="rangef" role="group" aria-label="Rentang waktu">${RANGES.map(([k, l]) => `<button class="tab ${k === range ? 'on' : ''}" data-range="${k}" aria-pressed="${k === range}">${l}</button>`).join('')}</div>`;
   if (!rows.length) {
-    app.innerHTML = head + tabs + `<div class="panel empty">Belum ada jawaban yang tercatat${B0 ? ' untuk buku ini' : ''} di browser ini.<br>Progres tersimpan per browser, jadi buka Kotae di browser tempat kamu biasa latihan.</div>`;
+    app.innerHTML = head + tabs + filter + `<div class="panel empty">${allRows.length ? 'Belum ada jawaban pertama dalam rentang ini. Pilih rentang yang lebih panjang.' : `Belum ada jawaban yang tercatat${B0 ? ' untuk buku ini' : ''} di browser ini.<br>Progres tersimpan per browser, jadi buka Kotae di browser tempat kamu biasa latihan.`}</div>`;
     return;
   }
-  const tile = (v, l, c = '') => `<div class="panel an-tile ${c}"><b>${v}</b><span>${l}</span></div>`;
-  const tiles = `<div class="an-tiles">${tile(rows.length, 'soal dicoba')}${tile(known.length ? Math.round(100 * firstOk / known.length) + '%' : '—', 'benar di percobaan pertama', 'g')}
-    ${tile(miss.length, 'salah di percobaan pertama', 'r')}${tile(fixed, 'sudah kamu perbaiki')}${tile(miss.length - fixed, 'masih salah')}${tile(rows.filter(r => r.rep).length, 'salah 2× atau lebih')}</div>`;
+  // KPI row; accuracy is compared with the previous period of the same length
+  const accNow = firstAcc(rows), accPrev = firstAcc(prev), delta = accNow != null && accPrev != null ? Math.round(100 * (accNow - accPrev)) : null;
+  AN.change = days ? { periode_pembanding: `${days} hari sebelumnya`, soal_periode_pembanding: prev.length,
+    akurasi_periode_pembanding_persen: accPrev == null ? null : Math.round(100 * accPrev), selisih_poin: delta } : null;
+  const H = heatData(allRows, days);
+  const tile = (v, l, c = '', d = '') => `<div class="panel an-tile ${c}"><b>${v}</b><span>${l}</span>${d}</div>`;
+  const dl = delta == null ? '' : `<em class="${delta > 0 ? 'up' : delta < 0 ? 'down' : ''}">${delta > 0 ? '▲' : delta < 0 ? '▼' : '='} ${Math.abs(delta)} poin vs ${days} hari sebelumnya</em>`;
+  const tiles = `<div class="an-tiles">${tile(rows.length, 'soal dicoba')}${tile(known.length ? Math.round(100 * firstOk / known.length) + '%' : '—', 'benar di percobaan pertama', 'g', dl)}
+    ${tile(miss.length, 'salah di percobaan pertama', 'r')}${tile(fixed, 'sudah kamu perbaiki')}${tile(miss.length - fixed, 'masih salah')}
+    ${tile(H.cur, 'hari beruntun', '', `<em>terpanjang ${H.best} hari · ${H.active} hari aktif</em>`)}</div>`;
   const pct = g => Math.round(100 * (g.n - g.miss) / g.n);
   const skills = `<div class="skills">${groupRows(rows, r => r.skill).map(g => `<span class="pill">${esc(g.k)} <b>${pct(g)}%</b> · ${g.miss} salah dari ${g.n}</span>`).join('')}</div>`;
+  // charts
+  const span = known.length ? (Math.max(...known.map(r => r.f.t)) - Math.min(...known.map(r => r.f.t))) / DAY : 0;
+  // per day only for short spans with enough answers per active day; one or two answers a day swing between 0% and 100%
+  const perDay = known.length / Math.max(1, new Set(known.map(r => dayKey(r.f.t))).size);
+  const daily = (days ? days <= 30 : span <= 45) && perDay >= 5, bk = trendBuckets(rows, daily), sh = skillShift(rows);
+  AN.bk = bk; AN.sh = sh; AN.heat = H; AN.est = estimateJLPT(rows, level);
+  const tbl = (cap, head, body) => `<details class="tview"><summary>Lihat tabel</summary><table><caption>${cap}</caption><thead><tr>${head.map(h => `<th>${h}</th>`).join('')}</tr></thead><tbody>${body.map(r => `<tr>${r.map(c => `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></details>`;
+  const trend = `<section class="panel chart"><h2>Tren akurasi</h2><p class="muted">Persen benar di percobaan pertama, per ${daily ? 'hari' : 'minggu'}. Di bawahnya: jumlah soal yang kamu kerjakan.</p>
+    ${bk.length >= 2 ? '<div class="cv" data-c="trend"></div>' + tbl('Tren akurasi', [daily ? 'Hari' : 'Minggu', 'Soal', 'Benar'], bk.map(d => [d.label, d.n, pc(d.p)]))
+      : '<p class="muted">Tren muncul setelah ada latihan di minimal dua ' + (daily ? 'hari' : 'minggu') + ' berbeda dalam rentang ini.</p>'}</section>`;
+  const shift = `<section class="panel chart"><h2>Awal vs akhir per kemampuan</h2><p class="muted">Paruh pertama dibanding paruh terakhir jawabanmu dalam rentang ini (jumlah soal sama).</p>
+    ${sh.length ? `<div class="legend"><span><i class="lk early"></i>Paruh awal</span><span><i class="lk"></i>Paruh akhir</span></div><div class="cv" data-c="shift"></div>`
+      + tbl('Awal vs akhir', ['Kemampuan', 'Awal', 'Akhir', 'Selisih'], sh.map(s => [s.sk, `${pc(s.pa)} (${s.na} soal)`, `${pc(s.pb)} (${s.nb} soal)`, `${Math.round(100 * (s.pb - s.pa))} poin`]))
+      : '<p class="muted">Butuh minimal 8 jawaban, dan tiap kemampuan minimal 3 soal di masing-masing paruh.</p>'}</section>`;
+  const heat = `<section class="panel chart"><h2>Kalender latihan</h2><p class="muted">Satu kotak = satu hari. Makin gelap, makin banyak soal yang kamu kerjakan.</p>
+    <div class="heatwrap">${heatSvg(H)}</div><div class="legend scale"><span>Sedikit</span>${[0, 1, 2, 3, 4].map(i => `<i class="hc h${i}"></i>`).join('')}<span>Banyak</span></div>
+    ${tbl('Hari aktif', ['Hari', 'Soal', 'Benar'], H.cells.filter(c => c.n).reverse().map(c => [fmtD(c.t, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }), c.n, pc(c.ok / c.n)]))}</section>`;
   const wkRow = (g, name, href) => `<div class="row"><div class="nm">${name}</div>
       <div class="ct">${g.miss} salah dari ${g.n} · ${pct(g)}% benar ${href ? `<a class="btn" href="${href}">Latih</a>` : ''}</div>
       ${bar({ g: g.n - g.miss, r: g.miss, n: g.n })}</div>`;
@@ -740,29 +1022,102 @@ function renderAnalysis(scope, Bs) {
   const list = miss.slice().sort((a, b) => b.t - a.t);
   const mlist = list.length ? `<div class="mlist">${list.slice(0, 30).map(item).join('')}${list.length > 30 ? `<details><summary>Tampilkan ${list.length - 30} lainnya</summary><div class="mlist">${list.slice(30).map(item).join('')}</div></details>` : ''}</div>` : '<div class="panel empty">Belum ada kesalahan di percobaan pertama. Mantap!</div>';
   const aiOn = !!((window.KOTAE_AI || {}).keys || []).length;
-  const cache = DB.ai && DB.ai.cache && DB.ai.cache[AN.scope];
-  app.innerHTML = head + tabs + tiles +
-    `<section class="an-sec"><h2>Per kemampuan</h2>${skills}</section>
+  const cache = DB.ai && DB.ai.cache && DB.ai.cache[aiCacheKey(AN)];
+  app.innerHTML = head + tabs + filter + tiles + predictHtml(AN.est, rows) +
+    `<div class="charts">${trend}${shift}</div>${heat}
+    <section class="an-sec"><h2>Per kemampuan</h2>${skills}</section>
     <section class="panel ai"><div class="aih"><div><h2>Analisis AI</h2>
-        <p class="muted">Gemini membaca kesalahan percobaan pertamamu${B0 ? ' di buku ini' : ' di semua buku'}, mencari polanya, lalu menyusun fokus belajar.</p></div>
-      <button class="btn pri" data-ai ${aiOn && miss.length ? '' : 'disabled'}>${cache ? 'Analisis ulang' : 'Analisis dengan AI'}</button></div>
+        <p class="muted">Gemini membaca profilmu${B0 ? ' di buku ini' : ''}: tren, prediksi skor, dan kesalahan percobaan pertama dalam rentang ini, lalu menyusun kekuatan, kelemahan, strategi, dan rencana 7 hari. Hanya jalan saat tombol ditekan.</p></div>
+      <button class="btn pri" data-ai ${aiOn && rows.length ? '' : 'disabled'}>${cache ? 'Analisis ulang' : 'Analisis dengan AI'}</button></div>
       <div id="aiout">${cache ? aiHtml(cache) : aiOn ? '' : '<p class="muted aimeta">Key Gemini belum dipasang (file <code>local/gemini-keys.js</code>).</p>'}</div></section>
     ${types ? `<section class="an-sec"><h2>Jenis soal yang paling sering salah</h2><p>Diurutkan dari jumlah salah di percobaan pertama.</p><div class="wk">${types}</div></section>` : ''}
     ${parts ? `<section class="an-sec"><h2>Bagian buku yang paling sering salah</h2><div class="wk">${parts}</div></section>` : ''}
     <section class="an-sec"><h2>Daftar kesalahan</h2><p>Terbaru di atas. Ketuk untuk mengulang soalnya.</p>${mlist}</section>`;
+  drawCharts();
+  const hw = $('.heatwrap', app);
+  if (hw) hw.scrollLeft = hw.scrollWidth;      // newest weeks in view on narrow screens
+}
+function drawCharts() {                  // sized to the card so chart text stays at its real size
+  if (!AN) return;
+  app.querySelectorAll('.cv[data-c]').forEach(el => {
+    const W = Math.max(280, Math.round(el.clientWidth));
+    if (el.dataset.c === 'trend') { const T = trendSvg(AN.bk, W); el.innerHTML = T.acc + T.vol; }
+    if (el.dataset.c === 'shift') el.innerHTML = shiftSvg(AN.sh, W);
+  });
+  wireCharts();
+}
+let chartResize = 0;
+window.addEventListener('resize', () => { clearTimeout(chartResize); chartResize = setTimeout(() => { if (AN && app.querySelector('.cv[data-c]')) drawCharts(); }, 150); });
+const aiCacheKey = A => A.range === 'all' ? A.scope : `${A.scope}|${A.range}`;   // "Semua waktu" keeps the old key
+
+/* chart hover / focus: one tooltip; every value is also in the "Lihat tabel" view */
+let ctip = null;
+function showTip(lines, x, y) {
+  if (!ctip) { ctip = document.createElement('div'); ctip.className = 'ctip'; ctip.setAttribute('role', 'tooltip'); document.body.appendChild(ctip); }
+  ctip.replaceChildren(...lines.map((s, i) => { const e = document.createElement(i ? 'span' : 'b'); e.textContent = s; return e; }));
+  ctip.style.display = 'block';
+  const w = ctip.offsetWidth, hh = ctip.offsetHeight;
+  ctip.style.left = Math.max(8, Math.min(innerWidth - w - 8, x - w / 2)) + 'px';
+  ctip.style.top = (y - hh - 12 < 8 ? y + 16 : y - hh - 12) + 'px';
+}
+const hideTip = () => { if (ctip) ctip.style.display = 'none'; };
+function wireCharts() {
+  hideTip();
+  const A = AN, at = el => { const b = el.getBoundingClientRect(); return [b.left + b.width / 2, b.top]; };
+  const trendTip = i => { const d = A.bk[i]; return [`${pc(d.p)} benar`, d.label, `${d.n} soal`]; };
+  const acc = app.querySelector('.chart svg.viz:not(.vol)'), xh = acc && acc.querySelector('.xh'), hits = acc ? [...acc.querySelectorAll('.hit')] : [];
+  const pointTo = i => { const c = hits[i]; if (!c) return; xh.setAttribute('x1', c.getAttribute('cx')); xh.setAttribute('x2', c.getAttribute('cx')); xh.style.opacity = 1; const [x, y] = at(c); showTip(trendTip(i), x, y); };
+  if (acc && A.bk.length >= 2) {
+    const ov = acc.querySelector('.ov');
+    ov.addEventListener('pointermove', e => {     // the crosshair snaps to the nearest period
+      let best = 0, bd = 1e9;
+      hits.forEach((c, i) => { const b = c.getBoundingClientRect(), dx = Math.abs(b.left + b.width / 2 - e.clientX); if (dx < bd) { bd = dx; best = i; } });
+      pointTo(best);
+    });
+    ov.addEventListener('pointerleave', () => { xh.style.opacity = 0; hideTip(); });
+    hits.forEach((c, i) => { c.addEventListener('focus', () => pointTo(i)); c.addEventListener('blur', () => { xh.style.opacity = 0; hideTip(); }); });
+  }
+  app.querySelectorAll('.col[data-ti]').forEach(el => {
+    const on = () => { const [x, y] = at(el); showTip(trendTip(+el.dataset.ti), x, y); };
+    el.addEventListener('pointerenter', on); el.addEventListener('focus', on);
+    el.addEventListener('pointerleave', hideTip); el.addEventListener('blur', hideTip);
+  });
+  app.querySelectorAll('.sr[data-si]').forEach(el => {
+    const s = A.sh[+el.dataset.si], on = () => { const [x, y] = at(el.querySelector('.dot:not(.early)'));
+      showTip([`${pc(s.pa)} → ${pc(s.pb)}`, s.sk, `awal ${s.na} soal (${fmtD(s.ta[0])}–${fmtD(s.ta[1])})`, `akhir ${s.nb} soal (${fmtD(s.tb[0])}–${fmtD(s.tb[1])})`], x, y); };
+    el.addEventListener('pointerenter', on); el.addEventListener('focus', on);
+    el.addEventListener('pointerleave', hideTip); el.addEventListener('blur', hideTip);
+  });
+  app.querySelectorAll('.hc[data-hi]').forEach(el => {
+    const c = A.heat.cells[+el.dataset.hi], on = () => { const [x, y] = at(el);
+      showTip([c.n ? `${c.n} soal · ${pc(c.ok / c.n)} benar` : 'Tidak latihan', fmtD(c.t, { weekday: 'long', day: 'numeric', month: 'long' })], x, y); };
+    el.addEventListener('pointerenter', on); el.addEventListener('focus', on);
+    el.addEventListener('pointerleave', hideTip); el.addEventListener('blur', hideTip);
+  });
 }
 
 /* ---------- AI (Gemini) ---------- */
 // keys come from local/gemini-keys.js (window.KOTAE_AI = { model, keys }); a key that hits a limit rests for 90 s
-const AI_SYSTEM = `Kamu tutor JLPT N3 untuk pelajar Indonesia. Kamu menerima daftar soal yang dijawab SALAH pada percobaan pertama, lengkap dengan jawaban pertama, kunci, dan pembahasan singkat. Tugasmu menemukan POLA kesalahan, bukan membahas soal satu per satu.
-Contoh pola: bacaan kanji (dakuten, bunyi panjang, っ kecil, on/kun), kanji yang bentuknya mirip, kolokasi kata kerja, beda nuansa sinonim, bentuk tata bahasa yang tertukar, partikel, keigo, salah menangkap konteks kalimat. Satu pola sebaiknya didukung minimal 2 soal; kalau datanya masih sedikit, katakan terus terang dan tetap beri saran yang berdasar data.
-Pakai bahasa Indonesia yang santai dan jelas (sapa dengan "kamu"). Kata dan kalimat Jepang SELALU ditulis dengan huruf Jepang (mis. ペアを組む, 受け取る) dan kanji Jepang, bukan huruf Tionghoa sederhana. Jangan menulis romaji sama sekali, juga tidak di dalam kurung; kalau perlu cara baca, tulis dengan hiragana. Ambil contoh dari data; jangan mengarang soal atau fakta di luar data.
+const AI_SYSTEM = `Kamu tutor JLPT untuk pelajar Indonesia. Kamu menerima PROFIL belajar si pelajar dalam satu rentang waktu: angka ringkasan, perubahan dibanding periode sebelumnya, tren akurasi per periode, perbandingan paruh awal vs paruh akhir per kemampuan, prediksi skor JLPT per bagian ujian (perkiraan, bukan skor resmi), jenis soal terlemah, dan daftar soal yang dijawab SALAH pada percobaan pertama (jawaban pertama, kunci, pembahasan singkat).
+Tugasmu menyusun analisis yang menyeluruh dan JUJUR berdasarkan data itu:
+- kekuatan: apa yang sudah baik, dengan angka.
+- kelemahan: kelemahan utama, masing-masing dengan bukti dari data (angka atau id soal) dan dampaknya ke skor.
+- tren: apakah kemampuannya membaik, stagnan, atau menurun, dan di kemampuan mana. Kalau datanya terlalu sedikit untuk menyimpulkan tren, katakan begitu.
+- prediksi: artikan prediksi skor; bagian mana yang paling menentukan lulus atau tidak, kira-kira berapa poin yang perlu dinaikkan di mana, dan kemampuan apa yang paling cepat menaikkan skor.
+- pola: pola kesalahan (bukan membahas soal satu per satu), misalnya bacaan kanji (dakuten, bunyi panjang, っ kecil, on/kun), kanji mirip, kolokasi, nuansa sinonim, bentuk tata bahasa yang tertukar, partikel, keigo, salah menangkap konteks. Satu pola sebaiknya didukung minimal 2 soal.
+- strategi: strategi belajar dan strategi saat ujian, urut dari dampak terbesar.
+- rencana_mingguan: rencana 7 hari yang realistis dengan kebiasaan latihannya (lihat jumlah soal per hari dan hari aktif).
+Pakai bahasa Indonesia yang santai dan jelas (sapa dengan "kamu"). Kata dan kalimat Jepang SELALU dengan huruf Jepang dan kanji Jepang (bukan huruf Tionghoa sederhana); jangan menulis romaji sama sekali, juga tidak di dalam kurung; kalau perlu cara baca, tulis dengan hiragana. Jangan mengarang angka, soal, atau fakta di luar data; kalau datanya sedikit, katakan terus terang.
 Balas HANYA JSON:
 {"ringkasan": "2-3 kalimat gambaran besar",
+ "kekuatan": ["..."],
+ "kelemahan": [{"topik": "...", "bukti": "...", "dampak": "..."}],
+ "tren": "...",
+ "prediksi": "...",
  "pola": [{"judul": "...", "penjelasan": "kenapa kamu salah, dengan contoh singkat", "saran": "cara memperbaikinya", "contoh": ["id soal"]}],
- "fokus": [{"topik": "...", "alasan": "...", "langkah": "latihan konkret; boleh sebut jenis soal atau bagian buku"}],
- "rencana": ["langkah singkat"]}
-pola 2-6 item, fokus 3-5 item urut dari yang paling penting, rencana 3-5 langkah. "contoh" hanya berisi id soal dari data.`;
+ "strategi": [{"fokus": "...", "alasan": "...", "langkah": "latihan konkret; boleh sebut jenis soal atau bagian buku"}],
+ "rencana_mingguan": [{"hari": "Hari 1", "kegiatan": "..."}]}
+kekuatan 2-4 item, kelemahan 2-5, pola 2-6, strategi 3-6 urut dari yang paling berdampak, rencana_mingguan tepat 7 item. "contoh" hanya berisi id soal dari data.`;
 const aiRest = {};
 async function gemini(system, user) {
   const C = window.KOTAE_AI || {}, keys = C.keys || [];
@@ -789,30 +1144,45 @@ async function gemini(system, user) {
   throw new Error(`Semua key sedang kena limit (${last}). Coba lagi 1–2 menit lagi.`);
 }
 function aiPrompt(A) {
-  // still-wrong and repeated mistakes first, then the newest; at most 80 go to the model
-  const sel = A.miss.slice().sort((a, b) => (b.h.ok ? 0 : 1) - (a.h.ok ? 0 : 1) || (b.h.w || 0) - (a.h.w || 0) || b.t - a.t).slice(0, 80);
-  const types = groupRows(A.rows, r => r.T.tag + ' / ' + r.T.id).map(g => `${g.k}: ${g.miss} salah dari ${g.n}`);
+  // still-wrong and repeated mistakes first, then the newest; at most 60 go to the model next to the profile
+  const sel = A.miss.slice().sort((a, b) => (b.h.ok ? 0 : 1) - (a.h.ok ? 0 : 1) || (b.h.w || 0) - (a.h.w || 0) || b.t - a.t).slice(0, 60);
+  const prc = p => p == null ? null : Math.round(100 * p);
+  const known = A.rows.filter(r => r.f), E = A.est;
+  const profil = {
+    rentang: A.days ? `${A.days} hari terakhir` : 'semua waktu', buku: A.B0 ? A.B0.title : 'semua buku', level: A.level,
+    soal_dicoba: A.rows.length, akurasi_percobaan_pertama_persen: prc(firstAcc(A.rows)), salah_percobaan_pertama: A.miss.length,
+    sudah_diperbaiki: A.miss.filter(r => r.fixed).length, masih_salah: A.miss.filter(r => !r.fixed).length,
+    perubahan_vs_periode_sebelumnya: A.change,
+    hari_aktif: A.heat.active, hari_beruntun: A.heat.cur, beruntun_terpanjang: A.heat.best,
+    rata_rata_soal_per_hari_aktif: A.heat.active ? Math.round(known.length / A.heat.active) : 0,
+    tren: A.bk.map(d => ({ periode: d.label, soal: d.n, benar_persen: prc(d.p) })),
+    awal_vs_akhir: A.sh.map(s => ({ kemampuan: s.sk, awal_persen: prc(s.pa), akhir_persen: prc(s.pb), soal_awal: s.na, soal_akhir: s.nb })),
+    per_kemampuan: groupRows(A.rows, r => r.skill).map(g => ({ kemampuan: g.k, dicoba: g.n, salah: g.miss })),
+    prediksi: E && { level: E.level, total: E.total, rentang_total: E.total != null ? `${E.lo}-${E.hi}` : null, maks: E.max, batas_lulus: E.pass,
+      status: { pass: 'kemungkinan besar lulus', border: 'di sekitar batas lulus', below: 'belum mencapai batas lulus', partial: 'data belum lengkap' }[E.verdict],
+      bagian: E.secs.map(s => ({ bagian: s.name, isi: s.sub, skor: s.score, rentang: s.score != null ? `${s.lo}-${s.hi}` : null, maks: s.max, minimal: s.min, soal: s.n, belum_ada_data: s.missing })) },
+    jenis_soal_terlemah: groupRows(A.rows, r => r.T.tag + ' / ' + r.T.id).filter(g => g.miss).slice(0, 10).map(g => ({ jenis: g.k, salah: g.miss, dicoba: g.n })),
+  };
   const items = sel.map(r => ({ id: r.q.id, buku: r.B.title, kemampuan: r.skill, jenis: `${r.T.tag} / ${r.T.id}`,
-    bagian: `${r.q.set.sec.title} · ${r.q.set.part.title}`, soal: snip(r.B, r.q, 220),
+    bagian: `${r.q.set.sec.title} · ${r.q.set.part.title}`, soal: snip(r.B, r.q, 200),
     pilihan: r.q.opts.map((o, k) => `${lab(r.q, k)}. ${strip(o).slice(0, 60)}`),
     jawaban_pertama: r.f ? pickText(r.q, r.f.c) : null, kunci: keyText(r.q),
     status: r.h.ok ? 'sudah benar saat diulang' : 'masih salah', berapa_kali_salah: r.h.w || 1,
-    pembahasan: strip((r.q.ex || {}).why || '').slice(0, 220) }));
-  return `Ringkasan per jenis soal (percobaan pertama):\n${types.join('\n')}\n\nTotal dicoba ${A.rows.length}, salah di percobaan pertama ${A.miss.length}` +
-    `${A.miss.length > sel.length ? ` (di bawah ini ${sel.length} yang paling penting)` : ''}.\n\nDaftar kesalahan (JSON):\n${JSON.stringify(items)}`;
+    pembahasan: strip((r.q.ex || {}).why || '').slice(0, 200) }));
+  return `PROFIL (JSON):\n${JSON.stringify(profil)}\n\nDaftar kesalahan percobaan pertama${A.miss.length > sel.length ? ` (${sel.length} paling penting dari ${A.miss.length})` : ''} (JSON):\n${JSON.stringify(items)}`;
 }
 async function runAI() {
   const A = AN, out = $('#aiout'), btn = $('[data-ai]');
-  if (!A || !A.miss.length || !out) return;
+  if (!A || !A.rows.length || !out) return;
   btn.setAttribute('disabled', '');
-  out.innerHTML = '<p class="muted aimeta">Gemini sedang membaca kesalahanmu…</p>';
+  out.innerHTML = '<p class="muted aimeta">Gemini sedang membaca profilmu…</p>';
   let html;
   try {
     const res = await gemini(AI_SYSTEM, aiPrompt(A));
     DB.ai.cache = DB.ai.cache || {};
-    DB.ai.cache[A.scope] = { t: Date.now(), n: A.miss.length, out: res };
+    DB.ai.cache[aiCacheKey(A)] = { t: Date.now(), n: A.miss.length, rows: A.rows.length, out: res };
     save();
-    html = aiHtml(DB.ai.cache[A.scope]);
+    html = aiHtml(DB.ai.cache[aiCacheKey(A)]);
   } catch (e) { html = `<p class="aierr">${esc(e.message || e)}</p>`; }
   if (AN !== A || !document.body.contains(out)) return;     // the user moved on meanwhile
   out.innerHTML = html;
@@ -821,12 +1191,20 @@ async function runAI() {
 function aiHtml(c) {
   const o = c.out || {}, arr = x => Array.isArray(x) ? x : [];
   const ex = id => { const r = AN.rows.find(x => x.q.id === id); return r ? `<a class="pill jp" href="#/m/${r.B.id}/@${encodeURIComponent(id)}">${esc(snip(r.B, r.q, 22))}…</a>` : ''; };
-  const newer = AN.miss.length - (c.n || 0);
-  return `<p class="aimeta muted">Dianalisis ${esc(new Date(c.t).toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' }))} dari ${c.n} kesalahan${newer > 0 ? ` · ada ${newer} kesalahan baru sejak itu, tekan Analisis ulang` : ''}.</p>
+  const newer = AN.rows.length - (c.rows != null ? c.rows : AN.rows.length);
+  // older saved analyses use "fokus" / "rencana"; newer ones "strategi" / "rencana_mingguan"
+  const strat = arr(o.strategi).length ? o.strategi.map(s => ({ topik: s.fokus, alasan: s.alasan, langkah: s.langkah })) : arr(o.fokus);
+  return `<p class="aimeta muted">Dianalisis ${esc(new Date(c.t).toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' }))}${c.rows != null ? ` dari ${c.rows} soal` : ''} dan ${c.n} kesalahan${newer > 0 ? ` · ada ${newer} soal baru sejak itu, tekan Analisis ulang` : ''}.</p>
     ${o.ringkasan ? `<p class="aisum">${esc(o.ringkasan)}</p>` : ''}
+    ${arr(o.kekuatan).length || arr(o.kelemahan).length ? `<div class="aisw">
+      ${arr(o.kekuatan).length ? `<div class="card good"><h3>Kekuatan</h3><ul>${o.kekuatan.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}
+      ${arr(o.kelemahan).length ? `<div class="card weak"><h3>Kelemahan</h3><ul>${o.kelemahan.map(k => `<li><b>${esc(k.topik || '')}</b>${k.bukti ? ` — ${esc(k.bukti)}` : ''}${k.dampak ? `<br><span class="muted">${esc(k.dampak)}</span>` : ''}</li>`).join('')}</ul></div>` : ''}</div>` : ''}
+    ${o.tren ? `<h3>Perkembangan</h3><p class="aip">${esc(o.tren)}</p>` : ''}
+    ${o.prediksi ? `<h3>Tentang prediksi skor</h3><p class="aip">${esc(o.prediksi)}</p>` : ''}
     ${arr(o.pola).length ? `<h3>Pola kesalahan</h3><div class="aipola">${arr(o.pola).map(p => `<div class="card"><b>${esc(p.judul || '')}</b><p>${esc(p.penjelasan || '')}</p>
       ${p.saran ? `<p class="sar"><span>Saran</span>${esc(p.saran)}</p>` : ''}<div>${arr(p.contoh).map(ex).join('')}</div></div>`).join('')}</div>` : ''}
-    ${arr(o.fokus).length ? `<h3>Fokus belajar</h3><ol class="aifokus">${arr(o.fokus).map(f => `<li><b>${esc(f.topik || '')}</b> — ${esc(f.alasan || '')}${f.langkah ? `<br><span class="muted">${esc(f.langkah)}</span>` : ''}</li>`).join('')}</ol>` : ''}
+    ${strat.length ? `<h3>Strategi</h3><ol class="aifokus">${strat.map(f => `<li><b>${esc(f.topik || '')}</b> — ${esc(f.alasan || '')}${f.langkah ? `<br><span class="muted">${esc(f.langkah)}</span>` : ''}</li>`).join('')}</ol>` : ''}
+    ${arr(o.rencana_mingguan).length ? `<h3>Rencana 7 hari</h3><div class="aiweek">${o.rencana_mingguan.map(d => `<div><b>${esc(d.hari || '')}</b><span>${esc(d.kegiatan || '')}</span></div>`).join('')}</div>` : ''}
     ${arr(o.rencana).length ? `<h3>Rencana singkat</h3><ul class="airen">${arr(o.rencana).map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}`;
 }
 
@@ -956,7 +1334,7 @@ function renderQ(keepScroll) {
   if (q.type === 'cloze') stem = `Kotak <span class="slot num cur">${q.n}</span> di teks diisi dengan…`;
 
   const short = q.opts.every(o => strip(o).length <= 9);
-  const optsHtml = q.opts.map((o, k) => {
+  const optsHtml = q.kind === 'input' ? inputHtml(q, done, picked) : q.kind === 'multi' ? multiHtml(q, done, picked) : q.opts.map((o, k) => {
     const n = k + 1;
     let cls = '';
     if (nar) cls = done ? 'dim' : (got.includes(n) ? 'used' : '');
@@ -1005,7 +1383,7 @@ function renderQ(keepScroll) {
           <button class="btn" data-act="prev" ${S.i ? '' : 'disabled'}><svg><use href="#i-back"/></svg>Sebelumnya</button>
           <button class="btn ${done ? 'pri' : ''}" data-act="next">${isLast ? (done ? 'Lihat hasil' : 'Lewati & selesai') : (done ? 'Berikutnya' : 'Lewati')}<svg><use href="#i-next"/></svg></button>
         </div>
-        <div class="kbd"><kbd>1</kbd>–<kbd>${Math.min(q.opts.length, 9)}</kbd> jawab${q.opts.length > 9 ? ' · klik pilihan 10 ke atas' : ''} · <kbd>Enter</kbd> lanjut · <kbd>←</kbd><kbd>→</kbd> pindah · <kbd>F</kbd> furigana</div>
+        <div class="kbd">${q.kind === 'input' ? 'Isi jawaban · Enter periksa / lanjut' : q.kind === 'multi' ? 'Pilih semua yang sesuai, lalu Periksa jawaban' : '<kbd>1</kbd>–<kbd>' + Math.min(q.opts.length, 9) + '</kbd> jawab' + (q.opts.length > 9 ? ' · klik pilihan 10 ke atas' : '') + '. <kbd>Enter</kbd> lanjut'} · <kbd>←</kbd><kbd>→</kbd> pindah · <kbd>F</kbd> furigana</div>
       </section>
     </div>`;
   if (keepA) $('audio.qa').replaceWith(keepA);
@@ -1021,9 +1399,9 @@ function explain(q, picked) {
   const ok = isOk(q, picked);
   const nar = q.type === 'narabe';
   const ex = q.ex || {};
-  const key = nar ? q.order.split('').join('→') : lab(q, q.ans - 1) + (q.alt || []).map(a => ' / ' + lab(q, a - 1)).join('');
+  const key = ['input', 'multi'].includes(q.kind) ? ansText(q) : nar ? q.order.split('').join('→') : lab(q, q.ans - 1) + (q.alt || []).map(a => ' / ' + lab(q, a - 1)).join('');
   let h = `<div class="verdict ${ok ? 'ok' : 'no'}"><svg><use href="#i-${ok ? 'ok' : 'no'}"/></svg>
-    <div>${ok ? 'Benar!' : 'Belum tepat.'} <span>Jawabannya <b>${key}</b> — <span class="jp">${ansText(q)}</span></span></div></div>`;
+    <div>${ok ? 'Benar!' : 'Belum tepat.'} <span>Jawabannya <b>${['input', 'multi'].includes(q.kind) ? '' : key}</b>${['input', 'multi'].includes(q.kind) ? '' : ' — '}<span class="jp">${ansText(q)}</span></span></div></div>`;
   h += '<div class="ex">';
   if ((q.type === 'star' || nar) && q.order) {
     const chips = seq => seq.split('').map((d, k) => `<span class="c ${k === starPos(q) ? 's' : ''}">${strip(q.opts[+d - 1])}</span>`).join('<span class="ar">›</span>');
@@ -1036,7 +1414,7 @@ function explain(q, picked) {
   const notes = ex.opt || [];
   if (notes.some(Boolean)) {
     h += `<div><h4>Tiap pilihan</h4><div class="olist">${q.opts.map((o, k) => {
-      const n = k + 1, right = !nar && isOk(q, n), mine = !nar && n === picked;
+      const n = k + 1, right = !nar && isOk(q, n), mine = !nar && (q.kind === 'multi' ? multiValues(picked).includes(n) : n === picked);
       const tag = nar ? `<span class="tag y">ke-${q.order.indexOf(String(n)) + 1}</span>` : (right ? '<span class="tag y">benar</span>' : '') + (mine && !right ? '<span class="tag m">pilihanmu</span>' : '');
       return `<div class="orow ${right ? 'right' : ''} ${mine ? 'mine' : ''}"><span class="k">${lab(q, k)}</span>
         <div><span class="ot">${o}${tag}</span>${notes[k] || ''}</div></div>`;
@@ -1056,7 +1434,8 @@ function starPos(q) {
 
 function pick(n) {
   const q = S.qs[S.i];
-  if (S.ans[q.id] != null || !(n >= 1 && n <= q.opts.length)) return;
+  if (q.kind === 'multi' && typeof n === 'number') return toggleMulti(n);
+  if (S.ans[q.id] != null || (['input', 'multi'].includes(q.kind) ? typeof n !== 'string' : !(n >= 1 && n <= q.opts.length))) return;
   if (q.type === 'narabe') {                 // collect pieces until all four are placed
     const got = S.part[q.id] = S.part[q.id] || [];
     if (got.includes(n)) return;
@@ -1124,15 +1503,19 @@ function summary() {
 
 /* ---------- events ---------- */
 app.addEventListener('click', e => {
-  const t = e.target.closest('[data-pick],[data-go],[data-act],[data-review],[data-unslot],[data-ai],[data-aiq]');
+  const t = e.target.closest('[data-pick],[data-go],[data-act],[data-review],[data-unslot],[data-ai],[data-aiq],[data-multi],[data-range]');
   if (t && t.dataset.ai != null) return runAI();
+  if (t && t.dataset.range && AN) { DB.prefs.anRange = t.dataset.range; save(); return analysisView(AN.scope === 'all' ? undefined : AN.scope); }
   if (!t || !S) return;
   if (t.dataset.aiq != null) return runAIQ();
+  if (t.dataset.multi) return toggleMulti(+t.dataset.multi);
   if (t.dataset.pick) return pick(+t.dataset.pick);
   if (t.dataset.unslot) return unslot(+t.dataset.unslot);
   if (t.dataset.go) return go(+t.dataset.go);
   if (t.dataset.review) { e.preventDefault(); S.i = +t.dataset.review; renderQ(); window.scrollTo({ top: 0 }); return; }
   const a = t.dataset.act;
+  if (a === 'inputCheck') return submitInput();
+  if (a === 'multiCheck') return pick(JSON.stringify(S.part[S.qs[S.i].id] || []));
   if (a === 'next') return next();
   if (a === 'prev') return go(S.i - 1);
   if (a === 'unslot') return unslot(-1);
@@ -1140,13 +1523,22 @@ app.addEventListener('click', e => {
   if (a === 'redoAll') return newSession(S.B, S.qs, S.title, S.crumb, S.back, S.setId);
   if (a === 'redoWrong') return newSession(S.B, S.wrongQs, 'Ulangi yang salah', S.crumb, S.back, null);
 });
+app.addEventListener('input', e => {
+  if (S && e.target.matches('[data-entry]')) {
+    const q = S.qs[S.i]; if (q.kind !== 'input' || S.ans[q.id] != null) return;
+    const values = S.part[q.id] || (S.part[q.id] = []); values[+e.target.dataset.entry] = e.target.value;
+  }
+});
 document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.isComposing && e.keyCode !== 229 && !e.ctrlKey && !e.metaKey && !e.altKey && e.target.matches('[data-entry]') && S?.qs[S.i].kind === 'input') {
+    e.preventDefault(); if (S.ans[S.qs[S.i].id] == null) submitInput(); else next(); return;
+  }
   if (e.ctrlKey || e.metaKey || e.altKey || e.target.closest('input,textarea,select,[contenteditable="true"]')) return;
   if (e.key === 'f' || e.key === 'F') { $('#furiBtn').click(); return; }
   if (!S || !$('.qcard')) return;
   if (/^[1-9]$/.test(e.key)) { pick(+e.key); e.preventDefault(); }
   else if ((e.key === 'a' || e.key === 'b') && (TYPES[S.qs[S.i].type] || {}).ab) { pick(e.key === 'a' ? 1 : 2); e.preventDefault(); }
-  else if (e.key === 'Backspace' && S.part[S.qs[S.i].id]) { unslot(-1); e.preventDefault(); }
+  else if (e.key === 'Backspace' && S.qs[S.i].type === 'narabe' && S.part[S.qs[S.i].id]) { unslot(-1); e.preventDefault(); }
   else if (e.key === 'Enter' || e.key === 'ArrowRight') { if (e.key === 'ArrowRight' || S.ans[S.qs[S.i].id] != null) { next(); e.preventDefault(); } }
   else if (e.key === 'ArrowLeft') { go(S.i - 1); e.preventDefault(); }
 });

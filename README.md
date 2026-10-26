@@ -1,8 +1,8 @@
 # Kotae 答え — practice questions from your own books
 
 Kotae turns the practice books you own into an interactive quiz: pick an answer, see right or wrong instantly,
-then read **why the key is right and why every other option is wrong**. Your mistakes are tracked, analysed,
-and (optionally) explained further by AI.
+then read **why the key is right and why every other option is wrong**. Your progress is tracked over time, with
+charts and a JLPT score estimate, and (optionally) explained further by AI.
 
 It was built for JLPT (Japanese) books, but it works with any multiple-choice question book. See
 [Beyond JLPT](#beyond-jlpt).
@@ -20,24 +20,32 @@ assistant ([how](#import-your-own-book-with-ai)). Imported books stay on your co
   passages with numbered boxes, reading passages, listening questions with audio, pictures.
 - **Your book's structure**: sections → parts → sets, page numbers, a progress strip per set,
   "review the ones I got wrong", and a random 20-question mix.
-- **Mistake analysis**: based on your **first** answer to each question, so a mistake stays on record even after
-  you get it right on a retry. Accuracy per skill, the question types and book parts you miss most (each with a
-  *Practise* button), and a list of every mistake.
-- **AI, only when you click** (optional, Gemini): one button analyses all your mistakes and returns patterns,
-  focus areas, and a short plan. Another button on each answered question explains why your pick was a trap,
+- **Profile analysis**, based on your **first** answer to each question, so a mistake stays on record even after
+  you get it right on a retry:
+  - a time range (all time, 90, 30 or 7 days), compared with the previous period of the same length;
+  - a **JLPT score estimate** per exam section, against the official pass mark and section minimums. It is an
+    approximation shown with a range; the real JLPT uses scaled scores;
+  - charts: accuracy trend with the number of answers, early vs late accuracy per skill, and a practice calendar
+    with streaks. Every chart has tooltips and a table view;
+  - accuracy per skill, the question types and book parts you miss most (each with a *Practise* button), and a
+    list of every mistake.
+- **AI, only when you click** (optional, Gemini): one button reads your profile (range, trend, score estimate,
+  mistakes) and returns strengths, weaknesses with evidence, what the trend and the estimate mean, mistake
+  patterns, a strategy, and a 7-day plan. Another button on each answered question explains why your pick was a trap,
   gives tips for this kind of question, a next-step strategy, and extra example sentences. Answers are cached,
   so reopening a question never calls the AI again.
 - **One HTML file**: no server, no build step, no account. Progress lives in your browser (`localStorage`).
-  Light and dark themes; works on phones.
+  Light theme by default, dark theme optional; works on phones.
 
 | | |
 |---|---|
 | ![Home](docs/screenshots/01-home.png) | ![Book page](docs/screenshots/02-book.png) |
 | ![★ sentence ordering](docs/screenshots/04-star.png) | ![Cloze passage](docs/screenshots/05-cloze-passage.png) |
-| ![Mistake analysis](docs/screenshots/06-mistake-analysis.png) | ![AI analysis of all mistakes](docs/screenshots/07-ai-analysis.png) |
+| ![Profile analysis: score estimate and charts](docs/screenshots/06-profile.png) | ![AI analysis of the profile](docs/screenshots/07-ai-analysis.png) |
 | ![AI on one question](docs/screenshots/08-ai-question.png) | ![Reading question](docs/screenshots/10-reading.png) |
 
-<p align="center"><img src="docs/screenshots/09-mobile.png" alt="Kotae on a phone" width="300"></p>
+<p align="center"><img src="docs/screenshots/09-mobile.png" alt="Kotae on a phone" width="300">
+&nbsp;&nbsp;<img src="docs/screenshots/11-mobile-profile.png" alt="Profile analysis on a phone" width="300"></p>
 
 ## Quick start
 
@@ -97,13 +105,14 @@ python tools/audit.py my-book             # every answer vs the separately typed
 1. Get a Gemini API key at [Google AI Studio](https://aistudio.google.com/apikey).
 2. Copy `local/gemini-keys.example.js` to `local/gemini-keys.js` and paste your key(s). You can add several keys;
    when one hits its rate limit the next one is used.
-3. Reload. The **Analisis dengan AI** button (mistake analysis page) and **Bahas kesalahanku / Minta tips**
+3. Reload. The **Analisis dengan AI** button (**Analisis profil** page) and **Bahas kesalahanku / Minta tips**
    (under each answered question) become active.
 
 - `local/gemini-keys.js` is git-ignored. Never commit it.
 - The AI is called **only when you click**. Answering questions never sends anything.
-- When you click, the question text, options, answer key, your answer and the existing explanation are sent to
-  Google's Gemini API. It works from `file://` too; no server is needed.
+- When you click, only what that button needs is sent to Google's Gemini API: for one question, its text,
+  options, answer key, your answer and the existing explanation; for the profile, your summary numbers and up to
+  60 of your mistakes. It works from `file://` too; no server is needed.
 - The default model is `gemini-3.1-flash-lite`. Change `model` in the same file if you like.
 
 ## Beyond JLPT
@@ -121,11 +130,14 @@ Current limits:
 
 - The interface text is Indonesian, and some labels are JLPT-flavoured (the furigana button, built-in Japanese
   question types). It is a single HTML file, so translating it is straightforward.
-- The AI prompts are written for a JLPT N3 tutor. For another subject, edit `AI_SYSTEM` and `AIQ_SYSTEM` in
+- The AI prompts are written for a JLPT tutor. For another subject, edit `AI_SYSTEM` and `AIQ_SYSTEM` in
   `index.html`.
+- The score estimate is for JLPT books: set `level` to `N1`–`N5` in `data/books.js`. Any other value hides it
+  (a missing `level` counts as N3).
 - No formula rendering (LaTeX). Math works with plain text or Unicode (x², √, ≤); put complex formulas in
   pictures.
-- Multiple choice and ordering only. No free-text or numeric answers.
+- The import tools produce multiple-choice and ordering questions. There is no text format for free-text or
+  numeric answers yet.
 
 ## Project layout
 
@@ -158,9 +170,11 @@ covers). The demo book in this repo was written from scratch for Kotae.
 ## Ringkasan (Bahasa Indonesia)
 
 Kotae mengubah buku latihan soal milikmu menjadi kuis interaktif: pilih jawaban, langsung tahu benar atau salah,
-lalu baca kenapa jawabannya benar dan kenapa pilihan lainnya salah. Ada analisis kesalahan (dihitung dari jawaban
-pertama, jadi kesalahan tetap tercatat walau sudah diperbaiki) dan bantuan AI Gemini yang **hanya jalan saat
-diklik**.
+lalu baca kenapa jawabannya benar dan kenapa pilihan lainnya salah. Ada **analisis profil** yang dihitung dari
+jawaban pertama (jadi kesalahan tetap tercatat walau sudah diperbaiki): bisa dilihat per rentang waktu dan
+dibandingkan dengan periode sebelumnya, lengkap dengan grafik tren, kalender latihan, dan perkiraan skor JLPT per
+bagian ujian. Bantuan AI Gemini (kekuatan, kelemahan, strategi, rencana 7 hari, pembahasan per soal) **hanya
+jalan saat diklik**.
 
 **Isi buku tidak disertakan** karena hak ciptanya milik penerbit. Repo ini hanya berisi app, alat impor, dan buku
 demo orisinal. Untuk memasukkan bukumu sendiri, buka folder ini di asisten AI (Claude Code, Codex, Cursor) lalu
@@ -172,4 +186,5 @@ Cara pakai: clone repo ini, lalu buka `index.html` (klik dua kali). Untuk fitur 
 
 Selain buku JLPT, Kotae bisa dipakai untuk buku soal pilihan ganda lain (biologi dengan gambar, sejarah,
 sertifikasi, dll.). Batasannya: tampilan berbahasa Indonesia, prompt AI disetel untuk JLPT, belum ada tampilan
-rumus matematika (pakai teks biasa atau gambar), dan belum ada soal isian.
+rumus matematika (pakai teks biasa atau gambar), alat impor baru menghasilkan soal pilihan ganda dan susun
+kalimat, dan perkiraan skor hanya untuk buku JLPT.
